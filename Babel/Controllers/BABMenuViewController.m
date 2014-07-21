@@ -7,12 +7,24 @@
 //
 
 #import "BABMenuViewController.h"
+#import "BABOAuthViewController.h"
 
-@interface BABMenuViewController ()
+@interface BABMenuViewController () <BABOAuthViewControllerDelegate>
+
+@property (nonatomic, strong) NSString *token;
+@property (nonatomic, strong) IBOutlet UIButton *btnStart;
+
+- (NSString *)retrieveToken;
+- (void)storeToken:(NSString *)token;
+- (IBAction)start:(id)sender;
+- (void)updateUI;
 
 @end
 
 @implementation BABMenuViewController
+
+NSString * const BABBabelService = @"BABBabelService";
+NSString * const BABBabelAccount = @"BABBabelAccount";
 
 #pragma mark - View controller life cycle
 
@@ -30,11 +42,78 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.token = [self retrieveToken];
+    [self updateUI];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue
+                 sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"AuthSegue"]) {
+        BABOAuthViewController *authViewController = (BABOAuthViewController *) [segue destinationViewController];
+        authViewController.delegate = self;
+    }
+}
+
+#pragma mark - Private Methods
+
+- (void)updateUI
+{
+    if (self.token != nil) {
+        self.navigationItem.rightBarButtonItem = nil;
+        [UIView animateWithDuration:0.5f
+                         animations:^{
+                             self.btnStart.alpha = 1.0f;
+                         }];
+    }
+}
+
+- (IBAction)start:(id)sender
+{
+    
+}
+
+- (NSString *)retrieveToken
+{
+    NSError *error;
+    NSString *token = [SSKeychain passwordForService:BABBabelService
+                                             account:BABBabelAccount
+                                               error:&error];
+    if (error) {
+        //TODO: Handle error.
+    }
+    return token;
+}
+
+- (void)storeToken:(NSString *)token
+{
+    NSError *error;
+    [SSKeychain setPassword:token
+                 forService:BABBabelService
+                    account:BABBabelAccount
+                      error:&error];
+    if (error) {
+        //TODO: Handle error.
+    }
+}
+
+#pragma mark - BABOAuthViewControllerDelegate
+
+- (void)authViewControllerDidFinishAuthenticationWithToken:(NSString *)token
+                                                     error:(NSError *)error
+{
+    if (!error) {
+        [self storeToken:token];
+        self.token = token;
+        [self updateUI];
+    } else {
+        //TODO: Handle error.
+    }
 }
 
 @end
