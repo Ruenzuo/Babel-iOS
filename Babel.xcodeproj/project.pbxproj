@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A093AA17197D6C5100F21675 /* BABOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A093AA16197D6C5100F21675 /* BABOAuthViewController.m */; };
+		A093AA1E197D7FFF00F21675 /* NSError+BABError.m in Sources */ = {isa = PBXBuildFile; fileRef = A093AA1D197D7FFF00F21675 /* NSError+BABError.m */; };
 		A0D9B14A197C4B7A00AD7990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B149197C4B7A00AD7990 /* Foundation.framework */; };
 		A0D9B14C197C4B7A00AD7990 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */; };
 		A0D9B14E197C4B7A00AD7990 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14D197C4B7A00AD7990 /* UIKit.framework */; };
@@ -21,6 +23,10 @@
 
 /* Begin PBXFileReference section */
 		0AD224A7F9CE4296BC149BF0 /* libPods-Babel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Babel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A093AA15197D6C5100F21675 /* BABOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABOAuthViewController.h; path = Controllers/BABOAuthViewController.h; sourceTree = "<group>"; };
+		A093AA16197D6C5100F21675 /* BABOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABOAuthViewController.m; path = Controllers/BABOAuthViewController.m; sourceTree = "<group>"; };
+		A093AA1C197D7FFF00F21675 /* NSError+BABError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+BABError.h"; path = "Extensions/NSError+BABError.h"; sourceTree = "<group>"; };
+		A093AA1D197D7FFF00F21675 /* NSError+BABError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+BABError.m"; path = "Extensions/NSError+BABError.m"; sourceTree = "<group>"; };
 		A0D9B146197C4B7A00AD7990 /* Babel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D9B149197C4B7A00AD7990 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -54,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A093AA1B197D7FB200F21675 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A093AA1C197D7FFF00F21675 /* NSError+BABError.h */,
+				A093AA1D197D7FFF00F21675 /* NSError+BABError.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		A0D9B13D197C4B7A00AD7990 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +104,7 @@
 			children = (
 				A0D9B17F197C4B8D00AD7990 /* Application */,
 				A0D9B192197C4D6200AD7990 /* Controllers */,
+				A093AA1B197D7FB200F21675 /* Extensions */,
 				A0D9B17E197C4B8800AD7990 /* Views */,
 				A0D9B161197C4B7A00AD7990 /* Images.xcassets */,
 				A0D9B150197C4B7A00AD7990 /* Supporting */,
@@ -129,6 +145,8 @@
 			children = (
 				A0D9B193197C4DA900AD7990 /* BABMenuViewController.h */,
 				A0D9B194197C4DA900AD7990 /* BABMenuViewController.m */,
+				A093AA15197D6C5100F21675 /* BABOAuthViewController.h */,
+				A093AA16197D6C5100F21675 /* BABOAuthViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -234,9 +252,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A093AA17197D6C5100F21675 /* BABOAuthViewController.m in Sources */,
 				A0D9B195197C4DA900AD7990 /* BABMenuViewController.m in Sources */,
 				A0D9B191197C4C1600AD7990 /* BABAppDelegate.m in Sources */,
 				A0D9B186197C4BE300AD7990 /* main.m in Sources */,
+				A093AA1E197D7FFF00F21675 /* NSError+BABError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
