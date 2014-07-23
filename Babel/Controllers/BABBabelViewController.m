@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSMutableDictionary *paginationCache;
 @property (nonatomic, strong) BABLanguage *currentLanguage;
 @property (nonatomic, strong) BABRepository *currentRepository;
+@property (nonatomic, assign, getter = isPooling) BOOL pooling;
+@property (nonatomic, strong) MSWeakTimer *timer;
 
 - (void)loadLanguages;
 - (BABLanguage *)randomLanguage;
@@ -29,6 +31,7 @@
 - (BFTask *)randomFileWithLanguage:(BABLanguage *)language
                         repository:(BABRepository *)repository;
 - (void)nextFile;
+- (void)poolRate;
 
 @end
 
@@ -38,11 +41,12 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
 
 #pragma mark - View controller life cycle
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithCoder:aDecoder];
     if (self) {
         self.paginationCache = [[NSMutableDictionary alloc] init];
+        self.pooling = false;
     }
     return self;
 }
@@ -68,6 +72,13 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
         if (task.error) {
             //TODO: Handle error;
             NSLog(@"%@", [task.error localizedDescription]);
+            if (task.error.domain == AFURLResponseSerializationErrorDomain &&
+                task.error.code == -1011) {
+                if (!self.isPooling) {
+                    [self poolRate];
+                }
+                return nil;
+            }
         }
         self.currentRepository = task.result;
         return [self randomFileWithLanguage:self.currentLanguage
@@ -80,14 +91,45 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
                 NSLog(@"Looping");
                 [self nextFile];
             }
+            if (task.error.domain == AFURLResponseSerializationErrorDomain &&
+                task.error.code == -1011) {
+                if (!self.isPooling) {
+                    [self poolRate];
+                }
+            }
         } else {
-            BABFile *file = task.result;
-            NSLog(@"SHA: %@", file.sha);
-            NSLog(@"Repository: %@", self.currentRepository.name);
-            NSLog(@"Language: %@", self.currentLanguage.name);
+            if (task.result != nil) {
+                if (self.isPooling) {
+                    [self stopPool];
+                }
+                BABFile *file = task.result;
+                NSLog(@"SHA: %@", file.sha);
+                NSLog(@"Repository: %@", self.currentRepository.name);
+                NSLog(@"Language: %@", self.currentLanguage.name);
+            }
         }
         return nil;
     }];
+}
+
+- (void)poolRate
+{
+    [SVProgressHUD showWithStatus:@"Pooling rate"
+                         maskType:SVProgressHUDMaskTypeBlack];
+    self.pooling = YES;
+    self.timer = [MSWeakTimer scheduledTimerWithTimeInterval:5
+                                                      target:self
+                                                    selector:@selector(nextFile)
+                                                    userInfo:nil
+                                                     repeats:YES
+                                               dispatchQueue:dispatch_get_main_queue()];
+}
+
+- (void)stopPool
+{
+    [SVProgressHUD dismiss];
+    self.pooling = NO;
+    [self.timer invalidate];
 }
 
 - (void)loadLanguages
