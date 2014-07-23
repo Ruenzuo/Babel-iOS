@@ -8,6 +8,7 @@
 
 #import "BABMenuViewController.h"
 #import "BABOAuthViewController.h"
+#import "BABBabelViewController.h"
 
 @interface BABMenuViewController () <BABOAuthViewControllerDelegate>
 
@@ -57,6 +58,9 @@ NSString * const BABBabelAccount = @"BABBabelAccount";
     if ([[segue identifier] isEqualToString:@"AuthSegue"]) {
         BABOAuthViewController *authViewController = (BABOAuthViewController *) [segue destinationViewController];
         authViewController.delegate = self;
+    } else if ([[segue identifier] isEqualToString:@"BabelSegue"]) {
+        BABBabelViewController *babelViewController = (BABBabelViewController *) [segue destinationViewController];
+        babelViewController.token = self.token;
     }
 }
 

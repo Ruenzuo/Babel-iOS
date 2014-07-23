@@ -12,11 +12,6 @@
 
 NSString * const BABErrorDomain = @"BABErrorDomain";
 
-typedef NS_ENUM(NSInteger, BABErrorCode) {
-    BABErrorCodeFailedAuthorization,
-    BABErrorCodeFailedRequest
-};
-
 + (NSError *)bab_authorizationError
 {
     return [NSError errorWithDomain:BABErrorDomain
@@ -28,6 +23,13 @@ typedef NS_ENUM(NSInteger, BABErrorCode) {
 {
     return [NSError errorWithDomain:BABErrorDomain
                                code:BABErrorCodeFailedRequest
+                           userInfo:nil];
+}
+
++ (NSError *)bab_fileNotFound
+{
+    return [NSError errorWithDomain:BABErrorDomain
+                               code:BABErrorCodeFileNotFound
                            userInfo:nil];
 }
 

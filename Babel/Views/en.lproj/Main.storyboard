@@ -33,6 +33,7 @@
                                 </state>
                                 <connections>
                                     <action selector="start:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="70J-bA-yzU"/>
+                                    <segue destination="JaQ-ia-nax" kind="push" identifier="BabelSegue" id="H6D-dU-2NH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -58,6 +59,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="814" y="132"/>
+        </scene>
+        <!--Babel View Controller-->
+        <scene sceneID="dZV-Vy-SR6">
+            <objects>
+                <viewController id="JaQ-ia-nax" customClass="BABBabelViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Lhy-MI-2oK"/>
+                        <viewControllerLayoutGuide type="bottom" id="RXM-ti-OgJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TSW-zv-djA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTy-ni-C69">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dTy-ni-C69" firstAttribute="leading" secondItem="TSW-zv-djA" secondAttribute="leading" id="kpS-Co-eOt"/>
+                            <constraint firstAttribute="trailing" secondItem="dTy-ni-C69" secondAttribute="trailing" id="oao-bf-ENf"/>
+                            <constraint firstAttribute="bottom" secondItem="dTy-ni-C69" secondAttribute="bottom" id="sTc-JV-A7w"/>
+                            <constraint firstItem="dTy-ni-C69" firstAttribute="top" secondItem="TSW-zv-djA" secondAttribute="top" id="wWG-vc-ZJq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="H4K-iv-5xY"/>
+                    <connections>
+                        <outlet property="webView" destination="dTy-ni-C69" id="eGY-xv-Fua"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PIK-1X-d1A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1356" y="866"/>
         </scene>
         <!--Auth View Controller - GitHub-->
         <scene sceneID="COj-zU-9sN">
@@ -95,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ttw-Wi-Cen" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1344" y="132"/>
+            <point key="canvasLocation" x="1356" y="132"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oAH-1Q-7df">

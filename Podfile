@@ -5,4 +5,5 @@ target "Babel" do
   pod 'SVProgressHUD', '~> 1.0.0'
   pod 'Bolts', '~> 1.1.0'
   pod 'SSKeychain', '~> 1.2.2'
+  pod 'Mantle', '~> 1.5.0'
 end

@@ -1,0 +1,272 @@
+[
+    {
+        "name": "css",
+        "extensions": [
+            "css"
+        ]
+    },
+    {
+        "name": "javascript",
+        "extensions": [
+            "js"
+        ]
+    },
+    {
+        "name": "objective-c",
+        "extensions": [
+            "h",
+            "m",
+            "mm"
+        ]
+    },
+    {
+        "name": "ruby",
+        "extensions": [
+            "rb",
+            "rbw"
+        ]
+    },
+    {
+        "name": "bash",
+        "extensions": [
+            "sh"
+        ]
+    },
+    {
+        "name": "coffeescript",
+        "extensions": [
+            "coffee"
+        ]
+    },
+    {
+        "name": "php",
+        "extensions": [
+            "php",
+            "phtml",
+            "php4",
+            "php3",
+            "php5",
+            "phps"
+        ]
+    },
+    {
+        "name": "sql",
+        "extensions": [
+            "sql"
+        ]
+    },
+    {
+        "name": "c#",
+        "extensions": [
+            "cs"
+        ]
+    },
+    {
+        "name": "perl",
+        "extensions": [
+            "pl",
+            "pm",
+            "t",
+            "pod"
+        ]
+    },
+    {
+        "name": "c++",
+        "extensions": [
+            "cc",
+            "cpp",
+            "cxx",
+            "c++",
+            "h",
+            "hh",
+            "hpp",
+            "hxx",
+            "h++"
+        ]
+    },
+    {
+        "name": "xml",
+        "extensions": [
+            "xml"
+        ]
+    },
+    {
+        "name": "java",
+        "extensions": [
+            "java",
+            "class",
+            "jar"
+        ]
+    },
+    {
+        "name": "python",
+        "extensions": [
+            "py",
+            "pyw",
+            "pyc",
+            "pyo",
+            "pyd"
+        ]
+    },
+    {
+        "name": "erlang",
+        "extensions": [
+            "erl",
+            "hrl"
+        ]
+    },
+    {
+        "name": "lua",
+        "extensions": [
+            "lua"
+        ]
+    },
+    {
+        "name": "scala",
+        "extensions": [
+            "scala"
+        ]
+    },
+    {
+        "name": "tex",
+        "extensions": [
+            "tex"
+        ]
+    },
+    {
+        "name": "autohotkey",
+        "extensions": [
+            "ahk"
+        ]
+    },
+    {
+        "name": "lasso",
+        "extensions": [
+            "lasso",
+            "LassoApp"
+        ]
+    },
+    {
+        "name": "ocaml",
+        "extensions": [
+            "ocaml",
+            "ml",
+            "mli"
+        ]
+    },
+    {
+        "name": "actionscript",
+        "extensions": [
+            "as"
+        ]
+    },
+    {
+        "name": "clojure",
+        "extensions": [
+            "clj",
+            "edn"
+        ]
+    },
+    {
+        "name": "go",
+        "extensions": [
+            "go"
+        ]
+    },
+    {
+        "name": "haskell",
+        "extensions": [
+            "hs",
+            "lhs"
+        ]
+    },
+    {
+        "name": "lisp",
+        "extensions": [
+            "lisp",
+            "cl"
+        ]
+    },
+    {
+        "name": "rust",
+        "extensions": [
+            "rs"
+        ]
+    },
+    {
+        "name": "smalltalk",
+        "extensions": [
+            "st"
+        ]
+    },
+    {
+        "name": "typescript",
+        "extensions": [
+            "ts"
+        ]
+    },
+    {
+        "name": "vala",
+        "extensions": [
+            "vala",
+            "vapi"
+        ]
+    },
+    {
+        "name": "applescript",
+        "extensions": [
+            "scpt",
+            "AppleScript"
+        ]
+    },
+    {
+        "name": "d",
+        "extensions": [
+            "d"
+        ]
+    },
+    {
+        "name": "elixir",
+        "extensions": [
+            "ex",
+            "exs"
+        ]
+    },
+    {
+        "name": "haxe",
+        "extensions": [
+            "hx",
+            "hxml"
+        ]
+    },
+    {
+        "name": "matlab",
+        "extensions": [
+            "m"
+        ]
+    },
+    {
+        "name": "nimrod",
+        "extensions": [
+            "nim"
+        ]
+    },
+    {
+        "name": "oxygene",
+        "extensions": [
+            "pas"
+        ]
+    },
+    {
+        "name": "r",
+        "extensions": [
+            "r"
+        ]
+    },
+    {
+        "name": "swift",
+        "extensions": [
+            "swift"
+        ]
+    }
+]
