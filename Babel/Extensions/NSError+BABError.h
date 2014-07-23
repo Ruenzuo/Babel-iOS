@@ -12,5 +12,6 @@
 
 + (NSError *)bab_authorizationError;
 + (NSError *)bab_requestError;
++ (NSError *)bab_fileNotFound;
 
 @end

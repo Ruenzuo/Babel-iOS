@@ -17,4 +17,6 @@
     #import <SVProgressHUD/SVProgressHUD.h>
     #import <Bolts/Bolts.h>
     #import <SSKeychain/SSKeychain.h>
+    #import <Mantle/Mantle.h>
+    #include "Definitions.h"
 #endif
