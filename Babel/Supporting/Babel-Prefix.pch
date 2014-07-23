@@ -18,5 +18,6 @@
     #import <Bolts/Bolts.h>
     #import <SSKeychain/SSKeychain.h>
     #import <Mantle/Mantle.h>
+    #import <MSWeakTimer/MSWeakTimer.h>
     #include "Definitions.h"
 #endif
