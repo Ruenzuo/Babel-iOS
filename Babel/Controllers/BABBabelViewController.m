@@ -23,6 +23,7 @@
 @property (nonatomic, assign, getter = isPooling) BOOL pooling;
 @property (nonatomic, strong) MSWeakTimer *timer;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolBar;
+@property (nonatomic, weak) FBShimmeringView *titleShimmeringView;
 
 - (void)setupWebViewInsets;
 - (void)loadLanguages;
@@ -61,6 +62,7 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupTitle];
     [self loadLanguages];
     [self setupWebViewInsets];
     [self setupLoadingIndicator];
@@ -93,6 +95,18 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
     
 }
 
+- (void)setupTitle
+{
+    FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
+    [self.navigationItem setTitleView:shimmeringView];
+    self.titleShimmeringView = shimmeringView;
+    UILabel *loadingLabel = [[UILabel alloc] initWithFrame:shimmeringView.bounds];
+    loadingLabel.font = [UIFont boldSystemFontOfSize:17.0f];
+    loadingLabel.textAlignment = NSTextAlignmentCenter;
+    loadingLabel.text = @"Babel";
+    shimmeringView.contentView = loadingLabel;
+}
+
 - (void)setupLoadingIndicator
 {
     UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -102,6 +116,7 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
                                       animated:YES];
     [self.toolBar setItems:@[]
                   animated:YES];
+    self.titleShimmeringView.shimmering = YES;
 }
 
 - (void)setupGuess
@@ -121,6 +136,7 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
                                                             action:@selector(skip:)];
     [self.toolBar setItems:@[separator, skip]
                   animated:YES];
+    self.titleShimmeringView.shimmering = NO;
 }
 
 - (void)setupWebViewInsets
