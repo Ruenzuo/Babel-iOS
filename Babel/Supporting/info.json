@@ -1,272 +1,197 @@
 [
     {
-        "name": "css",
-        "extensions": [
-            "css"
-        ]
+        "index": 0,
+        "name": "ActionScript",
+        "search": "actionscript"
     },
     {
-        "name": "javascript",
-        "extensions": [
-            "js"
-        ]
+        "index": 1,
+        "name": "AppleScript",
+        "search": "applescript"
     },
     {
-        "name": "objective-c",
-        "extensions": [
-            "h",
-            "m",
-            "mm"
-        ]
+        "index": 2,
+        "name": "AutoHotkey",
+        "search": "autohotkey"
     },
     {
-        "name": "ruby",
-        "extensions": [
-            "rb",
-            "rbw"
-        ]
+        "index": 3,
+        "name": "Bash",
+        "search": "bash"
     },
     {
-        "name": "bash",
-        "extensions": [
-            "sh"
-        ]
+        "index": 4,
+        "name": "C#",
+        "search": "c#"
     },
     {
-        "name": "coffeescript",
-        "extensions": [
-            "coffee"
-        ]
+        "index": 5,
+        "name": "C++",
+        "search": "c++"
     },
     {
-        "name": "php",
-        "extensions": [
-            "php",
-            "phtml",
-            "php4",
-            "php3",
-            "php5",
-            "phps"
-        ]
+        "index": 6,
+        "name": "Clojure",
+        "search": "clojure"
     },
     {
-        "name": "sql",
-        "extensions": [
-            "sql"
-        ]
+        "index": 7,
+        "name": "CoffeeScript",
+        "search": "coffeescript"
     },
     {
-        "name": "c#",
-        "extensions": [
-            "cs"
-        ]
+        "index": 8,
+        "name": "CSS",
+        "search": "css"
     },
     {
-        "name": "perl",
-        "extensions": [
-            "pl",
-            "pm",
-            "t",
-            "pod"
-        ]
+        "index": 9,
+        "name": "D",
+        "search": "d"
     },
     {
-        "name": "c++",
-        "extensions": [
-            "cc",
-            "cpp",
-            "cxx",
-            "c++",
-            "h",
-            "hh",
-            "hpp",
-            "hxx",
-            "h++"
-        ]
+        "index": 10,
+        "name": "Elixir",
+        "search": "elixir"
     },
     {
-        "name": "xml",
-        "extensions": [
-            "xml"
-        ]
+        "index": 11,
+        "name": "Erlang",
+        "search": "erlang"
     },
     {
-        "name": "java",
-        "extensions": [
-            "java",
-            "class",
-            "jar"
-        ]
+        "index": 12,
+        "name": "Go",
+        "search": "go"
     },
     {
-        "name": "python",
-        "extensions": [
-            "py",
-            "pyw",
-            "pyc",
-            "pyo",
-            "pyd"
-        ]
+        "index": 13,
+        "name": "Haskell",
+        "search": "haskell"
     },
     {
-        "name": "erlang",
-        "extensions": [
-            "erl",
-            "hrl"
-        ]
+        "index": 14,
+        "name": "Haxe",
+        "search": "haxe"
     },
     {
-        "name": "lua",
-        "extensions": [
-            "lua"
-        ]
+        "index": 15,
+        "name": "Java",
+        "search": "java"
     },
     {
-        "name": "scala",
-        "extensions": [
-            "scala"
-        ]
+        "index": 16,
+        "name": "JavaScript",
+        "search": "javascript"
     },
     {
-        "name": "tex",
-        "extensions": [
-            "tex"
-        ]
+        "index": 17,
+        "name": "Lasso",
+        "search": "lasso"
     },
     {
-        "name": "autohotkey",
-        "extensions": [
-            "ahk"
-        ]
+        "index": 18,
+        "name": "Lisp",
+        "search": "lisp"
     },
     {
-        "name": "lasso",
-        "extensions": [
-            "lasso",
-            "LassoApp"
-        ]
+        "index": 19,
+        "name": "Lua",
+        "search": "lua"
     },
     {
-        "name": "ocaml",
-        "extensions": [
-            "ocaml",
-            "ml",
-            "mli"
-        ]
+        "index": 20,
+        "name": "MATLAB",
+        "search": "matlab"
     },
     {
-        "name": "actionscript",
-        "extensions": [
-            "as"
-        ]
+        "index": 21,
+        "name": "Nimrod",
+        "search": "nimrod"
     },
     {
-        "name": "clojure",
-        "extensions": [
-            "clj",
-            "edn"
-        ]
+        "index": 22,
+        "name": "Objective-C",
+        "search": "objective-c"
     },
     {
-        "name": "go",
-        "extensions": [
-            "go"
-        ]
+        "index": 23,
+        "name": "OCaml",
+        "search": "ocaml"
     },
     {
-        "name": "haskell",
-        "extensions": [
-            "hs",
-            "lhs"
-        ]
+        "index": 24,
+        "name": "Oxygene",
+        "search": "oxygene"
     },
     {
-        "name": "lisp",
-        "extensions": [
-            "lisp",
-            "cl"
-        ]
+        "index": 25,
+        "name": "Perl",
+        "search": "perl"
     },
     {
-        "name": "rust",
-        "extensions": [
-            "rs"
-        ]
+        "index": 26,
+        "name": "PHP",
+        "search": "php"
     },
     {
-        "name": "smalltalk",
-        "extensions": [
-            "st"
-        ]
+        "index": 27,
+        "name": "Python",
+        "search": "python"
     },
     {
-        "name": "typescript",
-        "extensions": [
-            "ts"
-        ]
+        "index": 28,
+        "name": "R",
+        "search": "r"
     },
     {
-        "name": "vala",
-        "extensions": [
-            "vala",
-            "vapi"
-        ]
+        "index": 29,
+        "name": "Ruby",
+        "search": "ruby"
     },
     {
-        "name": "applescript",
-        "extensions": [
-            "scpt",
-            "AppleScript"
-        ]
+        "index": 30,
+        "name": "Rust",
+        "search": "rust"
     },
     {
-        "name": "d",
-        "extensions": [
-            "d"
-        ]
+        "index": 31,
+        "name": "Scala",
+        "search": "scala"
     },
     {
-        "name": "elixir",
-        "extensions": [
-            "ex",
-            "exs"
-        ]
+        "index": 32,
+        "name": "Smalltalk",
+        "search": "smalltalk"
     },
     {
-        "name": "haxe",
-        "extensions": [
-            "hx",
-            "hxml"
-        ]
+        "index": 33,
+        "name": "SQL",
+        "search": "sql"
     },
     {
-        "name": "matlab",
-        "extensions": [
-            "m"
-        ]
+        "index": 34,
+        "name": "Swift",
+        "search": "swift"
     },
     {
-        "name": "nimrod",
-        "extensions": [
-            "nim"
-        ]
+        "index": 35,
+        "name": "TeX",
+        "search": "tex"
     },
     {
-        "name": "oxygene",
-        "extensions": [
-            "pas"
-        ]
+        "index": 36,
+        "name": "TypeScript",
+        "search": "typescript"
     },
     {
-        "name": "r",
-        "extensions": [
-            "r"
-        ]
+        "index": 37,
+        "name": "Vala",
+        "search": "vala"
     },
     {
-        "name": "swift",
-        "extensions": [
-            "swift"
-        ]
+        "index": 38,
+        "name": "XML",
+        "search": "xml"
     }
 ]

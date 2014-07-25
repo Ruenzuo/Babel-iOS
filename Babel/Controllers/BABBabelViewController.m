@@ -11,6 +11,7 @@
 #import "BABRepository.h"
 #import "BABFile.h"
 #import "NSError+BABError.h"
+#import "NSMutableArray+BABShuffle.h"
 
 @interface BABBabelViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -157,12 +158,6 @@ NSUInteger const BABMAX_HINT = 5;
     self.hintEnabled = YES;
     [self.toolBar setItems:@[]
                   animated:YES];
-    NSMutableArray *indexes = [[NSMutableArray alloc] init];
-    for (int i = 0; i < self.languages.count; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i
-                                                    inSection:0];
-        [indexes addObject:indexPath];
-    }
     [self.hintLanguages removeAllObjects];
     [self.hintLanguages addObject:self.currentLanguage];
     BOOL finished = NO;
@@ -175,14 +170,9 @@ NSUInteger const BABMAX_HINT = 5;
             finished = YES;
         }
     } while (!finished);
-    NSMutableIndexSet *indexesSet = [NSMutableIndexSet indexSet];
-    for (BABLanguage *language in self.hintLanguages) {
-        [indexesSet addIndex:[language.index unsignedIntegerValue]];
-    }
-    [indexes removeObjectsAtIndexes:indexesSet];
-    [self.tableView deleteRowsAtIndexPaths:indexes
-                          withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView reloadData];
+    [self.hintLanguages bab_shuffle];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+                  withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)setupTitle
@@ -371,7 +361,7 @@ NSUInteger const BABMAX_HINT = 5;
                                  stringByReplacingOccurrencesOfString:@">"
                                  withString:@""];
                 [self.paginationCache setObject:url
-                                         forKey:language.name];
+                                         forKey:language.search];
                 break;
             }
         }
@@ -389,13 +379,13 @@ NSUInteger const BABMAX_HINT = 5;
 
 - (NSURL *)URLForRepositoryWithLanguage:(BABLanguage *)language
 {
-    NSString *cached = [self.paginationCache objectForKey:language.name];
+    NSString *cached = [self.paginationCache objectForKey:language.search];
     if (cached != nil) {
         return [NSURL URLWithString:cached];
     } else {
         return [NSURL URLWithString:[NSString stringWithFormat:@"%@search/repositories?q=%@&access_token=%@&per_page=5",
                                      BABGitHubAPIBaseURL,
-                                     language.name,
+                                     language.search,
                                      self.token]];
     }
 }
@@ -405,7 +395,7 @@ NSUInteger const BABMAX_HINT = 5;
 {
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@search/code?q=language:%@+repo:%@&access_token=%@",
                                  BABGitHubAPIBaseURL,
-                                 language.name,
+                                 language.search,
                                  repository.name,
                                  self.token]];
 }
@@ -526,7 +516,8 @@ NSUInteger const BABMAX_HINT = 5;
                                               self.currentFile.name,
                                               self.currentRepository.name]];
     } else {
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"Incorrect!\nFile: %@\nRepository:%@",
+        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"Incorrect!\nLanguage:%@\nFile: %@\nRepository:%@",
+                                            self.currentLanguage.name,
                                             self.currentFile.name,
                                             self.currentRepository.name]];
     }
