@@ -12,16 +12,19 @@
 #import "BABFile.h"
 #import "NSError+BABError.h"
 
-@interface BABBabelViewController ()
+@interface BABBabelViewController () <UIWebViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) NSArray *languages;
 @property (nonatomic, strong) NSMutableDictionary *paginationCache;
 @property (nonatomic, strong) BABLanguage *currentLanguage;
 @property (nonatomic, strong) BABRepository *currentRepository;
+@property (nonatomic, strong) BABFile *currentFile;
 @property (nonatomic, assign, getter = isPooling) BOOL pooling;
 @property (nonatomic, strong) MSWeakTimer *timer;
+@property (nonatomic, weak) IBOutlet UIToolbar *toolBar;
 
+- (void)setupWebViewInsets;
 - (void)loadLanguages;
 - (BABLanguage *)randomLanguage;
 - (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language;
@@ -32,6 +35,10 @@
                         repository:(BABRepository *)repository;
 - (void)nextFile;
 - (void)poolRate;
+- (IBAction)skip:(id)sender;
+- (IBAction)guess:(id)sender;
+- (void)setupLoadingIndicator;
+- (void)setupGuess;
 
 @end
 
@@ -55,6 +62,8 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
 {
     [super viewDidLoad];
     [self loadLanguages];
+    [self setupWebViewInsets];
+    [self setupLoadingIndicator];
     [self nextFile];
 }
 
@@ -65,10 +74,66 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
 
 #pragma mark - Private Methods
 
+- (IBAction)skip:(id)sender
+{
+    [self setupLoadingIndicator];
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+                         self.webView.alpha = 0.0f;
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             [self nextFile];
+                         }
+                     }];
+}
+
+- (IBAction)guess:(id)sender
+{
+    
+}
+
+- (void)setupLoadingIndicator
+{
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [activityIndicatorView startAnimating];
+    UIBarButtonItem *loadingIndicator = [[UIBarButtonItem alloc] initWithCustomView:activityIndicatorView];
+    [self.navigationItem setRightBarButtonItem:loadingIndicator
+                                      animated:YES];
+    [self.toolBar setItems:@[]
+                  animated:YES];
+}
+
+- (void)setupGuess
+{
+    UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:@"Guess"
+                                                              style:UIBarButtonItemStyleBordered
+                                                             target:self
+                                                             action:@selector(guess:)];
+    [self.navigationItem setRightBarButtonItem:guess
+                                      animated:YES];
+    UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                               target:nil
+                                                                               action:nil];
+    UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:@"Skip"
+                                                             style:UIBarButtonItemStyleBordered
+                                                            target:self
+                                                            action:@selector(skip:)];
+    [self.toolBar setItems:@[separator, skip]
+                  animated:YES];
+}
+
+- (void)setupWebViewInsets
+{
+    UIEdgeInsets edgeInsets = UIEdgeInsetsMake([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height, 0, self.toolBar.frame.size.height, 0);
+    self.webView.scrollView.contentInset = edgeInsets;
+    self.webView.scrollView.scrollIndicatorInsets = edgeInsets;
+}
+
 - (void)nextFile
 {
     self.currentLanguage = [self randomLanguage];
-    [[[self randomRepositoryWithLanguage:self.currentLanguage] continueWithBlock:^id(BFTask *task) {
+    [[[[[self randomRepositoryWithLanguage:self.currentLanguage] continueWithBlock:^id(BFTask *task) {
         if (task.error) {
             //TODO: Handle error;
             NSLog(@"%@", [task.error localizedDescription]);
@@ -77,8 +142,8 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
                 if (!self.isPooling) {
                     [self poolRate];
                 }
-                return nil;
             }
+            return [BFTask cancelledTask];
         }
         self.currentRepository = task.result;
         return [self randomFileWithLanguage:self.currentLanguage
@@ -97,16 +162,41 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
                     [self poolRate];
                 }
             }
-        } else {
-            if (task.result != nil) {
-                if (self.isPooling) {
-                    [self stopPool];
-                }
-                BABFile *file = task.result;
-                NSLog(@"SHA: %@", file.sha);
-                NSLog(@"Repository: %@", self.currentRepository.name);
-                NSLog(@"Language: %@", self.currentLanguage.name);
-            }
+            return [BFTask cancelledTask];
+        }
+        if (task.isCancelled) {
+            return [BFTask cancelledTask];
+        }
+        self.currentFile = task.result;
+        return [self blobWithRepository:self.currentRepository
+                                   file:self.currentFile];
+    }] continueWithBlock:^id(BFTask *task) {
+        if (task.error) {
+            //TODO: Handle error;
+            NSLog(@"%@", [task.error localizedDescription]);
+            return [BFTask cancelledTask];
+        }
+        if (task.isCancelled) {
+            return [BFTask cancelledTask];
+        }
+        NSString *htmlFilePath = [[NSBundle mainBundle] pathForResource:@"index"
+                                                                 ofType:@"html"
+                                                            inDirectory:@"/WebRoot"];
+        NSString* htmlString = [NSString stringWithContentsOfFile:htmlFilePath
+                                                         encoding:NSUTF8StringEncoding
+                                                            error:nil];
+        return [BFTask taskWithResult:[htmlString stringByReplacingOccurrencesOfString:@"BABEL_PLACEHOLDER"
+                                                                            withString:task.result]];
+    }] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        if (task.error) {
+            //TODO: Handle error;
+            NSLog(@"%@", [task.error localizedDescription]);
+        }
+        if (!task.isCancelled) {
+            [self.webView loadHTMLString:task.result
+                                 baseURL:[NSURL fileURLWithPath:
+                                          [NSString stringWithFormat:@"%@/WebRoot/",
+                                           [[NSBundle mainBundle] bundlePath]]]];
         }
         return nil;
     }];
@@ -212,6 +302,16 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
                                  self.token]];
 }
 
+- (NSURL *)URLForBlobWithRepository:(BABRepository *)repository
+                               file:(BABFile *)file
+{
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@repos/%@/git/blobs/%@?access_token=%@",
+                                 BABGitHubAPIBaseURL,
+                                 repository.name,
+                                 file.sha,
+                                 self.token]];
+}
+
 - (BFTask *)randomFileWithLanguage:(BABLanguage *)language
                         repository:(BABRepository *)repository
 {
@@ -235,6 +335,44 @@ NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
     }];
     [[NSOperationQueue mainQueue] addOperation:requestOperation];
     return task.task;
+}
+
+- (BFTask *)blobWithRepository:(BABRepository *)repository
+                          file:(BABFile *)file
+{
+    BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForBlobWithRepository:repository
+                                                                                   file:file]];
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
+        NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseDictionary[@"content"]
+                                                                  options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSString *decodedString = [[NSString alloc] initWithData:decodedData
+                                                        encoding:NSUTF8StringEncoding];
+        [task setResult:decodedString];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [task setError:error];
+    }];
+    [[NSOperationQueue mainQueue] addOperation:requestOperation];
+    return task.task;
+}
+
+#pragma mark - UIWebViewDelegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    if (self.isPooling) {
+        [self stopPool];
+    }
+    if (self.webView.alpha == 0.0f) {
+        [self setupGuess];
+        [UIView animateWithDuration:0.5f
+                         animations:^{
+                             self.webView.alpha = 1.0f;
+                         }];
+    }
 }
 
 @end

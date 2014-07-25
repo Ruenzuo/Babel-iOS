@@ -46,6 +46,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Babel" id="eNg-k2-aaw">
+                        <barButtonItem key="backBarButtonItem" title="Exit" id="zmc-vO-aFN"/>
                         <barButtonItem key="rightBarButtonItem" title="Log in" id="29j-1T-U14">
                             <connections>
                                 <segue destination="ylY-i0-YNr" kind="push" identifier="AuthSegue" id="pad-Kx-M3U"/>
@@ -63,7 +64,7 @@
         <!--Babel View Controller-->
         <scene sceneID="dZV-Vy-SR6">
             <objects>
-                <viewController id="JaQ-ia-nax" customClass="BABBabelViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="JaQ-ia-nax" customClass="BABBabelViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lhy-MI-2oK"/>
                         <viewControllerLayoutGuide type="bottom" id="RXM-ti-OgJ"/>
@@ -72,22 +73,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTy-ni-C69">
+                            <webView alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTy-ni-C69">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="JaQ-ia-nax" id="UBL-A5-HTI"/>
+                                </connections>
                             </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DQo-og-44b">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="pjq-0Q-0Xt"/>
+                                    <barButtonItem title="Skip" id="Wjh-Y5-lZe">
+                                        <connections>
+                                            <action selector="skip:" destination="JaQ-ia-nax" id="fOM-iA-Bgb"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="DQo-og-44b" secondAttribute="bottom" id="JTz-57-Ork"/>
+                            <constraint firstItem="DQo-og-44b" firstAttribute="leading" secondItem="TSW-zv-djA" secondAttribute="leading" id="K0w-BA-XAY"/>
+                            <constraint firstAttribute="trailing" secondItem="DQo-og-44b" secondAttribute="trailing" id="gLb-Lh-IgW"/>
                             <constraint firstItem="dTy-ni-C69" firstAttribute="leading" secondItem="TSW-zv-djA" secondAttribute="leading" id="kpS-Co-eOt"/>
                             <constraint firstAttribute="trailing" secondItem="dTy-ni-C69" secondAttribute="trailing" id="oao-bf-ENf"/>
                             <constraint firstAttribute="bottom" secondItem="dTy-ni-C69" secondAttribute="bottom" id="sTc-JV-A7w"/>
                             <constraint firstItem="dTy-ni-C69" firstAttribute="top" secondItem="TSW-zv-djA" secondAttribute="top" id="wWG-vc-ZJq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="H4K-iv-5xY"/>
+                    <navigationItem key="navigationItem" id="H4K-iv-5xY">
+                        <barButtonItem key="rightBarButtonItem" title="Guess" id="LZZ-MC-cqo">
+                            <connections>
+                                <action selector="guess:" destination="JaQ-ia-nax" id="0c6-7H-ipG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="toolBar" destination="DQo-og-44b" id="B09-oF-cFg"/>
                         <outlet property="webView" destination="dTy-ni-C69" id="eGY-xv-Fua"/>
                     </connections>
                 </viewController>
