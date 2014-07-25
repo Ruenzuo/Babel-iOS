@@ -10,6 +10,7 @@
 
 @interface BABFile : MTLModel <MTLJSONSerializing>
 
+@property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *sha;
 
 @end

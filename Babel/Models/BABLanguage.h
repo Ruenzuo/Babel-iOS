@@ -10,7 +10,7 @@
 
 @interface BABLanguage : MTLModel <MTLJSONSerializing>
 
+@property (nonatomic, copy, readonly) NSNumber *index;
 @property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSArray *extensions;
 
 @end
