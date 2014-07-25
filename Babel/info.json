@@ -1,272 +1,158 @@
 [
     {
-        "name": "css",
-        "extensions": [
-            "css"
-        ]
+        "index": 0,
+        "name": "css"
     },
     {
-        "name": "javascript",
-        "extensions": [
-            "js"
-        ]
+        "index": 1,
+        "name": "javascript"
     },
     {
-        "name": "objective-c",
-        "extensions": [
-            "h",
-            "m",
-            "mm"
-        ]
+        "index": 2,
+        "name": "objective-c"
     },
     {
-        "name": "ruby",
-        "extensions": [
-            "rb",
-            "rbw"
-        ]
+        "index": 3,
+        "name": "ruby"
     },
     {
-        "name": "bash",
-        "extensions": [
-            "sh"
-        ]
+        "index": 4,
+        "name": "bash"
     },
     {
-        "name": "coffeescript",
-        "extensions": [
-            "coffee"
-        ]
+        "index": 5,
+        "name": "coffeescript"
     },
     {
-        "name": "php",
-        "extensions": [
-            "php",
-            "phtml",
-            "php4",
-            "php3",
-            "php5",
-            "phps"
-        ]
+        "index": 6,
+        "name": "php"
     },
     {
-        "name": "sql",
-        "extensions": [
-            "sql"
-        ]
+        "index": 7,
+        "name": "sql"
     },
     {
-        "name": "c#",
-        "extensions": [
-            "cs"
-        ]
+        "index": 8,
+        "name": "c#"
     },
     {
-        "name": "perl",
-        "extensions": [
-            "pl",
-            "pm",
-            "t",
-            "pod"
-        ]
+        "index": 9,
+        "name": "perl"
     },
     {
-        "name": "c++",
-        "extensions": [
-            "cc",
-            "cpp",
-            "cxx",
-            "c++",
-            "h",
-            "hh",
-            "hpp",
-            "hxx",
-            "h++"
-        ]
+        "index": 10,
+        "name": "c++"
     },
     {
-        "name": "xml",
-        "extensions": [
-            "xml"
-        ]
+        "index": 11,
+        "name": "xml"
     },
     {
-        "name": "java",
-        "extensions": [
-            "java",
-            "class",
-            "jar"
-        ]
+        "index": 12,
+        "name": "java"
     },
     {
-        "name": "python",
-        "extensions": [
-            "py",
-            "pyw",
-            "pyc",
-            "pyo",
-            "pyd"
-        ]
+        "index": 13,
+        "name": "python"
     },
     {
-        "name": "erlang",
-        "extensions": [
-            "erl",
-            "hrl"
-        ]
+        "index": 14,
+        "name": "erlang"
     },
     {
-        "name": "lua",
-        "extensions": [
-            "lua"
-        ]
+        "index": 15,
+        "name": "lua"
     },
     {
-        "name": "scala",
-        "extensions": [
-            "scala"
-        ]
+        "index": 16,
+        "name": "scala"
     },
     {
-        "name": "tex",
-        "extensions": [
-            "tex"
-        ]
+        "index": 17,
+        "name": "tex"
     },
     {
-        "name": "autohotkey",
-        "extensions": [
-            "ahk"
-        ]
+        "index": 18,
+        "name": "autohotkey"
     },
     {
-        "name": "lasso",
-        "extensions": [
-            "lasso",
-            "LassoApp"
-        ]
+        "index": 19,
+        "name": "lasso"
     },
     {
-        "name": "ocaml",
-        "extensions": [
-            "ocaml",
-            "ml",
-            "mli"
-        ]
+        "index": 20,
+        "name": "ocaml"
     },
     {
-        "name": "actionscript",
-        "extensions": [
-            "as"
-        ]
+        "index": 21,
+        "name": "actionscript"
     },
     {
-        "name": "clojure",
-        "extensions": [
-            "clj",
-            "edn"
-        ]
+        "index": 22,
+        "name": "clojure"
     },
     {
-        "name": "go",
-        "extensions": [
-            "go"
-        ]
+        "index": 23,
+        "name": "go"
     },
     {
-        "name": "haskell",
-        "extensions": [
-            "hs",
-            "lhs"
-        ]
+        "index": 24,
+        "name": "haskell"
     },
     {
-        "name": "lisp",
-        "extensions": [
-            "lisp",
-            "cl"
-        ]
+        "index": 25,
+        "name": "lisp"
     },
     {
-        "name": "rust",
-        "extensions": [
-            "rs"
-        ]
+        "index": 26,
+        "name": "rust"
     },
     {
-        "name": "smalltalk",
-        "extensions": [
-            "st"
-        ]
+        "index": 27,
+        "name": "smalltalk"
     },
     {
-        "name": "typescript",
-        "extensions": [
-            "ts"
-        ]
+        "index": 28,
+        "name": "typescript"
     },
     {
-        "name": "vala",
-        "extensions": [
-            "vala",
-            "vapi"
-        ]
+        "index": 29,
+        "name": "vala"
     },
     {
-        "name": "applescript",
-        "extensions": [
-            "scpt",
-            "AppleScript"
-        ]
+        "index": 30,
+        "name": "applescript"
     },
     {
-        "name": "d",
-        "extensions": [
-            "d"
-        ]
+        "index": 31,
+        "name": "d"
     },
     {
-        "name": "elixir",
-        "extensions": [
-            "ex",
-            "exs"
-        ]
+        "index": 32,
+        "name": "elixir"
     },
     {
-        "name": "haxe",
-        "extensions": [
-            "hx",
-            "hxml"
-        ]
+        "index": 33,
+        "name": "haxe"
     },
     {
-        "name": "matlab",
-        "extensions": [
-            "m"
-        ]
+        "index": 34,
+        "name": "matlab"
     },
     {
-        "name": "nimrod",
-        "extensions": [
-            "nim"
-        ]
+        "index": 35,
+        "name": "nimrod"
     },
     {
-        "name": "oxygene",
-        "extensions": [
-            "pas"
-        ]
+        "index": 36,
+        "name": "oxygene"
     },
     {
-        "name": "r",
-        "extensions": [
-            "r"
-        ]
+        "index": 37,
+        "name": "r"
     },
     {
-        "name": "swift",
-        "extensions": [
-            "swift"
-        ]
+        "index": 38,
+        "name": "swift"
     }
 ]
