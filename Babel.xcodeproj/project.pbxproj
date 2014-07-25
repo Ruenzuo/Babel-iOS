@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A08E88F11982CF3F00EA3758 /* info.json in Resources */ = {isa = PBXBuildFile; fileRef = A08E88F01982CF3F00EA3758 /* info.json */; };
+		A08E88F41982D4D400EA3758 /* NSMutableArray+BABShuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */; };
 		A093AA17197D6C5100F21675 /* BABOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A093AA16197D6C5100F21675 /* BABOAuthViewController.m */; };
 		A093AA1E197D7FFF00F21675 /* NSError+BABError.m in Sources */ = {isa = PBXBuildFile; fileRef = A093AA1D197D7FFF00F21675 /* NSError+BABError.m */; };
-		A0A9CC8819801A3300333518 /* info.json in Resources */ = {isa = PBXBuildFile; fileRef = A0A9CC8719801A3300333518 /* info.json */; };
 		A0A9CC8A19801B5300333518 /* WebRoot in Resources */ = {isa = PBXBuildFile; fileRef = A0A9CC8919801B5300333518 /* WebRoot */; };
 		A0A9CC8D19801BC400333518 /* BABBabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A9CC8C19801BC400333518 /* BABBabelViewController.m */; };
 		A0A9CC9119801E7E00333518 /* BABLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A9CC9019801E7E00333518 /* BABLanguage.m */; };
@@ -29,11 +30,13 @@
 
 /* Begin PBXFileReference section */
 		0AD224A7F9CE4296BC149BF0 /* libPods-Babel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Babel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08E88F01982CF3F00EA3758 /* info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = info.json; path = Supporting/info.json; sourceTree = "<group>"; };
+		A08E88F21982D4D400EA3758 /* NSMutableArray+BABShuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+BABShuffle.h"; path = "Extensions/NSMutableArray+BABShuffle.h"; sourceTree = "<group>"; };
+		A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+BABShuffle.m"; path = "Extensions/NSMutableArray+BABShuffle.m"; sourceTree = "<group>"; };
 		A093AA15197D6C5100F21675 /* BABOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABOAuthViewController.h; path = Controllers/BABOAuthViewController.h; sourceTree = "<group>"; };
 		A093AA16197D6C5100F21675 /* BABOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABOAuthViewController.m; path = Controllers/BABOAuthViewController.m; sourceTree = "<group>"; };
 		A093AA1C197D7FFF00F21675 /* NSError+BABError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+BABError.h"; path = "Extensions/NSError+BABError.h"; sourceTree = "<group>"; };
 		A093AA1D197D7FFF00F21675 /* NSError+BABError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+BABError.m"; path = "Extensions/NSError+BABError.m"; sourceTree = "<group>"; };
-		A0A9CC8719801A3300333518 /* info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = info.json; sourceTree = "<group>"; };
 		A0A9CC8919801B5300333518 /* WebRoot */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebRoot; sourceTree = "<group>"; };
 		A0A9CC8B19801BC400333518 /* BABBabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABBabelViewController.h; path = Controllers/BABBabelViewController.h; sourceTree = "<group>"; };
 		A0A9CC8C19801BC400333518 /* BABBabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABBabelViewController.m; path = Controllers/BABBabelViewController.m; sourceTree = "<group>"; };
@@ -82,6 +85,8 @@
 			children = (
 				A093AA1C197D7FFF00F21675 /* NSError+BABError.h */,
 				A093AA1D197D7FFF00F21675 /* NSError+BABError.m */,
+				A08E88F21982D4D400EA3758 /* NSMutableArray+BABShuffle.h */,
+				A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -146,8 +151,8 @@
 		A0D9B150197C4B7A00AD7990 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
+				A08E88F01982CF3F00EA3758 /* info.json */,
 				A0A9CC8919801B5300333518 /* WebRoot */,
-				A0A9CC8719801A3300333518 /* info.json */,
 				A0D9B180197C4BE300AD7990 /* Babel-Info.plist */,
 				A0D9B181197C4BE300AD7990 /* Babel-Prefix.pch */,
 				A0D9B189197C4BEC00AD7990 /* InfoPlist.strings */,
@@ -243,8 +248,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0D9B187197C4BEC00AD7990 /* InfoPlist.strings in Resources */,
-				A0A9CC8819801A3300333518 /* info.json in Resources */,
 				A0D9B162197C4B7A00AD7990 /* Images.xcassets in Resources */,
+				A08E88F11982CF3F00EA3758 /* info.json in Resources */,
 				A0D9B18C197C4C0E00AD7990 /* Main.storyboard in Resources */,
 				A0A9CC8A19801B5300333518 /* WebRoot in Resources */,
 			);
@@ -293,6 +298,7 @@
 				A093AA17197D6C5100F21675 /* BABOAuthViewController.m in Sources */,
 				A0D9B195197C4DA900AD7990 /* BABMenuViewController.m in Sources */,
 				A0A9CC9119801E7E00333518 /* BABLanguage.m in Sources */,
+				A08E88F41982D4D400EA3758 /* NSMutableArray+BABShuffle.m in Sources */,
 				A0D9B191197C4C1600AD7990 /* BABAppDelegate.m in Sources */,
 				A0D9B186197C4BE300AD7990 /* main.m in Sources */,
 				A0A9CC9719802C6200333518 /* BABFile.m in Sources */,

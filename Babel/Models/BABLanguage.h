@@ -12,5 +12,6 @@
 
 @property (nonatomic, copy, readonly) NSNumber *index;
 @property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, copy, readonly) NSString *search;
 
 @end
