@@ -15,7 +15,8 @@
     return @{
              @"index" : @"index",
              @"name" : @"name",
-             @"search" : @"search"
+             @"search" : @"search",
+             @"css": @"css"
              };
 }
 
