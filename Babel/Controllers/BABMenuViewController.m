@@ -74,20 +74,21 @@
     if (!error) {
         [SVProgressHUD showWithStatus:@"Checking session validity."
                              maskType:SVProgressHUDMaskTypeBlack];
-        [[self.authorizationSessionManager checkTokenValidityWithToken:self.token] continueWithBlock:^id(BFTask *task) {
-            
-            @strongify(self);
-            
-            if (task.error) {
-                [SVProgressHUD showErrorWithStatus:@"Session expired."];
-                NSError *error = nil;
-                [BABKeychainHelper deleteStoredTokenWithError:&error];
-            } else {
-                [SVProgressHUD dismiss];
-                [self showLogOutView];
-            }
-            return nil;
-        }];
+        [[self.authorizationSessionManager checkTokenValidityWithToken:self.token]
+         continueWithExecutor:[BFExecutor mainThreadExecutor]
+         withBlock:^id(BFTask *task) {
+             @strongify(self);
+             
+             if (task.error) {
+                 [SVProgressHUD showErrorWithStatus:@"Session expired."];
+                 NSError *error = nil;
+                 [BABKeychainHelper deleteStoredTokenWithError:&error];
+             } else {
+                 [SVProgressHUD dismiss];
+                 [self showLogOutView];
+             }
+             return nil;
+         }];
     }
 }
 
@@ -103,20 +104,21 @@
     
     [SVProgressHUD showWithStatus:@"Logging out."
                          maskType:SVProgressHUDMaskTypeBlack];
-    [[self.authorizationSessionManager revokeTokenWithToken:self.token] continueWithBlock:^id(BFTask *task) {
-        
-        @strongify(self);
-        
-        if (task.error) {
-            [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
-        } else {
-            [SVProgressHUD dismiss];
-            NSError *error = nil;
-            [BABKeychainHelper deleteStoredTokenWithError:&error];
-            [self showLogInView];
-        }
-        return nil;
-    }];
+    [[self.authorizationSessionManager revokeTokenWithToken:self.token]
+     continueWithExecutor:[BFExecutor mainThreadExecutor]
+     withBlock:^id(BFTask *task) {
+         @strongify(self);
+         
+         if (task.error) {
+             [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+         } else {
+             [SVProgressHUD dismiss];
+             NSError *error = nil;
+             [BABKeychainHelper deleteStoredTokenWithError:&error];
+             [self showLogInView];
+         }
+         return nil;
+     }];
 
 }
 
