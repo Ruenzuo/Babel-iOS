@@ -20,5 +20,6 @@
     #import <Mantle/Mantle.h>
     #import <MSWeakTimer/MSWeakTimer.h>
     #import <Shimmer/FBShimmeringView.h>
+    #import <libextobjc/EXTScope.h>
     #include "Definitions.h"
 #endif

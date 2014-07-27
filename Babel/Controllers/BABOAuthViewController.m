@@ -9,13 +9,13 @@
 #import "BABOAuthViewController.h"
 #import "NSError+BABError.h"
 #import "BABURLHelper.h"
+#import "BABTranslatorHelper.h"
 
 @interface BABOAuthViewController () <UIWebViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
 
 - (void)getAccessTokenWithCode:(NSString *)code;
-- (NSDictionary *)dictionaryWithQuery:(NSString *)queryString;
 
 @end
 
@@ -37,27 +37,21 @@
 
 #pragma mark - Private Methods
 
-- (NSDictionary *)dictionaryWithQuery:(NSString *)queryString
-{
-    NSArray *components = [queryString componentsSeparatedByString:@"&"];
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithCapacity:[components count]];
-    for (NSString *component in components) {
-        NSArray *pairComponents = [component componentsSeparatedByString:@"="];
-        [dictionary setObject:pairComponents[1] forKey:pairComponents[0]];
-    }
-    return [dictionary copy];
-}
-
 - (void)getAccessTokenWithCode:(NSString *)code
 {
+    @weakify(self);
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[BABURLHelper accessTokenURLWithCode:code]];
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = [AFHTTPResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        @strongify(self);
+        
         [SVProgressHUD dismiss];
         NSString *query = [[NSString alloc] initWithData:responseObject
                                                    encoding:NSUTF8StringEncoding];
-        NSDictionary *dictionary = [self dictionaryWithQuery:query];
+        NSDictionary *dictionary = [BABTranslatorHelper dictionaryWithQuery:query];
         NSString *token = [dictionary objectForKey:@"access_token"];
         if (token != nil) {
             [self.delegate authViewControllerDidFinishAuthenticationWithToken:token
@@ -68,6 +62,9 @@
         }
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        @strongify(self);
+        
         if (error != nil) {
             [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
             [self.delegate authViewControllerDidFinishAuthenticationWithToken:nil
@@ -85,7 +82,7 @@
         [SVProgressHUD showWithStatus:@"Retrieving access token"
                              maskType:SVProgressHUDMaskTypeBlack];
         NSString *query = [[request URL] query];
-        NSDictionary *dictionary = [self dictionaryWithQuery:query];
+        NSDictionary *dictionary = [BABTranslatorHelper dictionaryWithQuery:query];
         NSString *code = dictionary[@"code"];
         [self getAccessTokenWithCode:code];
         return NO;
@@ -99,7 +96,21 @@
         if ([error domain] == NSURLErrorDomain) {
             [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
         }
+        if ([[error domain] isEqualToString:@"WebKitErrorDomain"] &&
+            error.code == 102) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        }
     }
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 @end
