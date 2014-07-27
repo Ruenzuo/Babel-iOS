@@ -18,16 +18,10 @@ extern NSString *const BABGitHubClientSecret;
 
 @interface BABURLHelper : NSObject
 
-+ (NSURL *)authorizeURL;
-+ (NSURL *)accessTokenURLWithCode:(NSString *)code;
-+ (NSURL *)URLForRepositoryWithLanguage:(BABLanguage *)language
-                                  token:(NSString *)token;
-+ (NSURL *)URLForFileWithLanguage:(BABLanguage *)language
-                       repository:(BABRepository *)repository
-                            token:(NSString *)token;
-+ (NSURL *)URLForBlobWithRepository:(BABRepository *)repository
-                               file:(BABFile *)file
-                              token:(NSString *)token;
++ (NSURL *)URLForAuthorization;
++ (NSURL *)URLForAccessTokenWithCode:(NSString *)code;
++ (NSString *)URLStringForBlobWithRepository:(BABRepository *)repository
+                                        file:(BABFile *)file;
 + (NSString *)URLStringForTokenValidityWithToken:(NSString *)token;
 
 @end

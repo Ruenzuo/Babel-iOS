@@ -10,6 +10,8 @@
 
 @interface BABTranslatorHelper : NSObject
 
-+ (NSDictionary *)dictionaryWithQuery:(NSString *)queryString;
++ (NSDictionary *)translateDictionaryWithQuery:(NSString *)queryString;
+- (NSArray *)translateRepositoriesWithJSONArray:(NSArray *)JSONArray;
+- (NSArray *)translateFilesWithJSONArray:(NSArray *)JSONArray;
 
 @end

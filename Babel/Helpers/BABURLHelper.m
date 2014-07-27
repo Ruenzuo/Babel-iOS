@@ -23,13 +23,13 @@ NSString * const BABGitHubClientSecret = @"5aecca077a31c7f35af8a21146d7738ad47f1
 
 #pragma mark - Public Methods
 
-+ (NSURL *)authorizeURL
++ (NSURL *)URLForAuthorization
 {
     return [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/login/oauth/authorize?client_id=%@",
                                  BABGitHubClientID]];
 }
 
-+ (NSURL *)accessTokenURLWithCode:(NSString *)code
++ (NSURL *)URLForAccessTokenWithCode:(NSString *)code
 {
     return [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/login/oauth/access_token?client_id=%@&client_secret=%@&code=%@",
                                  BABGitHubClientID,
@@ -37,35 +37,12 @@ NSString * const BABGitHubClientSecret = @"5aecca077a31c7f35af8a21146d7738ad47f1
                                  code]];
 }
 
-+ (NSURL *)URLForRepositoryWithLanguage:(BABLanguage *)language
-                                  token:(NSString *)token
++ (NSString *)URLStringForBlobWithRepository:(BABRepository *)repository
+                                        file:(BABFile *)file
 {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@search/repositories?q=%@&access_token=%@&per_page=5",
-                                 BABGitHubAPIBaseURL,
-                                 language.search,
-                                 token]];
-}
-
-+ (NSURL *)URLForFileWithLanguage:(BABLanguage *)language
-                       repository:(BABRepository *)repository
-                            token:(NSString *)token
-{
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@search/code?q=language:%@+repo:%@&access_token=%@",
-                                 BABGitHubAPIBaseURL,
-                                 language.search,
-                                 repository.name,
-                                 token]];
-}
-
-+ (NSURL *)URLForBlobWithRepository:(BABRepository *)repository
-                               file:(BABFile *)file
-                              token:(NSString *)token
-{
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@repos/%@/git/blobs/%@?access_token=%@",
-                                 BABGitHubAPIBaseURL,
-                                 repository.name,
-                                 file.sha,
-                                 token]];
+    return [NSString stringWithFormat:@"repos/%@/git/blobs/%@",
+            repository.name,
+            file.sha];
 }
 
 + (NSString *)URLStringForTokenValidityWithToken:(NSString *)token

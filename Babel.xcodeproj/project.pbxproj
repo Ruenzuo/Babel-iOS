@@ -20,6 +20,7 @@
 		A0AD091A1984FF3D00D6A5D5 /* BABKeychainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD09191984FF3D00D6A5D5 /* BABKeychainHelper.m */; };
 		A0AD091D1985049900D6A5D5 /* BABTranslatorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD091C1985049900D6A5D5 /* BABTranslatorHelper.m */; };
 		A0AD09281985123500D6A5D5 /* BABAuthorizationSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD09271985123500D6A5D5 /* BABAuthorizationSessionManager.m */; };
+		A0AD092B1985286100D6A5D5 /* BABGitHubAPISessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD092A1985286100D6A5D5 /* BABGitHubAPISessionManager.m */; };
 		A0D9B14A197C4B7A00AD7990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B149197C4B7A00AD7990 /* Foundation.framework */; };
 		A0D9B14C197C4B7A00AD7990 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */; };
 		A0D9B14E197C4B7A00AD7990 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14D197C4B7A00AD7990 /* UIKit.framework */; };
@@ -59,6 +60,8 @@
 		A0AD091C1985049900D6A5D5 /* BABTranslatorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABTranslatorHelper.m; path = Helpers/BABTranslatorHelper.m; sourceTree = "<group>"; };
 		A0AD09261985123500D6A5D5 /* BABAuthorizationSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABAuthorizationSessionManager.h; path = Managers/BABAuthorizationSessionManager.h; sourceTree = "<group>"; };
 		A0AD09271985123500D6A5D5 /* BABAuthorizationSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABAuthorizationSessionManager.m; path = Managers/BABAuthorizationSessionManager.m; sourceTree = "<group>"; };
+		A0AD09291985286100D6A5D5 /* BABGitHubAPISessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABGitHubAPISessionManager.h; path = Managers/BABGitHubAPISessionManager.h; sourceTree = "<group>"; };
+		A0AD092A1985286100D6A5D5 /* BABGitHubAPISessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABGitHubAPISessionManager.m; path = Managers/BABGitHubAPISessionManager.m; sourceTree = "<group>"; };
 		A0D9B146197C4B7A00AD7990 /* Babel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D9B149197C4B7A00AD7990 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -134,6 +137,8 @@
 			children = (
 				A0AD09261985123500D6A5D5 /* BABAuthorizationSessionManager.h */,
 				A0AD09271985123500D6A5D5 /* BABAuthorizationSessionManager.m */,
+				A0AD09291985286100D6A5D5 /* BABGitHubAPISessionManager.h */,
+				A0AD092A1985286100D6A5D5 /* BABGitHubAPISessionManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -338,6 +343,7 @@
 				A0A9CC9119801E7E00333518 /* BABLanguage.m in Sources */,
 				A08E88F41982D4D400EA3758 /* NSMutableArray+BABShuffle.m in Sources */,
 				A0D9B191197C4C1600AD7990 /* BABAppDelegate.m in Sources */,
+				A0AD092B1985286100D6A5D5 /* BABGitHubAPISessionManager.m in Sources */,
 				A0D9B186197C4BE300AD7990 /* main.m in Sources */,
 				A0A9CC9719802C6200333518 /* BABFile.m in Sources */,
 				A093AA1E197D7FFF00F21675 /* NSError+BABError.m in Sources */,

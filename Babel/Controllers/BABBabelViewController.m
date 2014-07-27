@@ -13,6 +13,8 @@
 #import "NSError+BABError.h"
 #import "NSMutableArray+BABShuffle.h"
 #import "BABURLHelper.h"
+#import "BABGitHubAPISessionManager.h"
+#import "BABTranslatorHelper.h"
 
 @interface BABBabelViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -29,14 +31,12 @@
 @property (nonatomic, weak) FBShimmeringView *titleShimmeringView;
 @property (nonatomic, assign, getter = isHintEnabled) BOOL hintEnabled;
 @property (nonatomic, assign) NSUInteger points;
-@property (nonatomic, strong) NSMutableDictionary *paginationCache;
+@property (nonatomic, strong) BABGitHubAPISessionManager *gitHubAPISessionManager;
+@property (nonatomic, strong) BABTranslatorHelper *translatorHelper;
 
 - (void)setupInsets;
 - (void)loadLanguages;
 - (BABLanguage *)randomLanguage;
-- (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language;
-- (BFTask *)randomFileWithLanguage:(BABLanguage *)language
-                        repository:(BABRepository *)repository;
 - (void)nextFile;
 - (void)poolRate;
 - (IBAction)skip:(id)sender;
@@ -53,6 +53,24 @@
 NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 NSUInteger const BABMAX_HINT = 5;
 
+#pragma mark - Properties
+
+- (BABGitHubAPISessionManager *)gitHubAPISessionManager
+{
+    if (_gitHubAPISessionManager == nil) {
+        _gitHubAPISessionManager = [[BABGitHubAPISessionManager alloc] init];
+    }
+    return _gitHubAPISessionManager;
+}
+
+- (BABTranslatorHelper *)translatorHelper
+{
+    if (_translatorHelper == nil) {
+        _translatorHelper = [[BABTranslatorHelper alloc] init];
+    }
+    return _translatorHelper;
+}
+
 #pragma mark - View controller life cycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -60,7 +78,6 @@ NSUInteger const BABMAX_HINT = 5;
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.hintLanguages = [[NSMutableArray alloc] init];
-        self.paginationCache = [[NSMutableDictionary alloc] init];
         self.pooling = false;
         self.points = 0;
     }
@@ -228,7 +245,16 @@ NSUInteger const BABMAX_HINT = 5;
 - (void)nextFile
 {
     self.currentLanguage = [self randomLanguage];
-    [[[[[self randomRepositoryWithLanguage:self.currentLanguage] continueWithBlock:^id(BFTask *task) {
+    [[[[[[[[self.gitHubAPISessionManager randomRepositoryWithLanguage:self.currentLanguage
+                                                             token:self.token] continueWithBlock:^id(BFTask *task) {
+        if (task.error) {
+            return [BFTask cancelledTask];
+        }
+        NSDictionary *responseDictionary = task.result;
+        NSArray *items = [responseDictionary objectForKey:@"items"];
+        NSArray *repositories = [self.translatorHelper translateRepositoriesWithJSONArray:items];
+        return [BFTask taskWithResult:repositories[arc4random_uniform((int32_t)5)]];
+    }] continueWithBlock:^id(BFTask *task) {
         if (task.error) {
             //TODO: Handle error;
             NSLog(@"%@", [task.error localizedDescription]);
@@ -241,8 +267,21 @@ NSUInteger const BABMAX_HINT = 5;
             return [BFTask cancelledTask];
         }
         self.currentRepository = task.result;
-        return [self randomFileWithLanguage:self.currentLanguage
-                                 repository:self.currentRepository];
+        return [self.gitHubAPISessionManager randomFileWithLanguage:self.currentLanguage
+                                                         repository:self.currentRepository
+                                                              token:self.token];
+    }] continueWithBlock:^id(BFTask *task) {
+        if (task.error) {
+            return [BFTask cancelledTask];
+        }
+        NSDictionary *responseDictionary = (NSDictionary *)task.result;
+        NSArray *items = [responseDictionary objectForKey:@"items"];
+        NSArray *files = [self.translatorHelper translateFilesWithJSONArray:items];
+        if (files.count == 0) {
+            return [BFTask taskWithError:[NSError bab_fileNotFound]];
+        } else {
+            return [BFTask taskWithResult:files[arc4random_uniform((int32_t)files.count)]];
+        }
     }] continueWithBlock:^id(BFTask *task) {
         if (task.error) {
             //TODO: Handle error;
@@ -263,8 +302,19 @@ NSUInteger const BABMAX_HINT = 5;
             return [BFTask cancelledTask];
         }
         self.currentFile = task.result;
-        return [self blobWithRepository:self.currentRepository
-                                   file:self.currentFile];
+        return [self.gitHubAPISessionManager blobWithRepository:self.currentRepository
+                                                           file:self.currentFile
+                                                          token:self.token];
+    }] continueWithBlock:^id(BFTask *task) {
+        if (task.error) {
+            return [BFTask cancelledTask];
+        }
+        NSDictionary *responseDictionary = (NSDictionary *)task.result;
+        NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseDictionary[@"content"]
+                                                                  options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSString *decodedString = [[NSString alloc] initWithData:decodedData
+                                                        encoding:NSUTF8StringEncoding];
+        return [BFTask taskWithResult:decodedString];
     }] continueWithBlock:^id(BFTask *task) {
         if (task.error) {
             //TODO: Handle error;
@@ -336,99 +386,6 @@ NSUInteger const BABMAX_HINT = 5;
 - (NSString *)randomLanguage
 {
     return self.languages[arc4random_uniform((int32_t)self.languages.count)];
-}
-
-- (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language
-{
-    BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
-    NSString *cached = [self.paginationCache objectForKey:language.search];
-    NSURL *requestURL;
-    if (cached != nil) {
-        requestURL = [NSURL URLWithString:cached];
-    } else {
-        requestURL = [BABURLHelper URLForRepositoryWithLanguage:language
-                                                          token:self.token];
-    }
-    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSHTTPURLResponse *response = operation.response;
-        NSDictionary *header = response.allHeaderFields;
-        NSString *link = header[@"Link"];
-        NSArray *components = [link componentsSeparatedByString:@","];
-        for (NSString *component in components) {
-            NSArray *subcomponets = [component componentsSeparatedByString:@"; rel="];
-            NSString *rel = subcomponets[1];
-            if ([rel rangeOfString:@"next"].location != NSNotFound) {
-                NSString *url = [[subcomponets[0] stringByReplacingOccurrencesOfString:@"<"
-                                                                           withString:@""]
-                                 stringByReplacingOccurrencesOfString:@">"
-                                 withString:@""];
-                [self.paginationCache setObject:url
-                                         forKey:language.search];
-                break;
-            }
-        }
-        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-        NSArray *items = [responseDictionary objectForKey:@"items"];
-        NSValueTransformer *valueTransformer = [MTLValueTransformer mtl_JSONArrayTransformerWithModelClass:[BABRepository class]];
-        NSArray *repositories = [valueTransformer transformedValue:items];
-        [task setResult:repositories[arc4random_uniform((int32_t)5)]];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [task setError:error];
-    }];
-    [[NSOperationQueue mainQueue] addOperation:requestOperation];
-    return task.task;
-}
-
-- (BFTask *)randomFileWithLanguage:(BABLanguage *)language
-                        repository:(BABRepository *)repository
-{
-    BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[BABURLHelper URLForFileWithLanguage:language
-                                                                                   repository:repository
-                                                                                        token:self.token]];
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-        NSArray *items = [responseDictionary objectForKey:@"items"];
-        NSValueTransformer *valueTransformer = [MTLValueTransformer mtl_JSONArrayTransformerWithModelClass:[BABFile class]];
-        NSArray *files = [valueTransformer transformedValue:items];
-        if (files.count == 0) {
-            [task setError:[NSError bab_fileNotFound]];
-        } else {
-            [task setResult:files[arc4random_uniform((int32_t)files.count)]];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [task setError:error];
-    }];
-    [[NSOperationQueue mainQueue] addOperation:requestOperation];
-    return task.task;
-}
-
-- (BFTask *)blobWithRepository:(BABRepository *)repository
-                          file:(BABFile *)file
-{
-    BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[BABURLHelper URLForBlobWithRepository:repository
-                                                                                           file:file
-                                                                                          token:self.token]];
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *responseDictionary = (NSDictionary *)responseObject;
-        NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseDictionary[@"content"]
-                                                                  options:NSDataBase64DecodingIgnoreUnknownCharacters];
-        NSString *decodedString = [[NSString alloc] initWithData:decodedData
-                                                        encoding:NSUTF8StringEncoding];
-        [task setResult:decodedString];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [task setError:error];
-    }];
-    [[NSOperationQueue mainQueue] addOperation:requestOperation];
-    return task.task;
 }
 
 #pragma mark - UIWebViewDelegate
