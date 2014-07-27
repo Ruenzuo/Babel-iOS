@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[BABURLHelper authorizeURL]];
+    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[BABURLHelper URLForAuthorization]];
     [self.webView loadRequest:URLRequest];
 }
 
@@ -41,7 +41,7 @@
 {
     @weakify(self);
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:[BABURLHelper accessTokenURLWithCode:code]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[BABURLHelper URLForAccessTokenWithCode:code]];
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = [AFHTTPResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -51,7 +51,7 @@
         [SVProgressHUD dismiss];
         NSString *query = [[NSString alloc] initWithData:responseObject
                                                    encoding:NSUTF8StringEncoding];
-        NSDictionary *dictionary = [BABTranslatorHelper dictionaryWithQuery:query];
+        NSDictionary *dictionary = [BABTranslatorHelper translateDictionaryWithQuery:query];
         NSString *token = [dictionary objectForKey:@"access_token"];
         if (token != nil) {
             [self.delegate authViewControllerDidFinishAuthenticationWithToken:token
@@ -75,7 +75,7 @@
 {
     if ([[[request URL] scheme] isEqualToString:@"babel"]) {
         NSString *query = [[request URL] query];
-        NSDictionary *dictionary = [BABTranslatorHelper dictionaryWithQuery:query];
+        NSDictionary *dictionary = [BABTranslatorHelper translateDictionaryWithQuery:query];
         NSString *code = dictionary[@"code"];
         if (code != nil) {
             [SVProgressHUD showWithStatus:@"Retrieving access token"
