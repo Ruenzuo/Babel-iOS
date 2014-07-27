@@ -8,22 +8,18 @@
 
 #import "BABOAuthViewController.h"
 #import "NSError+BABError.h"
+#import "BABURLHelper.h"
 
 @interface BABOAuthViewController () <UIWebViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
 
-- (NSURL *)authorizeURL;
-- (NSURL *)accessTokenURLWithCode:(NSString *)codel;
 - (void)getAccessTokenWithCode:(NSString *)code;
 - (NSDictionary *)dictionaryWithQuery:(NSString *)queryString;
 
 @end
 
 @implementation BABOAuthViewController
-
-NSString * const BABGitHubClientID = @"134fde19a1854aa20f4f";
-NSString * const BABGitHubClientSecret = @"5aecca077a31c7f35af8a21146d7738ad47f1390";
 
 #pragma mark - View controller life cycle
 
@@ -41,7 +37,7 @@ NSString * const BABGitHubClientSecret = @"5aecca077a31c7f35af8a21146d7738ad47f1
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[self authorizeURL]];
+    NSURLRequest *URLRequest = [NSURLRequest requestWithURL:[BABURLHelper authorizeURL]];
     [self.webView loadRequest:URLRequest];
 }
 
@@ -63,23 +59,9 @@ NSString * const BABGitHubClientSecret = @"5aecca077a31c7f35af8a21146d7738ad47f1
     return [dictionary copy];
 }
 
-- (NSURL *)authorizeURL
-{
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/login/oauth/authorize?client_id=%@",
-                                 BABGitHubClientID]];
-}
-
-- (NSURL *)accessTokenURLWithCode:(NSString *)code
-{
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/login/oauth/access_token?client_id=%@&client_secret=%@&code=%@",
-                                 BABGitHubClientID,
-                                 BABGitHubClientSecret,
-                                 code]];
-}
-
 - (void)getAccessTokenWithCode:(NSString *)code
 {
-    NSURLRequest *request = [NSURLRequest requestWithURL:[self accessTokenURLWithCode:code]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[BABURLHelper accessTokenURLWithCode:code]];
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = [AFHTTPResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {

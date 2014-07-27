@@ -13,11 +13,11 @@
 - (void)bab_shuffle
 {
     NSUInteger count = [self count];
-    for (NSUInteger i = 0; i < count; ++i) {
-        NSInteger remainingCount = count - i;
-        NSInteger exchangeIndex = i + arc4random_uniform(remainingCount);
-        [self exchangeObjectAtIndex:i
-                  withObjectAtIndex:exchangeIndex];
+    if (count > 1) {
+        for (NSUInteger i = count - 1; i > 0; --i) {
+            [self exchangeObjectAtIndex:i
+                      withObjectAtIndex:arc4random_uniform((int32_t)(i + 1))];
+        }
     }
 }
 

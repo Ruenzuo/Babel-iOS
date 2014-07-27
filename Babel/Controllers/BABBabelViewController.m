@@ -12,6 +12,7 @@
 #import "BABFile.h"
 #import "NSError+BABError.h"
 #import "NSMutableArray+BABShuffle.h"
+#import "BABURLHelper.h"
 
 @interface BABBabelViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -19,7 +20,6 @@
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *languages;
 @property (nonatomic, strong) NSMutableArray *hintLanguages;
-@property (nonatomic, strong) NSMutableDictionary *paginationCache;
 @property (nonatomic, strong) BABLanguage *currentLanguage;
 @property (nonatomic, strong) BABRepository *currentRepository;
 @property (nonatomic, strong) BABFile *currentFile;
@@ -29,14 +29,12 @@
 @property (nonatomic, weak) FBShimmeringView *titleShimmeringView;
 @property (nonatomic, assign, getter = isHintEnabled) BOOL hintEnabled;
 @property (nonatomic, assign) NSUInteger points;
+@property (nonatomic, strong) NSMutableDictionary *paginationCache;
 
 - (void)setupInsets;
 - (void)loadLanguages;
 - (BABLanguage *)randomLanguage;
 - (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language;
-- (NSURL *)URLForRepositoryWithLanguage:(BABLanguage *)language;
-- (NSURL *)URLForFileWithLanguage:(BABLanguage *)language
-                       repository:(BABRepository *)repository;
 - (BFTask *)randomFileWithLanguage:(BABLanguage *)language
                         repository:(BABRepository *)repository;
 - (void)nextFile;
@@ -52,7 +50,6 @@
 
 @implementation BABBabelViewController
 
-NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
 NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 NSUInteger const BABMAX_HINT = 5;
 
@@ -62,8 +59,8 @@ NSUInteger const BABMAX_HINT = 5;
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.paginationCache = [[NSMutableDictionary alloc] init];
         self.hintLanguages = [[NSMutableArray alloc] init];
+        self.paginationCache = [[NSMutableDictionary alloc] init];
         self.pooling = false;
         self.points = 0;
     }
@@ -162,7 +159,7 @@ NSUInteger const BABMAX_HINT = 5;
     [self.hintLanguages addObject:self.currentLanguage];
     BOOL finished = NO;
     do {
-        int randomIndex = arc4random()%self.languages.count;
+        int randomIndex = arc4random_uniform((int32_t)self.languages.count);
         if (randomIndex != [self.currentLanguage.index intValue]) {
             [self.hintLanguages addObject:self.languages[randomIndex]];
         }
@@ -338,13 +335,21 @@ NSUInteger const BABMAX_HINT = 5;
 
 - (NSString *)randomLanguage
 {
-    return self.languages[arc4random()%self.languages.count];
+    return self.languages[arc4random_uniform((int32_t)self.languages.count)];
 }
 
 - (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language
 {
     BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForRepositoryWithLanguage:language]];
+    NSString *cached = [self.paginationCache objectForKey:language.search];
+    NSURL *requestURL;
+    if (cached != nil) {
+        requestURL = [NSURL URLWithString:cached];
+    } else {
+        requestURL = [BABURLHelper URLForRepositoryWithLanguage:language
+                                                          token:self.token];
+    }
+    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -369,7 +374,7 @@ NSUInteger const BABMAX_HINT = 5;
         NSArray *items = [responseDictionary objectForKey:@"items"];
         NSValueTransformer *valueTransformer = [MTLValueTransformer mtl_JSONArrayTransformerWithModelClass:[BABRepository class]];
         NSArray *repositories = [valueTransformer transformedValue:items];
-        [task setResult:repositories[arc4random()%5]];
+        [task setResult:repositories[arc4random_uniform((int32_t)5)]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [task setError:error];
     }];
@@ -377,45 +382,13 @@ NSUInteger const BABMAX_HINT = 5;
     return task.task;
 }
 
-- (NSURL *)URLForRepositoryWithLanguage:(BABLanguage *)language
-{
-    NSString *cached = [self.paginationCache objectForKey:language.search];
-    if (cached != nil) {
-        return [NSURL URLWithString:cached];
-    } else {
-        return [NSURL URLWithString:[NSString stringWithFormat:@"%@search/repositories?q=%@&access_token=%@&per_page=5",
-                                     BABGitHubAPIBaseURL,
-                                     language.search,
-                                     self.token]];
-    }
-}
-
-- (NSURL *)URLForFileWithLanguage:(BABLanguage *)language
-                       repository:(BABRepository *)repository
-{
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@search/code?q=language:%@+repo:%@&access_token=%@",
-                                 BABGitHubAPIBaseURL,
-                                 language.search,
-                                 repository.name,
-                                 self.token]];
-}
-
-- (NSURL *)URLForBlobWithRepository:(BABRepository *)repository
-                               file:(BABFile *)file
-{
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@repos/%@/git/blobs/%@?access_token=%@",
-                                 BABGitHubAPIBaseURL,
-                                 repository.name,
-                                 file.sha,
-                                 self.token]];
-}
-
 - (BFTask *)randomFileWithLanguage:(BABLanguage *)language
                         repository:(BABRepository *)repository
 {
     BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForFileWithLanguage:language
-                                                                           repository:repository]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[BABURLHelper URLForFileWithLanguage:language
+                                                                                   repository:repository
+                                                                                        token:self.token]];
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -426,7 +399,7 @@ NSUInteger const BABMAX_HINT = 5;
         if (files.count == 0) {
             [task setError:[NSError bab_fileNotFound]];
         } else {
-            [task setResult:files[arc4random()%files.count]];
+            [task setResult:files[arc4random_uniform((int32_t)files.count)]];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [task setError:error];
@@ -439,8 +412,9 @@ NSUInteger const BABMAX_HINT = 5;
                           file:(BABFile *)file
 {
     BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForBlobWithRepository:repository
-                                                                                   file:file]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[BABURLHelper URLForBlobWithRepository:repository
+                                                                                           file:file
+                                                                                          token:self.token]];
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = [AFJSONResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
