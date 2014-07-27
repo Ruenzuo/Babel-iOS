@@ -27,7 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSError *error;
+    NSError *error = nil;
     self.token = [BABKeychainHelper retrieveTokenWithError:&error];
     if (!error) {
         [self updateView];
@@ -55,8 +55,7 @@
 
 - (void)updateView
 {
-    [self.navigationItem setRightBarButtonItem:nil
-                                      animated:YES];
+    self.navigationItem.rightBarButtonItem = nil;
     [UIView animateWithDuration:0.5f
                      animations:^{
                          self.btnStart.alpha = 1.0f;
@@ -69,7 +68,7 @@
                                                      error:(NSError *)error
 {
     if (!error) {
-        NSError *keychainError;
+        NSError *keychainError = nil;
         [BABKeychainHelper storeToken:token
                                 error:&keychainError];
         if (error) {

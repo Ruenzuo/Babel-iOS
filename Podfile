@@ -8,4 +8,5 @@ target "Babel" do
   pod 'Mantle', '~> 1.5.0'
   pod 'MSWeakTimer', '~> 1.1.0'
   pod 'Shimmer', '~> 1.0.1'
+  pod 'libextobjc', '~> 0.4.0'
 end

@@ -23,7 +23,7 @@ NSString * const BABBabelAccount = @"BABBabelAccount";
                                              account:BABBabelAccount
                                                error:error];
     if (error) {
-        NSLog(@"%@", [*error localizedDescription]);
+        NSLog(@"BABKeychainHelper error: %@", [(*error) localizedDescription]);
     }
     return token;
 }
@@ -36,7 +36,7 @@ NSString * const BABBabelAccount = @"BABBabelAccount";
                     account:BABBabelAccount
                       error:error];
     if (error) {
-        NSLog(@"%@", [*error localizedDescription]);
+        NSLog(@"BABKeychainHelper error: %@", [(*error) localizedDescription]);
     }
 }
 
