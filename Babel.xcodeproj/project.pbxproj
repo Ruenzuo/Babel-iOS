@@ -17,6 +17,7 @@
 		A0A9CC941980266200333518 /* BABRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A9CC931980266200333518 /* BABRepository.m */; };
 		A0A9CC9719802C6200333518 /* BABFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A9CC9619802C6200333518 /* BABFile.m */; };
 		A0AD09171984F91500D6A5D5 /* BABURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD09161984F91500D6A5D5 /* BABURLHelper.m */; };
+		A0AD091A1984FF3D00D6A5D5 /* BABKeychainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD09191984FF3D00D6A5D5 /* BABKeychainHelper.m */; };
 		A0D9B14A197C4B7A00AD7990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B149197C4B7A00AD7990 /* Foundation.framework */; };
 		A0D9B14C197C4B7A00AD7990 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */; };
 		A0D9B14E197C4B7A00AD7990 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14D197C4B7A00AD7990 /* UIKit.framework */; };
@@ -50,6 +51,8 @@
 		A0A9CC981980315300333518 /* Definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Definitions.h; path = Supporting/Definitions.h; sourceTree = "<group>"; };
 		A0AD09151984F91500D6A5D5 /* BABURLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABURLHelper.h; path = Helpers/BABURLHelper.h; sourceTree = "<group>"; };
 		A0AD09161984F91500D6A5D5 /* BABURLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABURLHelper.m; path = Helpers/BABURLHelper.m; sourceTree = "<group>"; };
+		A0AD09181984FF3D00D6A5D5 /* BABKeychainHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABKeychainHelper.h; path = Helpers/BABKeychainHelper.h; sourceTree = "<group>"; };
+		A0AD09191984FF3D00D6A5D5 /* BABKeychainHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABKeychainHelper.m; path = Helpers/BABKeychainHelper.m; sourceTree = "<group>"; };
 		A0D9B146197C4B7A00AD7990 /* Babel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D9B149197C4B7A00AD7990 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -112,6 +115,8 @@
 			children = (
 				A0AD09151984F91500D6A5D5 /* BABURLHelper.h */,
 				A0AD09161984F91500D6A5D5 /* BABURLHelper.m */,
+				A0AD09181984FF3D00D6A5D5 /* BABKeychainHelper.h */,
+				A0AD09191984FF3D00D6A5D5 /* BABKeychainHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				A093AA1E197D7FFF00F21675 /* NSError+BABError.m in Sources */,
 				A0A9CC8D19801BC400333518 /* BABBabelViewController.m in Sources */,
 				A0A9CC941980266200333518 /* BABRepository.m in Sources */,
+				A0AD091A1984FF3D00D6A5D5 /* BABKeychainHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

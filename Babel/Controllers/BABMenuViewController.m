@@ -9,42 +9,29 @@
 #import "BABMenuViewController.h"
 #import "BABOAuthViewController.h"
 #import "BABBabelViewController.h"
+#import "BABKeychainHelper.h"
 
 @interface BABMenuViewController () <BABOAuthViewControllerDelegate>
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) IBOutlet UIButton *btnStart;
 
-- (NSString *)retrieveToken;
-- (void)storeToken:(NSString *)token;
-- (IBAction)start:(id)sender;
-- (void)updateUI;
+- (void)updateView;
 
 @end
 
 @implementation BABMenuViewController
 
-NSString * const BABBabelService = @"BABBabelService";
-NSString * const BABBabelAccount = @"BABBabelAccount";
-
 #pragma mark - View controller life cycle
-
-- (id)initWithNibName:(NSString *)nibNameOrNil
-               bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil
-                           bundle:nibBundleOrNil];
-    if (self) {
-        
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.token = [self retrieveToken];
-    [self updateUI];
+    NSError *error;
+    self.token = [BABKeychainHelper retrieveTokenWithError:&error];
+    if (!error) {
+        [self updateView];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,44 +53,14 @@ NSString * const BABBabelAccount = @"BABBabelAccount";
 
 #pragma mark - Private Methods
 
-- (void)updateUI
+- (void)updateView
 {
-    if (self.token != nil) {
-        self.navigationItem.rightBarButtonItem = nil;
-        [UIView animateWithDuration:0.5f
-                         animations:^{
-                             self.btnStart.alpha = 1.0f;
-                         }];
-    }
-}
-
-- (IBAction)start:(id)sender
-{
-    
-}
-
-- (NSString *)retrieveToken
-{
-    NSError *error;
-    NSString *token = [SSKeychain passwordForService:BABBabelService
-                                             account:BABBabelAccount
-                                               error:&error];
-    if (error) {
-        //TODO: Handle error.
-    }
-    return token;
-}
-
-- (void)storeToken:(NSString *)token
-{
-    NSError *error;
-    [SSKeychain setPassword:token
-                 forService:BABBabelService
-                    account:BABBabelAccount
-                      error:&error];
-    if (error) {
-        //TODO: Handle error.
-    }
+    [self.navigationItem setRightBarButtonItem:nil
+                                      animated:YES];
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+                         self.btnStart.alpha = 1.0f;
+                     }];
 }
 
 #pragma mark - BABOAuthViewControllerDelegate
@@ -112,9 +69,14 @@ NSString * const BABBabelAccount = @"BABBabelAccount";
                                                      error:(NSError *)error
 {
     if (!error) {
-        [self storeToken:token];
+        NSError *keychainError;
+        [BABKeychainHelper storeToken:token
+                                error:&keychainError];
+        if (error) {
+            //TODO: Handle error.
+        }
         self.token = token;
-        [self updateUI];
+        [self updateView];
     } else {
         //TODO: Handle error.
     }
