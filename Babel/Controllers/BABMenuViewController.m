@@ -77,6 +77,7 @@
         [[self.authorizationSessionManager checkTokenValidityWithToken:self.token]
          continueWithExecutor:[BFExecutor mainThreadExecutor]
          withBlock:^id(BFTask *task) {
+             
              @strongify(self);
              
              if (task.error) {
@@ -107,6 +108,7 @@
     [[self.authorizationSessionManager revokeTokenWithToken:self.token]
      continueWithExecutor:[BFExecutor mainThreadExecutor]
      withBlock:^id(BFTask *task) {
+         
          @strongify(self);
          
          if (task.error) {

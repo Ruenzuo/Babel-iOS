@@ -107,12 +107,17 @@
 - (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language
                                    token:(NSString *)token
 {
+    @weakify(self);
+    
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     
     [self.sessionManager GET:@"search/repositories"
                   parameters:[self cachedParametersForLanguage:language
                                                          token:token]
                      success:^(NSURLSessionDataTask *task, id responseObject) {
+                         
+                         @strongify(self);
+                         
                          [self processForCacheWithResponse:task.response
                                                   language:language];
                          [completionSource setResult:responseObject];
