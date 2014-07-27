@@ -17,13 +17,17 @@
 NSString * const BABBabelService = @"BABBabelService";
 NSString * const BABBabelAccount = @"BABBabelAccount";
 
+#pragma mark - Public Methods
+
 + (NSString *)retrieveTokenWithError:(NSError *__autoreleasing *)error
 {
+    NSError *keychainError = nil;
     NSString *token = [SSKeychain passwordForService:BABBabelService
                                              account:BABBabelAccount
-                                               error:error];
-    if (error) {
-        NSLog(@"BABKeychainHelper error: %@", [(*error) localizedDescription]);
+                                               error:&keychainError];
+    if (keychainError) {
+        NSLog(@"BABKeychainHelper error: %@", [keychainError localizedDescription]);
+        *error = keychainError;
     }
     return token;
 }
@@ -31,12 +35,26 @@ NSString * const BABBabelAccount = @"BABBabelAccount";
 + (void)storeToken:(NSString *)token
              error:(NSError *__autoreleasing *)error
 {
+    NSError *keychainError = nil;
     [SSKeychain setPassword:token
                  forService:BABBabelService
                     account:BABBabelAccount
-                      error:error];
-    if (error) {
+                      error:&keychainError];
+    if (keychainError) {
+        NSLog(@"BABKeychainHelper error: %@", [keychainError localizedDescription]);
+        *error = keychainError;
+    }
+}
+
++ (void)deleteStoredTokenWithError:(NSError *__autoreleasing *)error
+{
+    NSError *keychainError = nil;
+    [SSKeychain deletePasswordForService:BABBabelService
+                                 account:BABBabelAccount
+                                   error:&keychainError];
+    if (keychainError) {
         NSLog(@"BABKeychainHelper error: %@", [(*error) localizedDescription]);
+        *error = keychainError;
     }
 }
 

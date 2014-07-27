@@ -12,6 +12,10 @@
 @class BABRepository;
 @class BABFile;
 
+extern NSString *const BABGitHubAPIBaseURL;
+extern NSString *const BABGitHubClientID;
+extern NSString *const BABGitHubClientSecret;
+
 @interface BABURLHelper : NSObject
 
 + (NSURL *)authorizeURL;
@@ -24,5 +28,6 @@
 + (NSURL *)URLForBlobWithRepository:(BABRepository *)repository
                                file:(BABFile *)file
                               token:(NSString *)token;
++ (NSString *)URLStringForTokenValidityWithToken:(NSString *)token;
 
 @end

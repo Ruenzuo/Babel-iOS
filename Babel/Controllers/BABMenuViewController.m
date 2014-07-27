@@ -10,28 +10,40 @@
 #import "BABOAuthViewController.h"
 #import "BABBabelViewController.h"
 #import "BABKeychainHelper.h"
+#import "BABAuthorizationSessionManager.h"
 
 @interface BABMenuViewController () <BABOAuthViewControllerDelegate>
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) IBOutlet UIButton *btnStart;
+@property (nonatomic, strong) BABAuthorizationSessionManager *authorizationSessionManager;
 
-- (void)updateView;
+- (void)checkTokenValidity;
+- (IBAction)logIn:(id)sender;
+- (void)logOut:(id)sender;
+- (void)showLogInView;
+- (void)showLogOutView;
 
 @end
 
 @implementation BABMenuViewController
+
+#pragma mark - Properties
+
+- (BABAuthorizationSessionManager *)authorizationSessionManager
+{
+    if (_authorizationSessionManager == nil) {
+        _authorizationSessionManager = [[BABAuthorizationSessionManager alloc] init];
+    }
+    return _authorizationSessionManager;
+}
 
 #pragma mark - View controller life cycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSError *error = nil;
-    self.token = [BABKeychainHelper retrieveTokenWithError:&error];
-    if (!error) {
-        [self updateView];
-    }
+    [self checkTokenValidity];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,9 +65,83 @@
 
 #pragma mark - Private Methods
 
-- (void)updateView
+- (void)checkTokenValidity
 {
-    self.navigationItem.rightBarButtonItem = nil;
+    @weakify(self);
+    
+    NSError *error = nil;
+    self.token = [BABKeychainHelper retrieveTokenWithError:&error];
+    if (!error) {
+        [SVProgressHUD showWithStatus:@"Checking session validity."
+                             maskType:SVProgressHUDMaskTypeBlack];
+        [[self.authorizationSessionManager checkTokenValidityWithToken:self.token] continueWithBlock:^id(BFTask *task) {
+            
+            @strongify(self);
+            
+            if (task.error) {
+                [SVProgressHUD showErrorWithStatus:@"Session expired."];
+                NSError *error = nil;
+                [BABKeychainHelper deleteStoredTokenWithError:&error];
+            } else {
+                [SVProgressHUD dismiss];
+                [self showLogOutView];
+            }
+            return nil;
+        }];
+    }
+}
+
+- (IBAction)logIn:(id)sender
+{
+    [self performSegueWithIdentifier:@"AuthSegue"
+                              sender:self];
+}
+
+- (void)logOut:(id)sender
+{
+    @weakify(self);
+    
+    [SVProgressHUD showWithStatus:@"Logging out."
+                         maskType:SVProgressHUDMaskTypeBlack];
+    [[self.authorizationSessionManager revokeTokenWithToken:self.token] continueWithBlock:^id(BFTask *task) {
+        
+        @strongify(self);
+        
+        if (task.error) {
+            [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+        } else {
+            [SVProgressHUD dismiss];
+            NSError *error = nil;
+            [BABKeychainHelper deleteStoredTokenWithError:&error];
+            [self showLogInView];
+        }
+        return nil;
+    }];
+
+}
+
+- (void)showLogInView
+{
+    UIBarButtonItem *logIn = [[UIBarButtonItem alloc] initWithTitle:@"Log In"
+                                                              style:UIBarButtonItemStyleBordered
+                                                             target:self
+                                                             action:@selector(logIn:)];
+    [self.navigationItem setRightBarButtonItem:logIn
+                                      animated:YES];
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+                         self.btnStart.alpha = 0.0f;
+                     }];
+}
+
+- (void)showLogOutView
+{
+    UIBarButtonItem *logOut = [[UIBarButtonItem alloc] initWithTitle:@"Log Out"
+                                                               style:UIBarButtonItemStyleBordered
+                                                              target:self
+                                                              action:@selector(logOut:)];
+    [self.navigationItem setRightBarButtonItem:logOut
+                                      animated:YES];
     [UIView animateWithDuration:0.5f
                      animations:^{
                          self.btnStart.alpha = 1.0f;
@@ -71,13 +157,10 @@
         NSError *keychainError = nil;
         [BABKeychainHelper storeToken:token
                                 error:&keychainError];
-        if (error) {
-            //TODO: Handle error.
-        }
         self.token = token;
-        [self updateView];
+        [self showLogOutView];
     } else {
-        //TODO: Handle error.
+        [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
     }
 }
 

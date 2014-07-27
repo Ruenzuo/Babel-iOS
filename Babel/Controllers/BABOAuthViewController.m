@@ -62,13 +62,8 @@
         }
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        @strongify(self);
-        
         if (error != nil) {
             [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
-            [self.delegate authViewControllerDidFinishAuthenticationWithToken:nil
-                                                                        error:[NSError bab_requestError]];
         }
     }];
     [[NSOperationQueue mainQueue] addOperation:requestOperation];
@@ -79,12 +74,16 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if ([[[request URL] scheme] isEqualToString:@"babel"]) {
-        [SVProgressHUD showWithStatus:@"Retrieving access token"
-                             maskType:SVProgressHUDMaskTypeBlack];
         NSString *query = [[request URL] query];
         NSDictionary *dictionary = [BABTranslatorHelper dictionaryWithQuery:query];
         NSString *code = dictionary[@"code"];
-        [self getAccessTokenWithCode:code];
+        if (code != nil) {
+            [SVProgressHUD showWithStatus:@"Retrieving access token"
+                                 maskType:SVProgressHUDMaskTypeBlack];
+            [self getAccessTokenWithCode:code];
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+        }
         return NO;
     }
     return YES;
@@ -93,9 +92,6 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     if (error != nil) {
-        if ([error domain] == NSURLErrorDomain) {
-            [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
-        }
         if ([[error domain] isEqualToString:@"WebKitErrorDomain"] &&
             error.code == 102) {
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

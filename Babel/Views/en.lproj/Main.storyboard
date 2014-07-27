@@ -48,12 +48,13 @@
                         <barButtonItem key="backBarButtonItem" title="Exit" id="zmc-vO-aFN"/>
                         <barButtonItem key="rightBarButtonItem" title="Log in" id="29j-1T-U14">
                             <connections>
-                                <segue destination="ylY-i0-YNr" kind="push" identifier="AuthSegue" id="pad-Kx-M3U"/>
+                                <action selector="logIn:" destination="vXZ-lx-hvc" id="AWU-5g-0E6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btnStart" destination="8z0-92-Dcm" id="9Mb-X0-ynd"/>
+                        <segue destination="ylY-i0-YNr" kind="push" identifier="AuthSegue" id="CBV-4B-QrS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
