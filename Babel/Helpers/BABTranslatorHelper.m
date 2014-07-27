@@ -14,6 +14,8 @@
 
 @implementation BABTranslatorHelper
 
+#pragma mark - Public Methods
+
 + (NSDictionary *)dictionaryWithQuery:(NSString *)queryString
 {
     NSArray *components = [queryString componentsSeparatedByString:@"&"];

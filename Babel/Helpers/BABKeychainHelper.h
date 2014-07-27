@@ -13,5 +13,6 @@
 + (NSString *)retrieveTokenWithError:(NSError *__autoreleasing *)error;
 + (void)storeToken:(NSString *)token
              error:(NSError *__autoreleasing *)error;
++ (void)deleteStoredTokenWithError:(NSError *__autoreleasing *)error;
 
 @end
