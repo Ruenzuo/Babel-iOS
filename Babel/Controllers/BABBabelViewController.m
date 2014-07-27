@@ -330,8 +330,10 @@ NSUInteger const BABMAX_HINT = 5;
         NSString* htmlString = [NSString stringWithContentsOfFile:htmlFilePath
                                                          encoding:NSUTF8StringEncoding
                                                             error:nil];
-        return [BFTask taskWithResult:[htmlString stringByReplacingOccurrencesOfString:@"BABEL_PLACEHOLDER"
-                                                                            withString:task.result]];
+        return [BFTask taskWithResult:[[htmlString stringByReplacingOccurrencesOfString:@"BABEL_CODE_PLACEHOLDER"
+                                                                            withString:task.result]
+                                       stringByReplacingOccurrencesOfString:@"BABEL_LANGUAGE_PLACEHOLDER"
+                                       withString:self.currentLanguage.css]];
     }] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         if (task.error) {
             //TODO: Handle error;
@@ -461,6 +463,8 @@ NSUInteger const BABMAX_HINT = 5;
                      completion:^(BOOL finished) {
                          if (finished) {
                              [self.tableView reloadData];
+                             [self.tableView setContentOffset:CGPointMake(0, 0 - self.tableView.contentInset.top)
+                                                     animated:NO];
                              [self nextFile];
                          }
                      }];
