@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Renzo Crisóstomo. All rights reserved.
 //
 
-#import "BABGitHubAPISessionManager.h"
+#import "BABGitHubAPISessionHelper.h"
 #import "BABURLHelper.h"
 #import "BABLanguage.h"
 #import "BABRepository.h"
@@ -14,7 +14,7 @@
 #import "NSError+BABError.h"
 #import "BABTranslatorHelper.h"
 
-@interface BABGitHubAPISessionManager ()
+@interface BABGitHubAPISessionHelper ()
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 @property (nonatomic, strong) NSMutableDictionary *repositoriesPaginationCache;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation BABGitHubAPISessionManager
+@implementation BABGitHubAPISessionHelper
 
 - (id)init
 {
@@ -104,13 +104,12 @@
 
 #pragma mark - Public Methods
 
-- (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language
-                                   token:(NSString *)token
+- (BFTask *)repositoriesWithLanguage:(BABLanguage *)language
+                               token:(NSString *)token
 {
     @weakify(self);
     
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    
     [self.sessionManager GET:@"search/repositories"
                   parameters:[self cachedParametersForLanguage:language
                                                          token:token]
@@ -128,9 +127,9 @@
     return completionSource.task;
 }
 
-- (BFTask *)randomFileWithLanguage:(BABLanguage *)language
-                        repository:(BABRepository *)repository
-                             token:(NSString *)token
+- (BFTask *)fileWithLanguage:(BABLanguage *)language
+                  repository:(BABRepository *)repository
+                       token:(NSString *)token
 {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [self.sessionManager GET:@"search/code"

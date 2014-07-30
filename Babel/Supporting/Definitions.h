@@ -10,9 +10,10 @@
 #define Babel_Definitions_h
 
 typedef NS_ENUM(NSInteger, BABErrorCode) {
-    BABErrorCodeFailedAuthorization,
+    BABErrorCodeFailedAuthorization = 99999,
     BABErrorCodeFailedRequest,
-    BABErrorCodeFileNotFound
+    BABErrorCodeFileNotFound,
+    BABErrorCodeRateLimitReached
 };
 
 #endif

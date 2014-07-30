@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 Renzo Crisóstomo. All rights reserved.
 //
 
-#import "BABAuthorizationSessionManager.h"
+#import "BABAuthorizationSessionHelper.h"
 #import "BABURLHelper.h"
 
-@interface BABAuthorizationSessionManager ()
+@interface BABAuthorizationSessionHelper ()
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 
 @end
 
-@implementation BABAuthorizationSessionManager
+@implementation BABAuthorizationSessionHelper
 
 #pragma mark - Properties
 

@@ -10,13 +10,14 @@
 #import "BABOAuthViewController.h"
 #import "BABBabelViewController.h"
 #import "BABKeychainHelper.h"
-#import "BABAuthorizationSessionManager.h"
+#import "BABAuthorizationSessionHelper.h"
+#import "BABBabelManager.h"
 
 @interface BABMenuViewController () <BABOAuthViewControllerDelegate>
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) IBOutlet UIButton *btnStart;
-@property (nonatomic, strong) BABAuthorizationSessionManager *authorizationSessionManager;
+@property (nonatomic, strong) BABAuthorizationSessionHelper *authorizationSessionHelper;
 
 - (void)checkTokenValidity;
 - (IBAction)logIn:(id)sender;
@@ -30,12 +31,12 @@
 
 #pragma mark - Properties
 
-- (BABAuthorizationSessionManager *)authorizationSessionManager
+- (BABAuthorizationSessionHelper *)authorizationSessionHelper
 {
-    if (_authorizationSessionManager == nil) {
-        _authorizationSessionManager = [[BABAuthorizationSessionManager alloc] init];
+    if (_authorizationSessionHelper == nil) {
+        _authorizationSessionHelper = [[BABAuthorizationSessionHelper alloc] init];
     }
-    return _authorizationSessionManager;
+    return _authorizationSessionHelper;
 }
 
 #pragma mark - View controller life cycle
@@ -59,7 +60,8 @@
         authViewController.delegate = self;
     } else if ([[segue identifier] isEqualToString:@"BabelSegue"]) {
         BABBabelViewController *babelViewController = (BABBabelViewController *) [segue destinationViewController];
-        babelViewController.token = self.token;
+        BABBabelManager *babelManager = [[BABBabelManager alloc] initWithToken:self.token];
+        babelViewController.babelManager = babelManager;
     }
 }
 
@@ -74,7 +76,7 @@
     if (!error) {
         [SVProgressHUD showWithStatus:@"Checking session validity."
                              maskType:SVProgressHUDMaskTypeBlack];
-        [[self.authorizationSessionManager checkTokenValidityWithToken:self.token]
+        [[self.authorizationSessionHelper checkTokenValidityWithToken:self.token]
          continueWithExecutor:[BFExecutor mainThreadExecutor]
          withBlock:^id(BFTask *task) {
              
@@ -105,7 +107,7 @@
     
     [SVProgressHUD showWithStatus:@"Logging out."
                          maskType:SVProgressHUDMaskTypeBlack];
-    [[self.authorizationSessionManager revokeTokenWithToken:self.token]
+    [[self.authorizationSessionHelper revokeTokenWithToken:self.token]
      continueWithExecutor:[BFExecutor mainThreadExecutor]
      withBlock:^id(BFTask *task) {
          

@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class BABBabelManager;
+
 @interface BABBabelViewController : UIViewController
 
-@property (nonatomic, strong) NSString *token;
+@property BABBabelManager *babelManager;
 
 @end

@@ -12,13 +12,13 @@
 @class BABRepository;
 @class BABFile;
 
-@interface BABGitHubAPISessionManager : NSObject
+@interface BABGitHubAPISessionHelper : NSObject
 
-- (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language
-                                   token:(NSString *)token;
-- (BFTask *)randomFileWithLanguage:(BABLanguage *)language
-                        repository:(BABRepository *)repository
-                             token:(NSString *)token;
+- (BFTask *)repositoriesWithLanguage:(BABLanguage *)language
+                               token:(NSString *)token;
+- (BFTask *)fileWithLanguage:(BABLanguage *)language
+                  repository:(BABRepository *)repository
+                       token:(NSString *)token;
 - (BFTask *)blobWithRepository:(BABRepository *)repository
                           file:(BABFile *)file
                          token:(NSString *)token;
