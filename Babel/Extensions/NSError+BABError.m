@@ -33,4 +33,11 @@ NSString * const BABErrorDomain = @"BABErrorDomain";
                            userInfo:nil];
 }
 
++ (NSError *)bab_rateLimitReached
+{
+    return [NSError errorWithDomain:BABErrorDomain
+                               code:BABErrorCodeRateLimitReached
+                           userInfo:nil];
+}
+
 @end

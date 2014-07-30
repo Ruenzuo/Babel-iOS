@@ -13,5 +13,6 @@
 + (NSError *)bab_authorizationError;
 + (NSError *)bab_requestError;
 + (NSError *)bab_fileNotFound;
++ (NSError *)bab_rateLimitReached;
 
 @end

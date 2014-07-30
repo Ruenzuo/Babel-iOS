@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BABAuthorizationSessionManager : NSObject
+@interface BABAuthorizationSessionHelper : NSObject
 
 - (BFTask *)checkTokenValidityWithToken:(NSString *)token;
 - (BFTask *)revokeTokenWithToken:(NSString *)token;
