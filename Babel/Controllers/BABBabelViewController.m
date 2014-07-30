@@ -22,6 +22,8 @@
 @property (nonatomic, weak) FBShimmeringView *titleShimmeringView;
 @property (nonatomic, assign, getter = isHintEnabled) BOOL hintEnabled;
 @property (nonatomic, assign) NSUInteger points;
+@property (nonatomic, assign) NSUInteger remainingHints;
+@property (nonatomic, assign) NSUInteger remainingSkips;
 
 - (void)nextFile;
 - (IBAction)skip:(id)sender;
@@ -34,7 +36,6 @@
 - (void)setupGuess;
 - (void)poolRate;
 - (void)stopPool;
-
 
 @end
 
@@ -50,6 +51,8 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     if (self) {
         self.pooling = false;
         self.points = 0;
+        self.remainingHints = 5;
+        self.remainingSkips = 5;
     }
     return self;
 }
@@ -72,9 +75,14 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (void)nextFile
 {
+    @weakify(self);
+    
     [[self.babelManager loadNext]
      continueWithExecutor:[BFExecutor mainThreadExecutor]
      withBlock:^id(BFTask *task) {
+         
+         @strongify(self);
+         
          if (task.error) {
              if (task.error.code == BABErrorCodeRateLimitReached) {
                  NSLog(@"Rate limit reached");
@@ -111,6 +119,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (IBAction)skip:(id)sender
 {
+    --self.remainingSkips;
     [self setupLoadingIndicator];
     [UIView animateWithDuration:0.5f
                      animations:^{
@@ -131,11 +140,11 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                                                             action:@selector(code:)];
     [self.navigationItem setRightBarButtonItem:code
                                       animated:YES];
-    if (!self.isHintEnabled) {
+    if (!self.isHintEnabled && self.remainingHints > 0) {
         UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-        UIBarButtonItem *hint = [[UIBarButtonItem alloc] initWithTitle:@"Hint"
+        UIBarButtonItem *hint = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Hint (%d)", self.remainingHints]
                                                                  style:UIBarButtonItemStyleBordered
                                                                 target:self
                                                                 action:@selector(hint:)];
@@ -157,11 +166,11 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                                                              action:@selector(guess:)];
     [self.navigationItem setRightBarButtonItem:guess
                                       animated:YES];
-    if (!self.isHintEnabled) {
+    if (!self.isHintEnabled && self.remainingSkips > 0) {
         UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:@"Skip"
+        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Skip (%d)", self.remainingSkips]
                                                                  style:UIBarButtonItemStyleBordered
                                                                 target:self
                                                                 action:@selector(skip:)];
@@ -178,6 +187,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 - (void)hint:(id)sender
 {
     self.hintEnabled = YES;
+    --self.remainingHints;
     [self.toolBar setItems:@[]
                   animated:YES];
     [self.babelManager prepareHintLanguages];
@@ -226,15 +236,17 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                                                              action:@selector(guess:)];
     [self.navigationItem setRightBarButtonItem:guess
                                       animated:YES];
-    UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                               target:nil
-                                                                               action:nil];
-    UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:@"Skip"
-                                                             style:UIBarButtonItemStyleBordered
-                                                            target:self
-                                                            action:@selector(skip:)];
-    [self.toolBar setItems:@[separator, skip]
-                  animated:YES];
+    if (self.remainingSkips > 0) {
+        UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                   target:nil
+                                                                                   action:nil];
+        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Skip (%d)", self.remainingSkips]
+                                                                 style:UIBarButtonItemStyleBordered
+                                                                target:self
+                                                                action:@selector(skip:)];
+        [self.toolBar setItems:@[separator, skip]
+                      animated:YES];
+    }
     self.titleShimmeringView.shimmering = NO;
 }
 
@@ -316,26 +328,28 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
         [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"Correct!\nFile: %@\nRepository:%@",
                                               self.babelManager.currentFile.name,
                                               self.babelManager.currentRepository.name]];
+        self.hintEnabled = NO;
+        [self setupLoadingIndicator];
+        [UIView animateWithDuration:0.5f
+                         animations:^{
+                             self.tableView.alpha = 0.0f;
+                         }
+                         completion:^(BOOL finished) {
+                             if (finished) {
+                                 [self.tableView reloadData];
+                                 [self.tableView setContentOffset:CGPointMake(0, 0 - self.tableView.contentInset.top)
+                                                         animated:NO];
+                                 [self nextFile];
+                             }
+                         }];
     } else {
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"Incorrect!\nLanguage:%@\nFile: %@\nRepository:%@",
+        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"Incorrect!\nLanguage:%@\nFile: %@\nRepository:%@\nTotal points: %d",
                                             self.babelManager.currentLanguage.name,
                                             self.babelManager.currentFile.name,
-                                            self.babelManager.currentRepository.name]];
+                                            self.babelManager.currentRepository.name,
+                                            self.points]];
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    self.hintEnabled = NO;
-    [self setupLoadingIndicator];
-    [UIView animateWithDuration:0.5f
-                     animations:^{
-                         self.tableView.alpha = 0.0f;
-                     }
-                     completion:^(BOOL finished) {
-                         if (finished) {
-                             [self.tableView reloadData];
-                             [self.tableView setContentOffset:CGPointMake(0, 0 - self.tableView.contentInset.top)
-                                                     animated:NO];
-                             [self nextFile];
-                         }
-                     }];
 }
 
 @end
