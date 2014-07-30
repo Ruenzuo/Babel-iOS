@@ -21,5 +21,6 @@
     #import <MSWeakTimer/MSWeakTimer.h>
     #import <Shimmer/FBShimmeringView.h>
     #import <libextobjc/EXTScope.h>
+    #import <HockeySDK/HockeySDK.h>
     #include "Definitions.h"
 #endif
