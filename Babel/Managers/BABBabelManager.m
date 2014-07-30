@@ -85,11 +85,16 @@ NSUInteger const BABMAX_HINT = 5;
 
 - (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language
 {
+    @weakify(self);
+    
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [[self.gitHubAPISessionHelper
       repositoriesWithLanguage:language
       token:self.token]
      continueWithBlock:^id(BFTask *task) {
+         
+         @strongify(self);
+         
          if (task.error) {
              NSLog(@"%@", [task.error localizedDescription]);
              if (task.error.domain == AFURLResponseSerializationErrorDomain &&
@@ -179,12 +184,17 @@ NSUInteger const BABMAX_HINT = 5;
 
 - (BFTask *)loadNext
 {
+    @weakify(self);
+    
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     self.currentLanguage = [self randomLanguage];
     self.currentRepository = nil;
     self.currentFile = nil;
     [[[[self randomRepositoryWithLanguage:self.currentLanguage]
      continueWithBlock:^id(BFTask *task) {
+         
+         @strongify(self);
+         
          if (task.error) {
              [completionSource setError:task.error];
              return nil;
@@ -194,6 +204,9 @@ NSUInteger const BABMAX_HINT = 5;
                                       repository:self.currentRepository];
          }
      }] continueWithBlock:^id(BFTask *task) {
+         
+         @strongify(self);
+         
          if (task.error) {
              [completionSource setError:task.error];
              return nil;
