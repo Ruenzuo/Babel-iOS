@@ -11,6 +11,8 @@
 #import "BABLanguage.h"
 #import "BABRepository.h"
 #import "BABFile.h"
+#import "BABConfigurationHelper.h"
+#import "NSMutableArray+BABShuffle.h"
 
 @interface BABBabelViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -24,6 +26,9 @@
 @property (nonatomic, assign) NSUInteger points;
 @property (nonatomic, assign) NSUInteger remainingHints;
 @property (nonatomic, assign) NSUInteger remainingSkips;
+@property (nonatomic, strong) BABLanguage *currentLanguage;
+@property (nonatomic, strong) BABRepository *currentRepository;
+@property (nonatomic, strong) BABFile *currentFile;
 
 - (void)nextFile;
 - (IBAction)skip:(id)sender;
@@ -36,6 +41,7 @@
 - (void)setupGuess;
 - (void)poolRate;
 - (void)stopPool;
+- (void)prepareHintLanguages;
 
 @end
 
@@ -91,28 +97,31 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                  if (!self.isPooling) {
                      [self poolRate];
                  }
-             } else if (task.error.code == BABErrorCodeFileNotFound ||
-                        task.error.code == BABErrorCodeSringDecodingFailed) {
-                 DDLogInfo(@"Looping with:");
-                 DDLogInfo(@"Current language: %@", self.babelManager.currentLanguage.name);
-                 DDLogInfo(@"Current repository: %@", self.babelManager.currentRepository.name);
-                 DDLogInfo(@"Current file: %@", self.babelManager.currentFile.name);
+             } else if (task.error.code == BABErrorCodeFileNotFound) {
+                 DDLogInfo(@"Looping with file not found error.");
                  [self nextFile];
                  return nil;
-             } else {
-                 DDLogError(@"%@", [task.error description]);
-                 DDLogInfo(@"Looping.");
+             } else if (task.error.code == BABErrorCodeSringDecodingFailed) {
+                 DDLogInfo(@"Looping with string decoding failed error.");
+                 [self nextFile];
+                 return nil;
+             }else {
+                 DDLogError(@"Looping with error: %@", [task.error description]);
                  [self nextFile];
              }
          } else {
              if (self.isPooling) {
                  [self stopPool];
              }
+             NSDictionary *result = task.result;
+             self.currentLanguage = result[@"Language"];
+             self.currentRepository = result[@"Repository"];
+             self.currentFile = result[@"File"];
              DDLogInfo(@"Loading file:");
-             DDLogInfo(@"Current language: %@", self.babelManager.currentLanguage.name);
-             DDLogInfo(@"Current repository: %@", self.babelManager.currentRepository.name);
-             DDLogInfo(@"Current file: %@", self.babelManager.currentFile.name);
-             [self.webView loadHTMLString:task.result
+             DDLogInfo(@"Current language: %@", self.currentLanguage.name);
+             DDLogInfo(@"Current repository: %@", self.currentRepository.name);
+             DDLogInfo(@"Current file: %@", self.currentFile.name);
+             [self.webView loadHTMLString:result[@"HTML"]
                                   baseURL:[NSURL fileURLWithPath:
                                            [NSString stringWithFormat:@"%@/WebRoot/",
                                             [[NSBundle mainBundle] bundlePath]]]];
@@ -128,9 +137,9 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     [self setupLoadingIndicator];
     [SVProgressHUD showImage:[UIImage imageNamed:@"Info"]
                       status:[NSString stringWithFormat:@"Skipped:\nLanguage:%@\nFile: %@\nRepository:%@",
-                                        self.babelManager.currentLanguage.name,
-                                        self.babelManager.currentFile.name,
-                                        self.babelManager.currentRepository.name]];
+                                        self.currentLanguage.name,
+                                        self.currentFile.name,
+                                        self.currentRepository.name]];
     [UIView animateWithDuration:0.5f
                      animations:^{
                          self.webView.alpha = 0.0f;
@@ -200,7 +209,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     --self.remainingHints;
     [self.toolBar setItems:@[]
                   animated:YES];
-    [self.babelManager prepareHintLanguages];
+    [self prepareHintLanguages];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                   withRowAnimation:UITableViewRowAnimationFade];
 }
@@ -280,6 +289,25 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     [self.timer invalidate];
 }
 
+- (void)prepareHintLanguages
+{
+    [self.babelManager.hintLanguages removeAllObjects];
+    [self.babelManager.hintLanguages addObject:self.currentLanguage];
+    NSMutableArray *languagesCopy = [self.babelManager.languages mutableCopy];
+    BOOL finished = NO;
+    do {
+        int randomIndex = arc4random_uniform((int32_t)languagesCopy.count);
+        if (randomIndex != [self.currentLanguage.index intValue]) {
+            [self.babelManager.hintLanguages addObject:languagesCopy[randomIndex]];
+            [languagesCopy removeObjectAtIndex:randomIndex];
+        }
+        if (self.babelManager.hintLanguages.count >= [self.babelManager maxHintForCurrentDifficulty]) {
+            finished = YES;
+        }
+    } while (!finished);
+    [self.babelManager.hintLanguages bab_shuffle];
+}
+
 #pragma mark - UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -338,11 +366,11 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     } else {
         language = self.babelManager.languages[indexPath.row];
     }
-    if ([language.index unsignedIntegerValue] == [self.babelManager.currentLanguage.index unsignedIntegerValue]) {
+    if ([language.index unsignedIntegerValue] == [self.currentLanguage.index unsignedIntegerValue]) {
         self.points++;
         [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"Correct!\nFile: %@\nRepository:%@",
-                                              self.babelManager.currentFile.name,
-                                              self.babelManager.currentRepository.name]];
+                                              self.currentFile.name,
+                                              self.currentRepository.name]];
         self.hintEnabled = NO;
         [self setupLoadingIndicator];
         [UIView animateWithDuration:0.5f
@@ -359,9 +387,9 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                          }];
     } else {
         [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"Incorrect!\nLanguage:%@\nFile: %@\nRepository:%@\nTotal points: %lu",
-                                            self.babelManager.currentLanguage.name,
-                                            self.babelManager.currentFile.name,
-                                            self.babelManager.currentRepository.name,
+                                            self.currentLanguage.name,
+                                            self.currentFile.name,
+                                            self.currentRepository.name,
                                             (unsigned long)self.points]];
         [self.navigationController popViewControllerAnimated:YES];
     }

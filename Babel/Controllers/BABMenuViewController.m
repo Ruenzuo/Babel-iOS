@@ -71,8 +71,9 @@
         authViewController.delegate = self;
     } else if ([[segue identifier] isEqualToString:@"BabelSegue"]) {
         BABBabelViewController *babelViewController = (BABBabelViewController *) [segue destinationViewController];
-        BABBabelManager *babelManager = [[BABBabelManager alloc] initWithToken:self.token];
-        babelManager.selectedDifficultyMode = self.selectedDifficultyMode;
+        BABBabelManager *babelManager = [[BABBabelManager alloc] initWithToken:self.token
+                                                             andDifficultyMode:self.selectedDifficultyMode];
+        [babelManager setupQueue];
         babelViewController.babelManager = babelManager;
     }
 }
