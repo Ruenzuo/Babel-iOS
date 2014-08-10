@@ -14,11 +14,13 @@
 #import "BABFile.h"
 #import "NSError+BABError.h"
 #import "NSMutableArray+BABShuffle.h"
+#import "BABConfigurationHelper.h"
 
 @interface BABBabelManager ()
 
 @property (nonatomic, strong) BABGitHubAPISessionHelper *gitHubAPISessionHelper;
 @property (nonatomic, strong) BABTranslatorHelper *translatorHelper;
+@property (nonatomic, strong) BABConfigurationHelper *configurationHelper;
 @property (nonatomic, strong) NSString *token;
 
 - (BABLanguage *)randomLanguage;
@@ -26,8 +28,6 @@
 @end
 
 @implementation BABBabelManager
-
-NSUInteger const BABMAX_HINT = 5;
 
 - (id)initWithToken:(NSString *)token
 {
@@ -57,17 +57,26 @@ NSUInteger const BABMAX_HINT = 5;
     return _translatorHelper;
 }
 
+- (BABConfigurationHelper *)configurationHelper
+{
+    if (_configurationHelper == nil) {
+        _configurationHelper = [[BABConfigurationHelper alloc] init];
+    }
+    return _configurationHelper;
+}
+
 - (NSArray *)languages
 {
     if (_languages == nil) {
         NSError *error;
-        NSData *data = [[NSFileManager defaultManager] contentsAtPath:[[NSBundle mainBundle] pathForResource:@"info"
-                                                                                                      ofType:@"json"]];
+        NSData *data = [[NSFileManager defaultManager] contentsAtPath:[[NSBundle mainBundle]
+                                                                       pathForResource:[self.configurationHelper fileNameForDifficultyMode:self.selectedDifficultyMode]
+                                                                       ofType:@"json"]];
         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                        options:0
                                                                          error:&error];
         if (error) {
-            //TODO: Handle error.
+            DDLogError(@"%@", [error localizedDescription]);
         }
         NSValueTransformer *valueTransformer = [MTLValueTransformer mtl_JSONArrayTransformerWithModelClass:[BABLanguage class]];
         NSArray *languages = [valueTransformer transformedValue:jsonDictionary];
@@ -78,9 +87,13 @@ NSUInteger const BABMAX_HINT = 5;
 
 #pragma mark - Private Methods
 
-- (NSString *)randomLanguage
+- (BABLanguage *)randomLanguage
 {
-    return self.languages[arc4random_uniform((int32_t)self.languages.count)];
+    if ([self.configurationHelper shouldFixRandomLanguage]) {
+        return [self.configurationHelper fixedRandomLanguage];
+    } else {
+        return self.languages[arc4random_uniform((int32_t)self.languages.count)];
+    }
 }
 
 - (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language
@@ -96,10 +109,10 @@ NSUInteger const BABMAX_HINT = 5;
          @strongify(self);
          
          if (task.error) {
-             NSLog(@"%@", [task.error localizedDescription]);
+             DDLogError(@"%@", [task.error localizedDescription]);
              if (task.error.domain == AFURLResponseSerializationErrorDomain &&
                  task.error.code == -1011) {
-                 [completionSource setError:[NSError bab_rateLimitReached]];
+                 [completionSource setError:[NSError bab_rateLimitReachedError]];
              } else {
                  [completionSource setError:task.error];
              }
@@ -107,6 +120,7 @@ NSUInteger const BABMAX_HINT = 5;
              NSDictionary *responseDictionary = task.result;
              NSArray *items = [responseDictionary objectForKey:@"items"];
              NSArray *repositories = [self.translatorHelper translateRepositoriesWithJSONArray:items];
+             DDLogInfo(@"Repositories found: %d", [repositories count]);
              [completionSource setResult:repositories[arc4random_uniform((int32_t)5)]];
          }
          return nil;
@@ -124,10 +138,10 @@ NSUInteger const BABMAX_HINT = 5;
       token:self.token]
      continueWithBlock:^id(BFTask *task) {
          if (task.error) {
-             NSLog(@"%@", [task.error localizedDescription]);
+             DDLogError(@"%@", [task.error localizedDescription]);
              if (task.error.domain == AFURLResponseSerializationErrorDomain &&
                  task.error.code == -1011) {
-                 [completionSource setError:[NSError bab_rateLimitReached]];
+                 [completionSource setError:[NSError bab_rateLimitReachedError]];
              } else {
                  [completionSource setError:task.error];
              }
@@ -135,8 +149,9 @@ NSUInteger const BABMAX_HINT = 5;
              NSDictionary *responseDictionary = (NSDictionary *)task.result;
              NSArray *items = [responseDictionary objectForKey:@"items"];
              NSArray *files = [self.translatorHelper translateFilesWithJSONArray:items];
+             DDLogInfo(@"Files found: %d", [files count]);
              if (files.count == 0) {
-                 [completionSource setError:[NSError bab_fileNotFound]];
+                 [completionSource setError:[NSError bab_fileNotFoundError]];
              } else {
                  [completionSource setResult:files[arc4random_uniform((int32_t)files.count)]];
              }
@@ -156,7 +171,9 @@ NSUInteger const BABMAX_HINT = 5;
       file:file
       token:self.token]
      continueWithBlock:^id(BFTask *task) {
+         DDLogDebug(@"Blob done.");
          if (task.error) {
+             DDLogError(@"%@", [task.error localizedDescription]);
              [completionSource setError:task.error];
          } else {
              NSDictionary *responseDictionary = (NSDictionary *)task.result;
@@ -164,16 +181,27 @@ NSUInteger const BABMAX_HINT = 5;
                                                                        options:NSDataBase64DecodingIgnoreUnknownCharacters];
              NSString *decodedString = [[NSString alloc] initWithData:decodedData
                                                              encoding:NSUTF8StringEncoding];
-             NSString *htmlFilePath = [[NSBundle mainBundle] pathForResource:@"index"
-                                                                      ofType:@"html"
-                                                                 inDirectory:@"/WebRoot"];
-             NSString* htmlString = [NSString stringWithContentsOfFile:htmlFilePath
-                                                              encoding:NSUTF8StringEncoding
-                                                                 error:nil];
-             [completionSource setResult:[[htmlString stringByReplacingOccurrencesOfString:@"BABEL_CODE_PLACEHOLDER"
-                                                                                withString:decodedString]
-                                          stringByReplacingOccurrencesOfString:@"BABEL_LANGUAGE_PLACEHOLDER"
-                                          withString:language.css]];
+             if (decodedString == nil) {
+                 DDLogError(@"Decoding error.");
+                 [completionSource setError:[NSError bab_stringDecodingError]];
+             } else {
+                 NSString *htmlFilePath = [[NSBundle mainBundle] pathForResource:@"index"
+                                                                          ofType:@"html"
+                                                                     inDirectory:@"/WebRoot"];
+                 NSError *error;
+                 NSString *htmlString = [NSString stringWithContentsOfFile:htmlFilePath
+                                                                  encoding:NSUTF8StringEncoding
+                                                                     error:&error];
+                 if (error) {
+                     DDLogError(@"Error decoding UTF8 string: %@", [error description]);
+                     [completionSource setError:[NSError bab_stringDecodingError]];
+                 } else {
+                     [completionSource setResult:[[htmlString stringByReplacingOccurrencesOfString:@"BABEL_CODE_PLACEHOLDER"
+                                                                                        withString:[NSString stringWithFormat:@"\n%@", decodedString]]
+                                                  stringByReplacingOccurrencesOfString:@"BABEL_LANGUAGE_PLACEHOLDER"
+                                                  withString:language.css]];
+                 }
+             }
          }
          return nil;
      }];
@@ -199,6 +227,8 @@ NSUInteger const BABMAX_HINT = 5;
              [completionSource setError:task.error];
              return nil;
          } else {
+             DDLogDebug(@"Random repository done.");
+             DDLogInfo(@"Repository: %@", task.result);
              self.currentRepository = task.result;
              return [self randomFileWithLanguage:self.currentLanguage
                                       repository:self.currentRepository];
@@ -211,6 +241,8 @@ NSUInteger const BABMAX_HINT = 5;
              [completionSource setError:task.error];
              return nil;
          } else {
+             DDLogDebug(@"Random file done.");
+             DDLogInfo(@"File: %@", task.result);
              self.currentFile = task.result;
              return [self HTMLStringWithLanguage:self.currentLanguage
                                       repository:self.currentRepository
@@ -221,6 +253,7 @@ NSUInteger const BABMAX_HINT = 5;
              [completionSource setError:task.error];
              return nil;
          } else {
+             DDLogDebug(@"HTML string done.");
              [completionSource setResult:task.result];
              return nil;
          }
@@ -238,7 +271,7 @@ NSUInteger const BABMAX_HINT = 5;
         if (randomIndex != [self.currentLanguage.index intValue]) {
             [self.hintLanguages addObject:self.languages[randomIndex]];
         }
-        if (self.hintLanguages.count >= BABMAX_HINT) {
+        if (self.hintLanguages.count >= [self.configurationHelper maxHintsForDifficultyMode:self.selectedDifficultyMode]) {
             finished = YES;
         }
     } while (!finished);

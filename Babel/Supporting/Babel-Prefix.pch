@@ -22,5 +22,6 @@
     #import <Shimmer/FBShimmeringView.h>
     #import <libextobjc/EXTScope.h>
     #import <HockeySDK/HockeySDK.h>
+    #import <CocoaLumberjack/DDLog.h>
     #include "Definitions.h"
 #endif

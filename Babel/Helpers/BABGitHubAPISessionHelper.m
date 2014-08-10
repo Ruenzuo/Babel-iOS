@@ -28,6 +28,8 @@
 
 @implementation BABGitHubAPISessionHelper
 
+int const BABMaxBytesFileSize = 1 * 1024 * 1024;
+
 - (id)init
 {
     self = [super init];
@@ -71,7 +73,7 @@
     if (cachedPaginationParameters != nil) {
         return cachedPaginationParameters;
     } else {
-        return @{@"q": language.search,
+        return @{@"q": [NSString stringWithFormat:@"language:%@", language.search],
                  @"access_token": token,
                  @"per_page": @5};
     }
@@ -133,8 +135,8 @@
 {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [self.sessionManager GET:@"search/code"
-                  parameters:@{@"q": [NSString stringWithFormat:@"language:%@+repo:%@", language.search,
-                                      repository.name],
+                  parameters:@{@"q": [[NSString stringWithFormat:@"language:%@+repo:%@+size:<%d", language.search,
+                                      repository.name, BABMaxBytesFileSize] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                @"access_token": token}
                      success:^(NSURLSessionDataTask *task, id responseObject) {
                          [completionSource setResult:responseObject];

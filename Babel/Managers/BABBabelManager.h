@@ -19,6 +19,7 @@
 @property (nonatomic, strong) BABFile *currentFile;
 @property (nonatomic, strong) NSMutableArray *hintLanguages;
 @property (nonatomic, strong) NSArray *languages;
+@property (nonatomic, assign) BABDifficultyMode selectedDifficultyMode;
 
 - (id)initWithToken:(NSString *)token;
 - (BFTask *)loadNext;

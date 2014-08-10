@@ -12,6 +12,6 @@
 
 @interface BABBabelViewController : UIViewController
 
-@property BABBabelManager *babelManager;
+@property (nonatomic, strong) BABBabelManager *babelManager;
 
 @end

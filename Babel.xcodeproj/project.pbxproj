@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A08E88F11982CF3F00EA3758 /* info.json in Resources */ = {isa = PBXBuildFile; fileRef = A08E88F01982CF3F00EA3758 /* info.json */; };
+		A08E88F11982CF3F00EA3758 /* info-hard.json in Resources */ = {isa = PBXBuildFile; fileRef = A08E88F01982CF3F00EA3758 /* info-hard.json */; };
 		A08E88F41982D4D400EA3758 /* NSMutableArray+BABShuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */; };
 		A093AA17197D6C5100F21675 /* BABOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A093AA16197D6C5100F21675 /* BABOAuthViewController.m */; };
 		A093AA1E197D7FFF00F21675 /* NSError+BABError.m in Sources */ = {isa = PBXBuildFile; fileRef = A093AA1D197D7FFF00F21675 /* NSError+BABError.m */; };
@@ -22,6 +22,9 @@
 		A0AD09171984F91500D6A5D5 /* BABURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD09161984F91500D6A5D5 /* BABURLHelper.m */; };
 		A0AD091A1984FF3D00D6A5D5 /* BABKeychainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD09191984FF3D00D6A5D5 /* BABKeychainHelper.m */; };
 		A0AD091D1985049900D6A5D5 /* BABTranslatorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AD091C1985049900D6A5D5 /* BABTranslatorHelper.m */; };
+		A0BA0146198E824E005BE680 /* info-easy.json in Resources */ = {isa = PBXBuildFile; fileRef = A0BA0145198E824E005BE680 /* info-easy.json */; };
+		A0BA0148198E82D7005BE680 /* info-normal.json in Resources */ = {isa = PBXBuildFile; fileRef = A0BA0147198E82D7005BE680 /* info-normal.json */; };
+		A0BA014B198E83C8005BE680 /* BABConfigurationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BA014A198E83C8005BE680 /* BABConfigurationHelper.m */; };
 		A0D9B14A197C4B7A00AD7990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B149197C4B7A00AD7990 /* Foundation.framework */; };
 		A0D9B14C197C4B7A00AD7990 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */; };
 		A0D9B14E197C4B7A00AD7990 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14D197C4B7A00AD7990 /* UIKit.framework */; };
@@ -36,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		0AD224A7F9CE4296BC149BF0 /* libPods-Babel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Babel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A08E88F01982CF3F00EA3758 /* info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = info.json; path = Supporting/info.json; sourceTree = "<group>"; };
+		A08E88F01982CF3F00EA3758 /* info-hard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "info-hard.json"; path = "Supporting/info-hard.json"; sourceTree = "<group>"; };
 		A08E88F21982D4D400EA3758 /* NSMutableArray+BABShuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+BABShuffle.h"; path = "Extensions/NSMutableArray+BABShuffle.h"; sourceTree = "<group>"; };
 		A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+BABShuffle.m"; path = "Extensions/NSMutableArray+BABShuffle.m"; sourceTree = "<group>"; };
 		A093AA15197D6C5100F21675 /* BABOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABOAuthViewController.h; path = Controllers/BABOAuthViewController.h; sourceTree = "<group>"; };
@@ -65,6 +68,10 @@
 		A0AD09191984FF3D00D6A5D5 /* BABKeychainHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABKeychainHelper.m; path = Helpers/BABKeychainHelper.m; sourceTree = "<group>"; };
 		A0AD091B1985049900D6A5D5 /* BABTranslatorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABTranslatorHelper.h; path = Helpers/BABTranslatorHelper.h; sourceTree = "<group>"; };
 		A0AD091C1985049900D6A5D5 /* BABTranslatorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABTranslatorHelper.m; path = Helpers/BABTranslatorHelper.m; sourceTree = "<group>"; };
+		A0BA0145198E824E005BE680 /* info-easy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "info-easy.json"; path = "Supporting/info-easy.json"; sourceTree = "<group>"; };
+		A0BA0147198E82D7005BE680 /* info-normal.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "info-normal.json"; path = "Supporting/info-normal.json"; sourceTree = "<group>"; };
+		A0BA0149198E83C8005BE680 /* BABConfigurationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABConfigurationHelper.h; path = Helpers/BABConfigurationHelper.h; sourceTree = "<group>"; };
+		A0BA014A198E83C8005BE680 /* BABConfigurationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABConfigurationHelper.m; path = Helpers/BABConfigurationHelper.m; sourceTree = "<group>"; };
 		A0D9B146197C4B7A00AD7990 /* Babel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D9B149197C4B7A00AD7990 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,6 +142,8 @@
 				A0AC26F71989579A0009A871 /* BABAuthorizationSessionHelper.m */,
 				A0AC26F81989579A0009A871 /* BABGitHubAPISessionHelper.h */,
 				A0AC26F91989579A0009A871 /* BABGitHubAPISessionHelper.m */,
+				A0BA0149198E83C8005BE680 /* BABConfigurationHelper.h */,
+				A0BA014A198E83C8005BE680 /* BABConfigurationHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -198,7 +207,9 @@
 		A0D9B150197C4B7A00AD7990 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				A08E88F01982CF3F00EA3758 /* info.json */,
+				A0BA0145198E824E005BE680 /* info-easy.json */,
+				A0BA0147198E82D7005BE680 /* info-normal.json */,
+				A08E88F01982CF3F00EA3758 /* info-hard.json */,
 				A0D9B180197C4BE300AD7990 /* Babel-Info.plist */,
 				A0D9B181197C4BE300AD7990 /* Babel-Prefix.pch */,
 				A0D9B189197C4BEC00AD7990 /* InfoPlist.strings */,
@@ -295,7 +306,9 @@
 			files = (
 				A0D9B187197C4BEC00AD7990 /* InfoPlist.strings in Resources */,
 				A0D9B162197C4B7A00AD7990 /* Images.xcassets in Resources */,
-				A08E88F11982CF3F00EA3758 /* info.json in Resources */,
+				A08E88F11982CF3F00EA3758 /* info-hard.json in Resources */,
+				A0BA0146198E824E005BE680 /* info-easy.json in Resources */,
+				A0BA0148198E82D7005BE680 /* info-normal.json in Resources */,
 				A0D9B18C197C4C0E00AD7990 /* Main.storyboard in Resources */,
 				A0A9CC8A19801B5300333518 /* WebRoot in Resources */,
 			);
@@ -349,6 +362,7 @@
 				A0A9CC9119801E7E00333518 /* BABLanguage.m in Sources */,
 				A0AC26FA1989579A0009A871 /* BABAuthorizationSessionHelper.m in Sources */,
 				A08E88F41982D4D400EA3758 /* NSMutableArray+BABShuffle.m in Sources */,
+				A0BA014B198E83C8005BE680 /* BABConfigurationHelper.m in Sources */,
 				A0D9B191197C4C1600AD7990 /* BABAppDelegate.m in Sources */,
 				A0D9B186197C4BE300AD7990 /* main.m in Sources */,
 				A0A9CC9719802C6200333518 /* BABFile.m in Sources */,

@@ -26,7 +26,7 @@ NSString * const BABBabelAccount = @"BABBabelAccount";
                                              account:BABBabelAccount
                                                error:&keychainError];
     if (keychainError) {
-        NSLog(@"BABKeychainHelper error: %@", [keychainError localizedDescription]);
+        DDLogError(@"BABKeychainHelper error: %@", [keychainError localizedDescription]);
         *error = keychainError;
     }
     return token;
@@ -41,7 +41,7 @@ NSString * const BABBabelAccount = @"BABBabelAccount";
                     account:BABBabelAccount
                       error:&keychainError];
     if (keychainError) {
-        NSLog(@"BABKeychainHelper error: %@", [keychainError localizedDescription]);
+        DDLogError(@"BABKeychainHelper error: %@", [keychainError localizedDescription]);
         *error = keychainError;
     }
 }
@@ -53,7 +53,7 @@ NSString * const BABBabelAccount = @"BABBabelAccount";
                                  account:BABBabelAccount
                                    error:&keychainError];
     if (keychainError) {
-        NSLog(@"BABKeychainHelper error: %@", [(*error) localizedDescription]);
+        DDLogError(@"BABKeychainHelper error: %@", [(*error) localizedDescription]);
         *error = keychainError;
     }
 }
