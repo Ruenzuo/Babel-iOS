@@ -126,6 +126,11 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 {
     --self.remainingSkips;
     [self setupLoadingIndicator];
+    [SVProgressHUD showImage:[UIImage imageNamed:@"Info"]
+                      status:[NSString stringWithFormat:@"Skipped:\nLanguage:%@\nFile: %@\nRepository:%@",
+                                        self.babelManager.currentLanguage.name,
+                                        self.babelManager.currentFile.name,
+                                        self.babelManager.currentRepository.name]];
     [UIView animateWithDuration:0.5f
                      animations:^{
                          self.webView.alpha = 0.0f;
