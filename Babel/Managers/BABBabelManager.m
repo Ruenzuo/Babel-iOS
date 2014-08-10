@@ -251,12 +251,11 @@
      }] continueWithBlock:^id(BFTask *task) {
          if (task.error) {
              [completionSource setError:task.error];
-             return nil;
          } else {
              DDLogDebug(@"HTML string done.");
              [completionSource setResult:task.result];
-             return nil;
          }
+         return nil;
      }];
     return completionSource.task;
 }
