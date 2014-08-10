@@ -293,13 +293,19 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 {
     [self.babelManager.hintLanguages removeAllObjects];
     [self.babelManager.hintLanguages addObject:self.currentLanguage];
-    NSMutableArray *languagesCopy = [self.babelManager.languages mutableCopy];
     BOOL finished = NO;
     do {
-        int randomIndex = arc4random_uniform((int32_t)languagesCopy.count);
+        int randomIndex = arc4random_uniform((int32_t)self.babelManager.languages.count);
         if (randomIndex != [self.currentLanguage.index intValue]) {
-            [self.babelManager.hintLanguages addObject:languagesCopy[randomIndex]];
-            [languagesCopy removeObjectAtIndex:randomIndex];
+            BOOL found = NO;
+            for (BABLanguage *language in self.babelManager.hintLanguages) {
+                if (randomIndex == [language.index intValue]) {
+                    found = YES;
+                }
+            }
+            if (!found) {
+                [self.babelManager.hintLanguages addObject:self.babelManager.languages[randomIndex]];
+            }
         }
         if (self.babelManager.hintLanguages.count >= [self.babelManager maxHintForCurrentDifficulty]) {
             finished = YES;

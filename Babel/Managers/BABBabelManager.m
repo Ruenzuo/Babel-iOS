@@ -137,7 +137,7 @@
              NSDictionary *responseDictionary = task.result;
              NSArray *items = [responseDictionary objectForKey:@"items"];
              NSArray *repositories = [self.translatorHelper translateRepositoriesWithJSONArray:items];
-             DDLogInfo(@"Repositories found: %d", [repositories count]);
+             DDLogInfo(@"Repositories found: %lu", (unsigned long)[repositories count]);
              [completionSource setResult:repositories[arc4random_uniform((int32_t)5)]];
          }
          return nil;
@@ -166,7 +166,7 @@
              NSDictionary *responseDictionary = (NSDictionary *)task.result;
              NSArray *items = [responseDictionary objectForKey:@"items"];
              NSArray *files = [self.translatorHelper translateFilesWithJSONArray:items];
-             DDLogInfo(@"Files found: %d", [files count]);
+             DDLogInfo(@"Files found: %lu", (unsigned long)[files count]);
              if (files.count == 0) {
                  [completionSource setError:[NSError bab_fileNotFoundError]];
              } else {
@@ -230,7 +230,7 @@
     [[self nextTask] continueWithBlock:^id(BFTask *task) {
         if (!task.error) {
             [self.queue addObject:task.result];
-            DDLogInfo(@"Queue size: %d", self.queue.count);
+            DDLogInfo(@"Queue size: %lu", (unsigned long)self.queue.count);
         } else {
             DDLogError(@"Add next to queue failed with error: %@", [task.error description]);
         }
