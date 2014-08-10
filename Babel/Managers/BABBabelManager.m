@@ -13,7 +13,6 @@
 #import "BABRepository.h"
 #import "BABFile.h"
 #import "NSError+BABError.h"
-#import "NSMutableArray+BABShuffle.h"
 #import "BABConfigurationHelper.h"
 
 @interface BABBabelManager ()
@@ -22,19 +21,32 @@
 @property (nonatomic, strong) BABTranslatorHelper *translatorHelper;
 @property (nonatomic, strong) BABConfigurationHelper *configurationHelper;
 @property (nonatomic, strong) NSString *token;
+@property (nonatomic, strong) NSMutableArray *queue;
+@property (nonatomic, assign) BABDifficultyMode difficultyMode;
 
 - (BABLanguage *)randomLanguage;
+- (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language;
+- (BFTask *)randomFileWithLanguage:(BABLanguage *)language
+                        repository:(BABRepository *)repository;
+- (BFTask *)HTMLStringWithLanguage:(BABLanguage *)language
+                        repository:(BABRepository *)repository
+                              file:(BABFile *)file;
+- (void)addNextToQueue;
+- (BFTask *)nextTask;
 
 @end
 
 @implementation BABBabelManager
 
 - (id)initWithToken:(NSString *)token
+  andDifficultyMode:(BABDifficultyMode)difficultyMode
 {
     self = [super init];
     if (self) {
         _token = token;
+        _difficultyMode = difficultyMode;
         _hintLanguages = [[NSMutableArray alloc] init];
+        _queue = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -70,7 +82,7 @@
     if (_languages == nil) {
         NSError *error;
         NSData *data = [[NSFileManager defaultManager] contentsAtPath:[[NSBundle mainBundle]
-                                                                       pathForResource:[self.configurationHelper fileNameForDifficultyMode:self.selectedDifficultyMode]
+                                                                       pathForResource:[self.configurationHelper fileNameForDifficultyMode:self.difficultyMode]
                                                                        ofType:@"json"]];
         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                        options:0
@@ -83,6 +95,11 @@
         _languages = languages;
     }
     return _languages;
+}
+
+- (NSUInteger)maxHintForCurrentDifficulty
+{
+    return [self.configurationHelper maxHintsForDifficultyMode:self.difficultyMode];
 }
 
 #pragma mark - Private Methods
@@ -208,73 +225,91 @@
     return completionSource.task;
 }
 
-#pragma mark - Public Methods
+- (void)addNextToQueue
+{
+    [[self nextTask] continueWithBlock:^id(BFTask *task) {
+        if (!task.error) {
+            [self.queue addObject:task.result];
+            DDLogInfo(@"Queue size: %d", self.queue.count);
+        } else {
+            DDLogError(@"Add next to queue failed with error: %@", [task.error description]);
+        }
+        return nil;
+    }];
+}
 
-- (BFTask *)loadNext
+- (BFTask *)nextTask
 {
     @weakify(self);
     
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    self.currentLanguage = [self randomLanguage];
-    self.currentRepository = nil;
-    self.currentFile = nil;
-    [[[[self randomRepositoryWithLanguage:self.currentLanguage]
-     continueWithBlock:^id(BFTask *task) {
-         
-         @strongify(self);
-         
-         if (task.error) {
-             [completionSource setError:task.error];
-             return nil;
-         } else {
-             DDLogDebug(@"Random repository done.");
-             DDLogInfo(@"Repository: %@", task.result);
-             self.currentRepository = task.result;
-             return [self randomFileWithLanguage:self.currentLanguage
-                                      repository:self.currentRepository];
-         }
-     }] continueWithBlock:^id(BFTask *task) {
-         
-         @strongify(self);
-         
-         if (task.error) {
-             [completionSource setError:task.error];
-             return nil;
-         } else {
-             DDLogDebug(@"Random file done.");
-             DDLogInfo(@"File: %@", task.result);
-             self.currentFile = task.result;
-             return [self HTMLStringWithLanguage:self.currentLanguage
-                                      repository:self.currentRepository
-                                            file:self.currentFile];
-         }
-     }] continueWithBlock:^id(BFTask *task) {
-         if (task.error) {
-             [completionSource setError:task.error];
-         } else {
-             DDLogDebug(@"HTML string done.");
-             [completionSource setResult:task.result];
-         }
-         return nil;
-     }];
+    BABLanguage *language = [self randomLanguage];
+    __block BABRepository *repository;
+    __block BABFile *file;
+    [[[[self randomRepositoryWithLanguage:language]
+       continueWithBlock:^id(BFTask *task) {
+           
+           @strongify(self);
+           
+           if (task.error) {
+               [completionSource setError:task.error];
+               return nil;
+           } else {
+               DDLogDebug(@"Random repository done.");
+               DDLogInfo(@"Repository: %@", task.result);
+               repository = task.result;
+               return [self randomFileWithLanguage:language
+                                        repository:repository];
+           }
+       }] continueWithBlock:^id(BFTask *task) {
+           
+           @strongify(self);
+           
+           if (task.error) {
+               [completionSource setError:task.error];
+               return nil;
+           } else {
+               DDLogDebug(@"Random file done.");
+               DDLogInfo(@"File: %@", task.result);
+               file = task.result;
+               return [self HTMLStringWithLanguage:language
+                                        repository:repository
+                                              file:file];
+           }
+       }] continueWithBlock:^id(BFTask *task) {
+           if (task.error) {
+               [completionSource setError:task.error];
+           } else {
+               DDLogDebug(@"HTML string done.");
+               [completionSource setResult:@{@"Language": language,
+                                             @"Repository": repository,
+                                             @"File": file,
+                                             @"HTML": task.result}];
+           }
+           return nil;
+       }];
     return completionSource.task;
 }
 
-- (void)prepareHintLanguages
+#pragma mark - Public Methods
+
+- (BFTask *)loadNext
 {
-    [self.hintLanguages removeAllObjects];
-    [self.hintLanguages addObject:self.currentLanguage];
-    BOOL finished = NO;
-    do {
-        int randomIndex = arc4random_uniform((int32_t)self.languages.count);
-        if (randomIndex != [self.currentLanguage.index intValue]) {
-            [self.hintLanguages addObject:self.languages[randomIndex]];
-        }
-        if (self.hintLanguages.count >= [self.configurationHelper maxHintsForDifficultyMode:self.selectedDifficultyMode]) {
-            finished = YES;
-        }
-    } while (!finished);
-    [self.hintLanguages bab_shuffle];
+    [self addNextToQueue];
+    if (self.queue.count > 0) {
+        NSDictionary *result = [self.queue objectAtIndex:0];
+        [self.queue removeObjectAtIndex:0];
+        return [BFTask taskWithResult:result];
+    } else {
+        return [self nextTask];
+    }
+}
+
+- (void)setupQueue
+{
+    [self addNextToQueue];
+    [self addNextToQueue];
+    [self addNextToQueue];
 }
 
 @end

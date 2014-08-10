@@ -8,21 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@class BABLanguage;
-@class BABRepository;
-@class BABFile;
+@class BABConfigurationHelper;
 
 @interface BABBabelManager : NSObject
 
-@property (nonatomic, strong) BABLanguage *currentLanguage;
-@property (nonatomic, strong) BABRepository *currentRepository;
-@property (nonatomic, strong) BABFile *currentFile;
 @property (nonatomic, strong) NSMutableArray *hintLanguages;
 @property (nonatomic, strong) NSArray *languages;
-@property (nonatomic, assign) BABDifficultyMode selectedDifficultyMode;
 
-- (id)initWithToken:(NSString *)token;
+- (id)initWithToken:(NSString *)token
+  andDifficultyMode:(BABDifficultyMode)difficultyMode;
 - (BFTask *)loadNext;
-- (void)prepareHintLanguages;
+- (void)setupQueue;
+- (NSUInteger)maxHintForCurrentDifficulty;
 
 @end
