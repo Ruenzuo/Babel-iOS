@@ -13,7 +13,17 @@ typedef NS_ENUM(NSInteger, BABErrorCode) {
     BABErrorCodeFailedAuthorization = 99999,
     BABErrorCodeFailedRequest,
     BABErrorCodeFileNotFound,
-    BABErrorCodeRateLimitReached
+    BABErrorCodeRateLimitReached,
+    BABErrorCodeSringDecodingFailed
 };
+
+typedef NS_ENUM(NSInteger, BABDifficultyMode) {
+    BABDifficultyModeEasy,
+    BABDifficultyModeNormal,
+    BABDifficultyModeHard,
+    BABDifficultyModeNone
+};
+
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 #endif

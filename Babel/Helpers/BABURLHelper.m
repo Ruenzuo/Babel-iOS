@@ -11,15 +11,15 @@
 #import "BABRepository.h"
 #import "BABFile.h"
 
-NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
-NSString * const BABGitHubClientID = @"134fde19a1854aa20f4f";
-NSString * const BABGitHubClientSecret = @"5aecca077a31c7f35af8a21146d7738ad47f1390";
-
 @interface BABURLHelper ()
 
 @end
 
 @implementation BABURLHelper
+
+NSString * const BABGitHubAPIBaseURL = @"https://api.github.com/";
+NSString * const BABGitHubClientID = @"134fde19a1854aa20f4f";
+NSString * const BABGitHubClientSecret = @"5aecca077a31c7f35af8a21146d7738ad47f1390";
 
 #pragma mark - Public Methods
 

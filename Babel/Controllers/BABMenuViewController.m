@@ -13,14 +13,16 @@
 #import "BABAuthorizationSessionHelper.h"
 #import "BABBabelManager.h"
 
-@interface BABMenuViewController () <BABOAuthViewControllerDelegate>
+@interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) IBOutlet UIButton *btnStart;
 @property (nonatomic, strong) BABAuthorizationSessionHelper *authorizationSessionHelper;
+@property (nonatomic, assign) BABDifficultyMode selectedDifficultyMode;
 
 - (void)checkTokenValidity;
 - (IBAction)logIn:(id)sender;
+- (IBAction)start:(id)sender;
 - (void)logOut:(id)sender;
 - (void)showLogInView;
 - (void)showLogOutView;
@@ -40,6 +42,15 @@
 }
 
 #pragma mark - View controller life cycle
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        _selectedDifficultyMode = BABDifficultyModeNone;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -61,6 +72,7 @@
     } else if ([[segue identifier] isEqualToString:@"BabelSegue"]) {
         BABBabelViewController *babelViewController = (BABBabelViewController *) [segue destinationViewController];
         BABBabelManager *babelManager = [[BABBabelManager alloc] initWithToken:self.token];
+        babelManager.selectedDifficultyMode = self.selectedDifficultyMode;
         babelViewController.babelManager = babelManager;
     }
 }
@@ -99,6 +111,16 @@
 {
     [self performSegueWithIdentifier:@"AuthSegue"
                               sender:self];
+}
+
+- (IBAction)start:(id)sender
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Difficulty"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Easy", @"Normal", @"Hard", nil];
+    [actionSheet showInView:self.view];
 }
 
 - (void)logOut:(id)sender
@@ -167,6 +189,19 @@
         [self showLogOutView];
     } else {
         [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+    }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        self.selectedDifficultyMode = BABDifficultyModeNone;
+    } else {
+        self.selectedDifficultyMode = buttonIndex;
+        [self performSegueWithIdentifier:@"BabelSegue"
+                                  sender:self];
     }
 }
 

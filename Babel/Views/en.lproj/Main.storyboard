@@ -32,7 +32,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="JaQ-ia-nax" kind="push" identifier="BabelSegue" id="H6D-dU-2NH"/>
+                                    <action selector="start:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="pux-gW-2hV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -55,6 +55,7 @@
                     <connections>
                         <outlet property="btnStart" destination="8z0-92-Dcm" id="9Mb-X0-ynd"/>
                         <segue destination="ylY-i0-YNr" kind="push" identifier="AuthSegue" id="CBV-4B-QrS"/>
+                        <segue destination="JaQ-ia-nax" kind="push" identifier="BabelSegue" id="avb-TR-6LK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

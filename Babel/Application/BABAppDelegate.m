@@ -7,10 +7,13 @@
 //
 
 #import "BABAppDelegate.h"
+#import <CocoaLumberjack/DDASLLogger.h>
+#import <CocoaLumberjack/DDTTYLogger.h>
 
 @interface BABAppDelegate ()
 
 - (void)configureHockeyApp;
+- (void)configureCocoaLumberjack;
 
 @end
 
@@ -23,6 +26,7 @@ NSString * const BABHockeyAppIdentifier = @"6fd9e830e7744e983eb60925d91d3d93";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self configureHockeyApp];
+    [self configureCocoaLumberjack];
     return YES;
 }
 
@@ -47,6 +51,12 @@ NSString * const BABHockeyAppIdentifier = @"6fd9e830e7744e983eb60925d91d3d93";
     [[[BITHockeyManager sharedHockeyManager] authenticator] setIdentificationType:BITAuthenticatorIdentificationTypeDevice];
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[[BITHockeyManager sharedHockeyManager] authenticator] authenticateInstallation];
+}
+
+- (void)configureCocoaLumberjack
+{
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
 }
 
 @end

@@ -26,17 +26,24 @@ NSString * const BABErrorDomain = @"BABErrorDomain";
                            userInfo:nil];
 }
 
-+ (NSError *)bab_fileNotFound
++ (NSError *)bab_fileNotFoundError
 {
     return [NSError errorWithDomain:BABErrorDomain
                                code:BABErrorCodeFileNotFound
                            userInfo:nil];
 }
 
-+ (NSError *)bab_rateLimitReached
++ (NSError *)bab_rateLimitReachedError
 {
     return [NSError errorWithDomain:BABErrorDomain
                                code:BABErrorCodeRateLimitReached
+                           userInfo:nil];
+}
+
++ (NSError *)bab_stringDecodingError
+{
+    return [NSError errorWithDomain:BABErrorDomain
+                               code:BABErrorCodeSringDecodingFailed
                            userInfo:nil];
 }
 
