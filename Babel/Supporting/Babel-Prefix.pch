@@ -23,5 +23,6 @@
     #import <libextobjc/EXTScope.h>
     #import <HockeySDK/HockeySDK.h>
     #import <CocoaLumberjack/DDLog.h>
+    #import <GameKit/GameKit.h>
     #include "Definitions.h"
 #endif

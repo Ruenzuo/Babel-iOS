@@ -12,13 +12,15 @@
 #import "BABKeychainHelper.h"
 #import "BABAuthorizationSessionHelper.h"
 #import "BABBabelManager.h"
+#import "BABGameCenterManager.h"
 
-@interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate>
+@interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate, BABGameCenterManagerDelegate>
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) IBOutlet UIButton *btnStart;
 @property (nonatomic, strong) BABAuthorizationSessionHelper *authorizationSessionHelper;
 @property (nonatomic, assign) BABDifficultyMode selectedDifficultyMode;
+@property (nonatomic, strong) BABGameCenterManager *gameCenterManager;
 
 - (void)checkTokenValidity;
 - (IBAction)logIn:(id)sender;
@@ -39,6 +41,15 @@
         _authorizationSessionHelper = [[BABAuthorizationSessionHelper alloc] init];
     }
     return _authorizationSessionHelper;
+}
+
+- (BABGameCenterManager *)gameCenterManager
+{
+    if (_gameCenterManager == nil) {
+        _gameCenterManager = [[BABGameCenterManager alloc] init];
+        _gameCenterManager.delegate = self;
+    }
+    return _gameCenterManager;
 }
 
 #pragma mark - View controller life cycle
@@ -75,6 +86,7 @@
                                                              andDifficultyMode:self.selectedDifficultyMode];
         [babelManager setupQueue];
         babelViewController.babelManager = babelManager;
+        babelViewController.gameCenterManager = self.gameCenterManager;
     }
 }
 
@@ -174,7 +186,21 @@
     [UIView animateWithDuration:0.5f
                      animations:^{
                          self.btnStart.alpha = 1.0f;
+                     }
+                     completion:^(BOOL finished) {
+                         if (finished) {
+                             [self.gameCenterManager authenticateLocalPlayer];
+                         }
                      }];
+}
+
+#pragma mark - BABGameCenterManagerDelegate
+
+- (void)showAuthenticateViewController:(UIViewController *)viewController
+{
+    [self.navigationController presentViewController:viewController
+                                            animated:YES
+                                          completion:nil];
 }
 
 #pragma mark - BABOAuthViewControllerDelegate

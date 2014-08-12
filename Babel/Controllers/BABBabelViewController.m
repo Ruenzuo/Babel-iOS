@@ -13,6 +13,7 @@
 #import "BABFile.h"
 #import "BABConfigurationHelper.h"
 #import "NSMutableArray+BABShuffle.h"
+#import "BABGameCenterManager.h"
 
 @interface BABBabelViewController () <UIWebViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -397,6 +398,8 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                                             self.currentFile.name,
                                             self.currentRepository.name,
                                             (unsigned long)self.points]];
+        [self.gameCenterManager reportPoints:self.points
+                           forDifficultyMode:self.babelManager.difficultyMode];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

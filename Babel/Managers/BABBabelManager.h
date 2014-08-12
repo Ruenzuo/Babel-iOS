@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) NSMutableArray *hintLanguages;
 @property (nonatomic, strong) NSArray *languages;
+@property (nonatomic, assign) BABDifficultyMode difficultyMode;
 
 - (id)initWithToken:(NSString *)token
   andDifficultyMode:(BABDifficultyMode)difficultyMode;
