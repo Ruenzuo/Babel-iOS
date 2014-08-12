@@ -29,6 +29,7 @@
 @implementation BABGitHubAPISessionHelper
 
 int const BABMaxBytesFileSize = 1 * 1024 * 1024;
+int const BABMinBytesFileSize = 10 * 1024;
 
 - (id)init
 {
@@ -135,8 +136,8 @@ int const BABMaxBytesFileSize = 1 * 1024 * 1024;
 {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [self.sessionManager GET:@"search/code"
-                  parameters:@{@"q": [[NSString stringWithFormat:@"language:%@+repo:%@+size:<%d", language.search,
-                                      repository.name, BABMaxBytesFileSize] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                  parameters:@{@"q": [[NSString stringWithFormat:@"language:%@+repo:%@+size:<%d+size:>%d", language.search,
+                                      repository.name, BABMaxBytesFileSize, BABMinBytesFileSize] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
                                @"access_token": token}
                      success:^(NSURLSessionDataTask *task, id responseObject) {
                          [completionSource setResult:responseObject];

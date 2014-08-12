@@ -69,7 +69,7 @@ NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOARD";
 }
 
 - (void)reportPoints:(NSUInteger)points
-  forDifficultyMode:(BABDifficultyMode)difficultyMode
+   forDifficultyMode:(BABDifficultyMode)difficultyMode
 {
     if (!self.gameCenterEnabled) {
         return;
