@@ -59,7 +59,7 @@ NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOARD";
         @strongify(self);
         
         if (error) {
-            NSLog(@"%@", [error localizedDescription]);
+            DDLogError(@"%@", [error localizedDescription]);
         } else if (viewController) {
             [self.delegate showAuthenticateViewController:viewController];
         } else {
@@ -79,7 +79,7 @@ NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOARD";
     [GKScore reportScores:@[score]
     withCompletionHandler:^(NSError *error) {
         if (error) {
-            NSLog(@"%@", [error localizedDescription]);
+            DDLogError(@"%@", [error localizedDescription]);
         }
     }];
 }
