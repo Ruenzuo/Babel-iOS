@@ -34,6 +34,8 @@
 		A0D9B18C197C4C0E00AD7990 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0D9B18E197C4C0E00AD7990 /* Main.storyboard */; };
 		A0D9B191197C4C1600AD7990 /* BABAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D9B190197C4C1600AD7990 /* BABAppDelegate.m */; };
 		A0D9B195197C4DA900AD7990 /* BABMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D9B194197C4DA900AD7990 /* BABMenuViewController.m */; };
+		A0EDABE9199A6CE400E06BDE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDABE8199A6CE400E06BDE /* GameKit.framework */; };
+		A0EDABEC199A6D9700E06BDE /* BABGameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EDABEB199A6D9700E06BDE /* BABGameCenterManager.m */; };
 		CA1D4F7A641D4E668F17AD43 /* libPods-Babel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD224A7F9CE4296BC149BF0 /* libPods-Babel.a */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +89,9 @@
 		A0D9B190197C4C1600AD7990 /* BABAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABAppDelegate.m; path = Application/BABAppDelegate.m; sourceTree = "<group>"; };
 		A0D9B193197C4DA900AD7990 /* BABMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABMenuViewController.h; path = Controllers/BABMenuViewController.h; sourceTree = "<group>"; };
 		A0D9B194197C4DA900AD7990 /* BABMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABMenuViewController.m; path = Controllers/BABMenuViewController.m; sourceTree = "<group>"; };
+		A0EDABE8199A6CE400E06BDE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		A0EDABEA199A6D9700E06BDE /* BABGameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABGameCenterManager.h; path = Managers/BABGameCenterManager.h; sourceTree = "<group>"; };
+		A0EDABEB199A6D9700E06BDE /* BABGameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABGameCenterManager.m; path = Managers/BABGameCenterManager.m; sourceTree = "<group>"; };
 		E8F077ECE7EF454391650157 /* Pods-Babel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Babel.xcconfig"; path = "Pods/Pods-Babel.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +104,7 @@
 				A0D9B14E197C4B7A00AD7990 /* UIKit.framework in Frameworks */,
 				A0D9B14A197C4B7A00AD7990 /* Foundation.framework in Frameworks */,
 				CA1D4F7A641D4E668F17AD43 /* libPods-Babel.a in Frameworks */,
+				A0EDABE9199A6CE400E06BDE /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +159,8 @@
 			children = (
 				A0AC26FC198957AB0009A871 /* BABBabelManager.h */,
 				A0AC26FD198957AB0009A871 /* BABBabelManager.m */,
+				A0EDABEA199A6D9700E06BDE /* BABGameCenterManager.h */,
+				A0EDABEB199A6D9700E06BDE /* BABGameCenterManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -178,6 +186,7 @@
 		A0D9B148197C4B7A00AD7990 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0EDABE8199A6CE400E06BDE /* GameKit.framework */,
 				A0D9B149197C4B7A00AD7990 /* Foundation.framework */,
 				A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */,
 				A0D9B14D197C4B7A00AD7990 /* UIKit.framework */,
@@ -280,6 +289,16 @@
 				CLASSPREFIX = BAB;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Renzo Crisóstomo";
+				TargetAttributes = {
+					A0D9B145197C4B7A00AD7990 = {
+						DevelopmentTeam = 36AFPDVAX2;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = A0D9B141197C4B7A00AD7990 /* Build configuration list for PBXProject "Babel" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -356,6 +375,7 @@
 			files = (
 				A0AC26FB1989579A0009A871 /* BABGitHubAPISessionHelper.m in Sources */,
 				A093AA17197D6C5100F21675 /* BABOAuthViewController.m in Sources */,
+				A0EDABEC199A6D9700E06BDE /* BABGameCenterManager.m in Sources */,
 				A0AC26FE198957AB0009A871 /* BABBabelManager.m in Sources */,
 				A0D9B195197C4DA900AD7990 /* BABMenuViewController.m in Sources */,
 				A0AD09171984F91500D6A5D5 /* BABURLHelper.m in Sources */,
@@ -474,11 +494,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Babel/Supporting/Babel-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B2563366-B41A-44AB-909B-EC2E033E5E69";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -489,11 +511,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Babel/Supporting/Babel-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B9C80EDF-FD36-4339-B280-73EB94BEB7CD";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

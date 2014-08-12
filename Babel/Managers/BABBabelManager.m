@@ -22,7 +22,6 @@
 @property (nonatomic, strong) BABConfigurationHelper *configurationHelper;
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, strong) NSMutableArray *queue;
-@property (nonatomic, assign) BABDifficultyMode difficultyMode;
 
 - (BABLanguage *)randomLanguage;
 - (BFTask *)randomRepositoryWithLanguage:(BABLanguage *)language;
