@@ -28,5 +28,6 @@
     #import <Accounts/Accounts.h>
     #import <Social/Social.h>
     #import <TSMessages/TSMessage.h>
+    #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
     #include "Definitions.h"
 #endif

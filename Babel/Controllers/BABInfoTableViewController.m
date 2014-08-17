@@ -19,6 +19,7 @@
 - (void)setupGameCenterLabel;
 - (void)leaderboards;
 - (void)developer;
+- (void)acknowledgements;
 - (void)onGameCenterDidFinishAutenticationSuccessfully:(NSNotification *)notification;
 
 @end
@@ -82,6 +83,15 @@
                               sender:self];
 }
 
+- (void)acknowledgements
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Pods-Babel-acknowledgements"
+                                                     ofType:@"plist"];
+    VTAcknowledgementsViewController *viewController = [[VTAcknowledgementsViewController alloc] initWithAcknowledgementsPlistPath:path];
+    [self.navigationController pushViewController:viewController
+                                         animated:YES];
+}
+
 #pragma mark - GKGameCenterControllerDelegate
 
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
@@ -110,6 +120,10 @@
             switch (indexPath.row) {
                 case 0: {
                     [self developer];
+                    break;
+                }
+                case 1: {
+                    [self acknowledgements];
                     break;
                 }
             }

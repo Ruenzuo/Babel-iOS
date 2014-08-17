@@ -12,4 +12,5 @@ target "Babel" do
   pod 'HockeySDK', '~> 3.5.6'
   pod 'CocoaLumberjack', '~> 1.9.1'
   pod 'TSMessages', '~> 0.9.9'
+  pod 'VTAcknowledgementsViewController', '~> 0.11.0'
 end
