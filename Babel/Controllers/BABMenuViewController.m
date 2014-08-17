@@ -13,6 +13,8 @@
 #import "BABAuthorizationSessionHelper.h"
 #import "BABBabelManager.h"
 #import "BABGameCenterManager.h"
+#import "BABInfoTableViewController.h"
+#import "BABDifficultiesActionSheet.h"
 
 @interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate, BABGameCenterManagerDelegate>
 
@@ -87,6 +89,9 @@
         [babelManager setupQueue];
         babelViewController.babelManager = babelManager;
         babelViewController.gameCenterManager = self.gameCenterManager;
+    } else if ([[segue identifier] isEqualToString:@"InfoSegue"]) {
+        BABInfoTableViewController *infoViewController = (BABInfoTableViewController *) [segue destinationViewController];
+        infoViewController.gameCenterManager = self.gameCenterManager;
     }
 }
 
@@ -128,12 +133,7 @@
 
 - (IBAction)start:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Difficulty"
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Easy", @"Normal", @"Hard", nil];
-    [actionSheet showInView:self.view];
+    [BABDifficultiesActionSheet showDifficultiesActionSheetInViewController:self];
 }
 
 - (void)logOut:(id)sender
