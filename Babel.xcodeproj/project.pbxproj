@@ -27,6 +27,10 @@
 		A0BA014B198E83C8005BE680 /* BABConfigurationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BA014A198E83C8005BE680 /* BABConfigurationHelper.m */; };
 		A0BEA9E219A0A74800704B2F /* BABInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEA9E119A0A74800704B2F /* BABInfoTableViewController.m */; };
 		A0BEA9E519A0B5E300704B2F /* BABDifficultiesActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEA9E419A0B5E300704B2F /* BABDifficultiesActionSheet.m */; };
+		A0BEA9E819A0BA2A00704B2F /* BABDeveloperTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEA9E719A0BA2A00704B2F /* BABDeveloperTableViewController.m */; };
+		A0BEA9EA19A0BB2100704B2F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9E919A0BB2100704B2F /* MessageUI.framework */; };
+		A0BEA9EC19A0BB3900704B2F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9EB19A0BB3900704B2F /* Accounts.framework */; };
+		A0BEA9EE19A0BB4F00704B2F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9ED19A0BB4F00704B2F /* Social.framework */; };
 		A0D9B14A197C4B7A00AD7990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B149197C4B7A00AD7990 /* Foundation.framework */; };
 		A0D9B14C197C4B7A00AD7990 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */; };
 		A0D9B14E197C4B7A00AD7990 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14D197C4B7A00AD7990 /* UIKit.framework */; };
@@ -80,6 +84,11 @@
 		A0BEA9E119A0A74800704B2F /* BABInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABInfoTableViewController.m; path = Controllers/BABInfoTableViewController.m; sourceTree = "<group>"; };
 		A0BEA9E319A0B5E300704B2F /* BABDifficultiesActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABDifficultiesActionSheet.h; path = Extensions/BABDifficultiesActionSheet.h; sourceTree = "<group>"; };
 		A0BEA9E419A0B5E300704B2F /* BABDifficultiesActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABDifficultiesActionSheet.m; path = Extensions/BABDifficultiesActionSheet.m; sourceTree = "<group>"; };
+		A0BEA9E619A0BA2A00704B2F /* BABDeveloperTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABDeveloperTableViewController.h; path = Controllers/BABDeveloperTableViewController.h; sourceTree = "<group>"; };
+		A0BEA9E719A0BA2A00704B2F /* BABDeveloperTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABDeveloperTableViewController.m; path = Controllers/BABDeveloperTableViewController.m; sourceTree = "<group>"; };
+		A0BEA9E919A0BB2100704B2F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A0BEA9EB19A0BB3900704B2F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		A0BEA9ED19A0BB4F00704B2F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A0D9B146197C4B7A00AD7990 /* Babel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D9B149197C4B7A00AD7990 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -106,6 +115,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0BEA9EE19A0BB4F00704B2F /* Social.framework in Frameworks */,
+				A0BEA9EC19A0BB3900704B2F /* Accounts.framework in Frameworks */,
+				A0BEA9EA19A0BB2100704B2F /* MessageUI.framework in Frameworks */,
 				A0D9B14C197C4B7A00AD7990 /* CoreGraphics.framework in Frameworks */,
 				A0D9B14E197C4B7A00AD7990 /* UIKit.framework in Frameworks */,
 				A0D9B14A197C4B7A00AD7990 /* Foundation.framework in Frameworks */,
@@ -194,6 +206,9 @@
 		A0D9B148197C4B7A00AD7990 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0BEA9ED19A0BB4F00704B2F /* Social.framework */,
+				A0BEA9EB19A0BB3900704B2F /* Accounts.framework */,
+				A0BEA9E919A0BB2100704B2F /* MessageUI.framework */,
 				A0EDABE8199A6CE400E06BDE /* GameKit.framework */,
 				A0D9B149197C4B7A00AD7990 /* Foundation.framework */,
 				A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */,
@@ -264,6 +279,8 @@
 				A0A9CC8C19801BC400333518 /* BABBabelViewController.m */,
 				A0BEA9E019A0A74800704B2F /* BABInfoTableViewController.h */,
 				A0BEA9E119A0A74800704B2F /* BABInfoTableViewController.m */,
+				A0BEA9E619A0BA2A00704B2F /* BABDeveloperTableViewController.h */,
+				A0BEA9E719A0BA2A00704B2F /* BABDeveloperTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -400,6 +417,7 @@
 				A0A9CC9719802C6200333518 /* BABFile.m in Sources */,
 				A093AA1E197D7FFF00F21675 /* NSError+BABError.m in Sources */,
 				A0A9CC8D19801BC400333518 /* BABBabelViewController.m in Sources */,
+				A0BEA9E819A0BA2A00704B2F /* BABDeveloperTableViewController.m in Sources */,
 				A0AD091D1985049900D6A5D5 /* BABTranslatorHelper.m in Sources */,
 				A0A9CC941980266200333518 /* BABRepository.m in Sources */,
 				A0AD091A1984FF3D00D6A5D5 /* BABKeychainHelper.m in Sources */,
