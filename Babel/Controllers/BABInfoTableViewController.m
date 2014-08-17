@@ -20,6 +20,9 @@
 - (void)leaderboards;
 - (void)developer;
 - (void)acknowledgements;
+- (void)shareOnFacebook;
+- (void)shareOnTwitter;
+- (void)rateOnAppStore;
 - (void)onGameCenterDidFinishAutenticationSuccessfully:(NSNotification *)notification;
 
 @end
@@ -92,6 +95,65 @@
                                          animated:YES];
 }
 
+- (void)shareOnFacebook
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController *facebookStatus = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [facebookStatus setInitialText:@"Check Babel on the AppStore!"];
+        [facebookStatus addURL:[[iLink sharedInstance] iLinkGetAppURLforSharing]];
+        [self presentViewController:facebookStatus
+                           animated:YES
+                         completion:nil];
+    } else {
+        [TSMessage
+         showNotificationInViewController:self
+         title:@"Error"
+         subtitle:@"It seems that you don't have a Facebook account configured."
+         type:TSMessageNotificationTypeError
+         duration:3.0f
+         canBeDismissedByUser:YES];
+    }
+}
+
+- (void)shareOnTwitter
+{
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    [accountStore
+     requestAccessToAccountsWithType:accountType
+     options:nil
+     completion:^(BOOL granted, NSError *error) {
+         if(granted) {
+             NSArray *accounts = [accountStore accountsWithAccountType:accountType];
+             if ([accounts count] > 0) {
+                 SLComposeViewController *tweetSheet = [SLComposeViewController
+                                                        composeViewControllerForServiceType:SLServiceTypeTwitter];
+                 [tweetSheet setInitialText:@"Check Babel on the AppStore!"];
+                 [tweetSheet addURL:[[iLink sharedInstance] iLinkGetAppURLforSharing]];
+                 [self presentViewController:tweetSheet
+                                    animated:YES
+                                  completion:nil];
+             }
+             else {
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     [TSMessage
+                      showNotificationInViewController:self
+                      title:@"Error"
+                      subtitle:@"It seems that you don't have a Twitter account configured."
+                      type:TSMessageNotificationTypeError
+                      duration:3.0f
+                      canBeDismissedByUser:YES];
+                 });
+             }
+         }
+     }];
+}
+
+- (void)rateOnAppStore
+{
+    [[iLink sharedInstance] iLinkOpenRatingsPageInAppStore];
+}
+
 #pragma mark - GKGameCenterControllerDelegate
 
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
@@ -111,6 +173,29 @@
                     [tableView deselectRowAtIndexPath:indexPath
                                              animated:YES];
                     [self leaderboards];
+                    break;
+                }
+            }
+            break;
+        }
+        case 1: {
+            switch (indexPath.row) {
+                case 0: {
+                    [tableView deselectRowAtIndexPath:indexPath
+                                             animated:YES];
+                    [self shareOnFacebook];
+                    break;
+                }
+                case 1: {
+                    [tableView deselectRowAtIndexPath:indexPath
+                                             animated:YES];
+                    [self shareOnTwitter];
+                    break;
+                }
+                case 2: {
+                    [tableView deselectRowAtIndexPath:indexPath
+                                             animated:YES];
+                    [self rateOnAppStore];
                     break;
                 }
             }

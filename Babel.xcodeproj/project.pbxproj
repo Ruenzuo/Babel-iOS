@@ -32,6 +32,7 @@
 		A0BEA9EC19A0BB3900704B2F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9EB19A0BB3900704B2F /* Accounts.framework */; };
 		A0BEA9EE19A0BB4F00704B2F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9ED19A0BB4F00704B2F /* Social.framework */; };
 		A0BEA9F019A0C37700704B2F /* Pods-Babel-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0BEA9EF19A0C37700704B2F /* Pods-Babel-acknowledgements.plist */; };
+		A0BEA9F819A0C4E100704B2F /* iLink.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEA9F719A0C4E100704B2F /* iLink.m */; };
 		A0D9B14A197C4B7A00AD7990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B149197C4B7A00AD7990 /* Foundation.framework */; };
 		A0D9B14C197C4B7A00AD7990 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */; };
 		A0D9B14E197C4B7A00AD7990 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14D197C4B7A00AD7990 /* UIKit.framework */; };
@@ -91,6 +92,8 @@
 		A0BEA9EB19A0BB3900704B2F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		A0BEA9ED19A0BB4F00704B2F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A0BEA9EF19A0C37700704B2F /* Pods-Babel-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-Babel-acknowledgements.plist"; path = "Pods/Pods-Babel-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
+		A0BEA9F619A0C4E100704B2F /* iLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iLink.h; path = External/iLink/iLink/iLink.h; sourceTree = SOURCE_ROOT; };
+		A0BEA9F719A0C4E100704B2F /* iLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iLink.m; path = External/iLink/iLink/iLink.m; sourceTree = SOURCE_ROOT; };
 		A0D9B146197C4B7A00AD7990 /* Babel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0D9B149197C4B7A00AD7990 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -187,6 +190,23 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		A0BEA9F119A0C47800704B2F /* External */ = {
+			isa = PBXGroup;
+			children = (
+				A0BEA9F519A0C4D700704B2F /* iLink */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		A0BEA9F519A0C4D700704B2F /* iLink */ = {
+			isa = PBXGroup;
+			children = (
+				A0BEA9F619A0C4E100704B2F /* iLink.h */,
+				A0BEA9F719A0C4E100704B2F /* iLink.m */,
+			);
+			name = iLink;
+			sourceTree = "<group>";
+		};
 		A0D9B13D197C4B7A00AD7990 = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +247,7 @@
 				A0D9B17F197C4B8D00AD7990 /* Application */,
 				A0D9B192197C4D6200AD7990 /* Controllers */,
 				A093AA1B197D7FB200F21675 /* Extensions */,
+				A0BEA9F119A0C47800704B2F /* External */,
 				A0AD09141984F8EF00D6A5D5 /* Helpers */,
 				A0D9B161197C4B7A00AD7990 /* Images.xcassets */,
 				A0AD09251985121500D6A5D5 /* Managers */,
@@ -417,6 +438,7 @@
 				A0BEA9E519A0B5E300704B2F /* BABDifficultiesActionSheet.m in Sources */,
 				A0BA014B198E83C8005BE680 /* BABConfigurationHelper.m in Sources */,
 				A0D9B191197C4C1600AD7990 /* BABAppDelegate.m in Sources */,
+				A0BEA9F819A0C4E100704B2F /* iLink.m in Sources */,
 				A0D9B186197C4BE300AD7990 /* main.m in Sources */,
 				A0A9CC9719802C6200333518 /* BABFile.m in Sources */,
 				A093AA1E197D7FFF00F21675 /* NSError+BABError.m in Sources */,
