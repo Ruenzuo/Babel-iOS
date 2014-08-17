@@ -72,6 +72,7 @@ PODS:
   - SVProgressHUD (1.0)
   - TSMessages (0.9.9):
     - HexColors
+  - VTAcknowledgementsViewController (0.11)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3.1)
@@ -85,6 +86,7 @@ DEPENDENCIES:
   - SSKeychain (~> 1.2.2)
   - SVProgressHUD (~> 1.0.0)
   - TSMessages (~> 0.9.9)
+  - VTAcknowledgementsViewController (~> 0.11.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
@@ -99,5 +101,6 @@ SPEC CHECKSUMS:
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
   TSMessages: 2999ef55e532378692e9d14d32da2bb60e285129
+  VTAcknowledgementsViewController: 6e71652adbe73c68f0a278a73ac9ca1e1fc00b90
 
 COCOAPODS: 0.33.1
