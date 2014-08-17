@@ -10,33 +10,15 @@
 
 @interface BABGameCenterManager ()
 
-@property (nonatomic, assign, getter = isGameCenterEnabled) BOOL gameCenterEnabled;
-
-- (NSString *)identifierForDifficultyMode:(BABDifficultyMode)difficultyMode;
-
 @end
+
+NSString * const BABGameCenterManagerDidFinishAuthenticationSuccessfullyNotification = @"BABGameCenterManagerDidFinishAuthenticationSuccessfullyNotification";
 
 @implementation BABGameCenterManager
 
 NSString * const BABEasyLeaderboardIdentifier = @"BAB_001_EASY_LEADERBOARD";
 NSString * const BABNormalLeaderboardIdentifier = @"BAB_001_NORMAL_LEADERBOARD";
 NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOARD";
-
-#pragma mark - Private Method
-
-- (NSString *)identifierForDifficultyMode:(BABDifficultyMode)difficultyMode
-{
-    switch (difficultyMode) {
-        case BABDifficultyModeEasy:
-            return BABEasyLeaderboardIdentifier;
-        case BABDifficultyModeNormal:
-            return BABNormalLeaderboardIdentifier;
-        case BABDifficultyModeHard:
-            return BABHardLeaderboardIdentifier;
-        case BABDifficultyModeNone:
-            return @"";
-    }
-}
 
 #pragma mark - Public Methods
 
@@ -64,6 +46,8 @@ NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOARD";
             [self.delegate showAuthenticateViewController:viewController];
         } else {
             self.gameCenterEnabled = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:BABGameCenterManagerDidFinishAuthenticationSuccessfullyNotification
+                                                                object:nil];
         }
     }];
 }
@@ -82,6 +66,20 @@ NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOARD";
             DDLogError(@"%@", [error localizedDescription]);
         }
     }];
+}
+
+- (NSString *)identifierForDifficultyMode:(BABDifficultyMode)difficultyMode
+{
+    switch (difficultyMode) {
+        case BABDifficultyModeEasy:
+            return BABEasyLeaderboardIdentifier;
+        case BABDifficultyModeNormal:
+            return BABNormalLeaderboardIdentifier;
+        case BABDifficultyModeHard:
+            return BABHardLeaderboardIdentifier;
+        case BABDifficultyModeNone:
+            return @"";
+    }
 }
 
 @end

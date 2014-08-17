@@ -14,12 +14,16 @@
 
 @end
 
+extern NSString * const BABGameCenterManagerDidFinishAuthenticationSuccessfullyNotification;
+
 @interface BABGameCenterManager : NSObject
 
 @property (nonatomic, weak) id<BABGameCenterManagerDelegate> delegate;
+@property (nonatomic, assign, getter = isGameCenterEnabled) BOOL gameCenterEnabled;
 
 - (void)authenticateLocalPlayer;
 - (void)reportPoints:(NSUInteger)points
    forDifficultyMode:(BABDifficultyMode)difficultyMode;
+- (NSString *)identifierForDifficultyMode:(BABDifficultyMode)difficultyMode;
 
 @end
