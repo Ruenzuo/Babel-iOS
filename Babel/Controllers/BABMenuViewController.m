@@ -113,9 +113,13 @@
              @strongify(self);
              
              if (task.error) {
-                 [SVProgressHUD showErrorWithStatus:@"Session expired."];
-                 NSError *error = nil;
-                 [BABKeychainHelper deleteStoredTokenWithError:&error];
+                 if ([task.error.domain isEqualToString:NSURLErrorDomain] && task.error.code == NSURLErrorNotConnectedToInternet) {
+                     [SVProgressHUD showErrorWithStatus:@"The Internet connection appears to be offline."];
+                 } else {
+                     [SVProgressHUD showErrorWithStatus:@"Session expired."];
+                     NSError *error = nil;
+                     [BABKeychainHelper deleteStoredTokenWithError:&error];
+                 }
              } else {
                  [SVProgressHUD dismiss];
                  [self showLogOutView];
