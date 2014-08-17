@@ -18,6 +18,7 @@
 - (void)setupVersionLabel;
 - (void)setupGameCenterLabel;
 - (void)leaderboards;
+- (void)developer;
 - (void)onGameCenterDidFinishAutenticationSuccessfully:(NSNotification *)notification;
 
 @end
@@ -75,6 +76,12 @@
     }
 }
 
+- (void)developer
+{
+    [self performSegueWithIdentifier:@"DeveloperSegue"
+                              sender:self];
+}
+
 #pragma mark - GKGameCenterControllerDelegate
 
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
@@ -94,6 +101,15 @@
                     [tableView deselectRowAtIndexPath:indexPath
                                              animated:YES];
                     [self leaderboards];
+                    break;
+                }
+            }
+            break;
+        }
+        case 2: {
+            switch (indexPath.row) {
+                case 0: {
+                    [self developer];
                     break;
                 }
             }

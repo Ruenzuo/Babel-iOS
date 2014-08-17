@@ -24,5 +24,9 @@
     #import <HockeySDK/HockeySDK.h>
     #import <CocoaLumberjack/DDLog.h>
     #import <GameKit/GameKit.h>
+    #import <MessageUI/MessageUI.h>
+    #import <Accounts/Accounts.h>
+    #import <Social/Social.h>
+    #import <TSMessages/TSMessage.h>
     #include "Definitions.h"
 #endif
