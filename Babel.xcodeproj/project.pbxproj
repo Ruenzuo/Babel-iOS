@@ -554,6 +554,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Babel/Supporting/Babel-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"BITHOCKEY_VERSION=\"@\\\"3.5.6\\\"\"",
+					"BITHOCKEY_C_VERSION=\"\\\"3.5.6\\\"\"",
+					"BITHOCKEY_BUILD=\"@\\\"31\\\"\"",
+					"BITHOCKEY_C_BUILD=\"\\\"31\\\"\"",
+					"APP_STORE=1",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "B2563366-B41A-44AB-909B-EC2E033E5E69";
@@ -571,6 +581,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Babel/Supporting/Babel-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"$(inherited)",
+					"BITHOCKEY_VERSION=\"@\\\"3.5.6\\\"\"",
+					"BITHOCKEY_C_VERSION=\"\\\"3.5.6\\\"\"",
+					"BITHOCKEY_BUILD=\"@\\\"31\\\"\"",
+					"BITHOCKEY_C_BUILD=\"\\\"31\\\"\"",
+					"APP_STORE=1",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b9b03671-a5ad-4687-bfc3-d857bbe5c206";
