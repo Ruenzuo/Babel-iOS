@@ -14,7 +14,7 @@
                                                      error:(NSError *)error;
 @end
 
-@interface BABOAuthViewController : UIViewController
+@interface BABOAuthViewController : GAITrackedViewController
 
 @property (nonatomic, weak) id<BABOAuthViewControllerDelegate> delegate;
 

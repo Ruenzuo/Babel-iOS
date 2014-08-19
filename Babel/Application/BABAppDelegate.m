@@ -14,12 +14,14 @@
 
 - (void)configureHockeyApp;
 - (void)configureCocoaLumberjack;
+- (void)configureGoogleAnalytics;
 
 @end
 
 @implementation BABAppDelegate
 
 NSString * const BABHockeyAppIdentifier = @"6fd9e830e7744e983eb60925d91d3d93";
+NSString * const BABGoogleAnalyticsTrackingId = @"UA-53969387-1";
 
 #pragma mark - Application Life cycle
 
@@ -27,6 +29,7 @@ NSString * const BABHockeyAppIdentifier = @"6fd9e830e7744e983eb60925d91d3d93";
 {
     [self configureHockeyApp];
     [self configureCocoaLumberjack];
+    [self configureGoogleAnalytics];
     return YES;
 }
 
@@ -57,6 +60,11 @@ NSString * const BABHockeyAppIdentifier = @"6fd9e830e7744e983eb60925d91d3d93";
 {
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
+}
+
+- (void)configureGoogleAnalytics
+{
+    [[GAI sharedInstance] trackerWithTrackingId:BABGoogleAnalyticsTrackingId];
 }
 
 @end

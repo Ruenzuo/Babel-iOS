@@ -13,4 +13,5 @@ target "Babel" do
   pod 'CocoaLumberjack', '~> 1.9.1'
   pod 'TSMessages', '~> 0.9.9'
   pod 'VTAcknowledgementsViewController', '~> 0.11.0'
+  pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.9'
 end
