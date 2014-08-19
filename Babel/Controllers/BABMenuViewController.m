@@ -71,6 +71,12 @@
     [self checkTokenValidity];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.screenName = @"Menu Screen";
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

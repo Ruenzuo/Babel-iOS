@@ -73,6 +73,12 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     [self nextFile];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.screenName = @"Babel Screen";
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
