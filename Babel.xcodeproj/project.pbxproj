@@ -573,7 +573,7 @@
 				GCC_PREFIX_HEADER = "Babel/Supporting/Babel-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B9C80EDF-FD36-4339-B280-73EB94BEB7CD";
+				PROVISIONING_PROFILE = "b9b03671-a5ad-4687-bfc3-d857bbe5c206";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
