@@ -29,6 +29,7 @@
     #import <Social/Social.h>
     #import <TSMessages/TSMessage.h>
     #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
+    #import <GoogleAnalytics-iOS-SDK/GAI.h>
     #import "iLink.h"
     #include "Definitions.h"
 #endif

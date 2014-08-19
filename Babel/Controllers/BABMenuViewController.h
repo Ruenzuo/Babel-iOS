@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BABMenuViewController : UIViewController
+@interface BABMenuViewController : GAITrackedViewController
 
 @end
