@@ -51,7 +51,9 @@ NSString * const BABGoogleAnalyticsTrackingId = @"UA-53969387-1";
 - (void)configureHockeyApp
 {
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:BABHockeyAppIdentifier];
-    [[[BITHockeyManager sharedHockeyManager] authenticator] setIdentificationType:BITAuthenticatorIdentificationTypeDevice];
+    if (!APP_STORE) {
+        [[[BITHockeyManager sharedHockeyManager] authenticator] setIdentificationType:BITAuthenticatorIdentificationTypeDevice];
+    }
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[[BITHockeyManager sharedHockeyManager] authenticator] authenticateInstallation];
 }
