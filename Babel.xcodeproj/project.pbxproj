@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F055F0119EC42DC00B6283D /* Pods-Babel-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F055F0019EC42DC00B6283D /* Pods-Babel-acknowledgements.plist */; };
+		3F0F704A19EC44BA006FD5ED /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0F704819EC44BA006FD5ED /* LaunchScreen.xib */; };
 		A08E88F11982CF3F00EA3758 /* info-hard.json in Resources */ = {isa = PBXBuildFile; fileRef = A08E88F01982CF3F00EA3758 /* info-hard.json */; };
 		A08E88F41982D4D400EA3758 /* NSMutableArray+BABShuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */; };
 		A093AA17197D6C5100F21675 /* BABOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A093AA16197D6C5100F21675 /* BABOAuthViewController.m */; };
@@ -31,7 +33,6 @@
 		A0BEA9EA19A0BB2100704B2F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9E919A0BB2100704B2F /* MessageUI.framework */; };
 		A0BEA9EC19A0BB3900704B2F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9EB19A0BB3900704B2F /* Accounts.framework */; };
 		A0BEA9EE19A0BB4F00704B2F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9ED19A0BB4F00704B2F /* Social.framework */; };
-		A0BEA9F019A0C37700704B2F /* Pods-Babel-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0BEA9EF19A0C37700704B2F /* Pods-Babel-acknowledgements.plist */; };
 		A0BEA9F819A0C4E100704B2F /* iLink.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEA9F719A0C4E100704B2F /* iLink.m */; };
 		A0D9B14A197C4B7A00AD7990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B149197C4B7A00AD7990 /* Foundation.framework */; };
 		A0D9B14C197C4B7A00AD7990 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D9B14B197C4B7A00AD7990 /* CoreGraphics.framework */; };
@@ -49,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		0AD224A7F9CE4296BC149BF0 /* libPods-Babel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Babel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		31F354D0933A7BF82364D843 /* Pods-Babel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Babel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Babel/Pods-Babel.release.xcconfig"; sourceTree = "<group>"; };
+		3F055F0019EC42DC00B6283D /* Pods-Babel-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-Babel-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-Babel/Pods-Babel-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
+		3F0F704919EC44BA006FD5ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Views/en.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A08E88F01982CF3F00EA3758 /* info-hard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "info-hard.json"; path = "Supporting/info-hard.json"; sourceTree = "<group>"; };
 		A08E88F21982D4D400EA3758 /* NSMutableArray+BABShuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+BABShuffle.h"; path = "Extensions/NSMutableArray+BABShuffle.h"; sourceTree = "<group>"; };
 		A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+BABShuffle.m"; path = "Extensions/NSMutableArray+BABShuffle.m"; sourceTree = "<group>"; };
@@ -91,7 +95,6 @@
 		A0BEA9E919A0BB2100704B2F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A0BEA9EB19A0BB3900704B2F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		A0BEA9ED19A0BB4F00704B2F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		A0BEA9EF19A0C37700704B2F /* Pods-Babel-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-Babel-acknowledgements.plist"; path = "Pods/Pods-Babel-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		A0BEA9F619A0C4E100704B2F /* iLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iLink.h; path = External/iLink/iLink/iLink.h; sourceTree = SOURCE_ROOT; };
 		A0BEA9F719A0C4E100704B2F /* iLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iLink.m; path = External/iLink/iLink/iLink.m; sourceTree = SOURCE_ROOT; };
 		A0D9B146197C4B7A00AD7990 /* Babel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Babel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +115,7 @@
 		A0EDABE8199A6CE400E06BDE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		A0EDABEA199A6D9700E06BDE /* BABGameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABGameCenterManager.h; path = Managers/BABGameCenterManager.h; sourceTree = "<group>"; };
 		A0EDABEB199A6D9700E06BDE /* BABGameCenterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABGameCenterManager.m; path = Managers/BABGameCenterManager.m; sourceTree = "<group>"; };
-		E8F077ECE7EF454391650157 /* Pods-Babel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Babel.xcconfig"; path = "Pods/Pods-Babel.xcconfig"; sourceTree = "<group>"; };
+		FE7DA33BD6829162BABC7875 /* Pods-Babel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Babel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Babel/Pods-Babel.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C1B648D2B500CD307AA8342 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FE7DA33BD6829162BABC7875 /* Pods-Babel.debug.xcconfig */,
+				31F354D0933A7BF82364D843 /* Pods-Babel.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A093AA1B197D7FB200F21675 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,7 +225,7 @@
 				A0D9B14F197C4B7A00AD7990 /* Babel */,
 				A0D9B148197C4B7A00AD7990 /* Frameworks */,
 				A0D9B147197C4B7A00AD7990 /* Products */,
-				E8F077ECE7EF454391650157 /* Pods-Babel.xcconfig */,
+				3C1B648D2B500CD307AA8342 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -262,7 +274,7 @@
 		A0D9B150197C4B7A00AD7990 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				A0BEA9EF19A0C37700704B2F /* Pods-Babel-acknowledgements.plist */,
+				3F055F0019EC42DC00B6283D /* Pods-Babel-acknowledgements.plist */,
 				A0BA0145198E824E005BE680 /* info-easy.json */,
 				A0BA0147198E82D7005BE680 /* info-normal.json */,
 				A08E88F01982CF3F00EA3758 /* info-hard.json */,
@@ -279,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				A0D9B18E197C4C0E00AD7990 /* Main.storyboard */,
+				3F0F704819EC44BA006FD5ED /* LaunchScreen.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -378,9 +391,10 @@
 				A0D9B162197C4B7A00AD7990 /* Images.xcassets in Resources */,
 				A08E88F11982CF3F00EA3758 /* info-hard.json in Resources */,
 				A0BA0146198E824E005BE680 /* info-easy.json in Resources */,
-				A0BEA9F019A0C37700704B2F /* Pods-Babel-acknowledgements.plist in Resources */,
+				3F055F0119EC42DC00B6283D /* Pods-Babel-acknowledgements.plist in Resources */,
 				A0BA0148198E82D7005BE680 /* info-normal.json in Resources */,
 				A0D9B18C197C4C0E00AD7990 /* Main.storyboard in Resources */,
+				3F0F704A19EC44BA006FD5ED /* LaunchScreen.xib in Resources */,
 				A0A9CC8A19801B5300333518 /* WebRoot in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,7 +414,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-Babel-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Babel/Pods-Babel-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E9B27289B902492980EF33B9 /* Check Pods Manifest.lock */ = {
@@ -453,6 +467,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3F0F704819EC44BA006FD5ED /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F0F704919EC44BA006FD5ED /* en */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 		A0D9B189197C4BEC00AD7990 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -508,6 +530,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -539,6 +562,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -546,34 +570,32 @@
 		};
 		A0D9B179197C4B7A00AD7990 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8F077ECE7EF454391650157 /* Pods-Babel.xcconfig */;
+			baseConfigurationReference = FE7DA33BD6829162BABC7875 /* Pods-Babel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Babel/Supporting/Babel-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B2563366-B41A-44AB-909B-EC2E033E5E69";
+				PROVISIONING_PROFILE = "2f9eb8b9-fd90-45a2-8c7b-28358f669429";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		A0D9B17A197C4B7A00AD7990 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8F077ECE7EF454391650157 /* Pods-Babel.xcconfig */;
+			baseConfigurationReference = 31F354D0933A7BF82364D843 /* Pods-Babel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Babel/Supporting/Babel-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B9C80EDF-FD36-4339-B280-73EB94BEB7CD";
+				PROVISIONING_PROFILE = "b9b03671-a5ad-4687-bfc3-d857bbe5c206";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
