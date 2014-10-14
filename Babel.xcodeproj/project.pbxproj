@@ -588,6 +588,7 @@
 					"APP_STORE=1",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2f9eb8b9-fd90-45a2-8c7b-28358f669429";
 				WRAPPER_EXTENSION = app;
@@ -614,6 +615,7 @@
 					"APP_STORE=1",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b9b03671-a5ad-4687-bfc3-d857bbe5c206";
 				WRAPPER_EXTENSION = app;
