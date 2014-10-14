@@ -12,7 +12,6 @@
 
 @interface BABAppDelegate ()
 
-- (void)configureHockeyApp;
 - (void)configureCocoaLumberjack;
 - (void)configureGoogleAnalytics;
 
@@ -27,36 +26,12 @@ NSString * const BABGoogleAnalyticsTrackingId = @"UA-53969387-1";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self configureHockeyApp];
     [self configureCocoaLumberjack];
     [self configureGoogleAnalytics];
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
-{
-    if( [[BITHockeyManager sharedHockeyManager].authenticator handleOpenURL:url
-                                                          sourceApplication:sourceApplication
-                                                                 annotation:annotation]) {
-        return YES;
-    }
-    return NO;
-}
-
 #pragma mark - Private Methods
-
-- (void)configureHockeyApp
-{
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:BABHockeyAppIdentifier];
-    if (!APP_STORE) {
-        [[[BITHockeyManager sharedHockeyManager] authenticator] setIdentificationType:BITAuthenticatorIdentificationTypeDevice];
-    }
-    [[BITHockeyManager sharedHockeyManager] startManager];
-    [[[BITHockeyManager sharedHockeyManager] authenticator] authenticateInstallation];
-}
 
 - (void)configureCocoaLumberjack
 {
