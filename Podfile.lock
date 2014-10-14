@@ -28,7 +28,6 @@ PODS:
     - CocoaLumberjack/Core
   - GoogleAnalytics-iOS-SDK (3.0.9)
   - HexColors (2.2.1)
-  - HockeySDK (3.5.6)
   - libextobjc (0.4):
     - libextobjc/EXTADT
     - libextobjc/EXTConcreteProtocol
@@ -80,7 +79,6 @@ DEPENDENCIES:
   - Bolts (~> 1.1.1)
   - CocoaLumberjack (~> 1.9.1)
   - GoogleAnalytics-iOS-SDK (~> 3.0.9)
-  - HockeySDK (~> 3.5.6)
   - libextobjc (~> 0.4.0)
   - Mantle (~> 1.5.0)
   - MSWeakTimer (~> 1.1.0)
@@ -96,7 +94,6 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 94accd5749f5c5d15134c8d50f34a973aed8ef69
   GoogleAnalytics-iOS-SDK: d9e198b1f955259a72886769be7377cdfcdb2250
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
-  HockeySDK: 27d8b411208f9d3f70c8f6695a8defa2a3465721
   libextobjc: ba42e4111f433273a886cd54f0ddaddb7f62f82f
   Mantle: c67a7e45e14196ed42b2a7cbb98ff6a9920e6b92
   MSWeakTimer: 6bd071c058fd49daa62013e4ae70caf61d0f2dc2
@@ -106,4 +103,4 @@ SPEC CHECKSUMS:
   TSMessages: 2999ef55e532378692e9d14d32da2bb60e285129
   VTAcknowledgementsViewController: 6e71652adbe73c68f0a278a73ac9ca1e1fc00b90
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.34.2

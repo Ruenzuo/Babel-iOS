@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YRQ-7f-8wt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YRQ-7f-8wt">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Menu View Controller - Babel-->
+        <!--Babel-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="BABMenuViewController" sceneMemberID="viewController">
@@ -13,16 +14,14 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="bP2-Of-KcO">
-                                <rect key="frame" x="0.0" y="124" width="320" height="320"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="140" y="140" width="320" height="320"/>
                             </imageView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8z0-92-Dcm">
-                                <rect key="frame" x="101" y="507" width="119" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="241" y="539" width="119" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="119" id="ASe-GK-eEs"/>
                                     <constraint firstAttribute="height" constant="41" id="zt0-xn-q7I"/>
@@ -48,7 +47,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="zmc-vO-aFN"/>
                         <barButtonItem key="leftBarButtonItem" image="AppInfo" id="4mH-sx-kT9">
                             <connections>
-                                <segue destination="nn1-li-c8k" kind="push" identifier="InfoSegue" id="VpY-yC-9cQ"/>
+                                <segue destination="nn1-li-c8k" kind="show" identifier="InfoSegue" id="VpY-yC-9cQ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Log in" id="29j-1T-U14">
@@ -59,13 +58,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnStart" destination="8z0-92-Dcm" id="9Mb-X0-ynd"/>
-                        <segue destination="ylY-i0-YNr" kind="push" identifier="AuthSegue" id="CBV-4B-QrS"/>
-                        <segue destination="JaQ-ia-nax" kind="push" identifier="BabelSegue" id="avb-TR-6LK"/>
+                        <segue destination="ylY-i0-YNr" kind="show" identifier="AuthSegue" id="CBV-4B-QrS"/>
+                        <segue destination="JaQ-ia-nax" kind="show" identifier="BabelSegue" id="avb-TR-6LK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="814" y="132"/>
+            <point key="canvasLocation" x="1526.25" y="139.43661971830986"/>
         </scene>
         <!--Babel View Controller-->
         <scene sceneID="dZV-Vy-SR6">
@@ -76,12 +75,11 @@
                         <viewControllerLayoutGuide type="bottom" id="RXM-ti-OgJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="TSW-zv-djA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTy-ni-C69">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
                                 <connections>
@@ -89,8 +87,7 @@
                                 </connections>
                             </webView>
                             <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="54C-p9-uZ7">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BABLanguageTableViewCell" textLabel="3kJ-az-L5t" style="IBUITableViewCellStyleDefault" id="p75-KQ-RPQ">
@@ -117,8 +114,7 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DQo-og-44b">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="pjq-0Q-0Xt"/>
                                     <barButtonItem title="Skip" id="Wjh-Y5-lZe">
@@ -159,14 +155,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PIK-1X-d1A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1356" y="866"/>
+            <point key="canvasLocation" x="2542.5" y="914.78873239436609"/>
         </scene>
-        <!--Info Table View Controller - Info-->
+        <!--Info-->
         <scene sceneID="B3W-ki-jlV">
             <objects>
                 <tableViewController id="nn1-li-c8k" customClass="BABInfoTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="iXT-U0-JxZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -318,19 +314,19 @@
                     <connections>
                         <outlet property="lblGameCenter" destination="5ZS-sP-jM9" id="z6E-Yi-WR3"/>
                         <outlet property="lblVersion" destination="mlw-rf-8dB" id="puc-wl-33w"/>
-                        <segue destination="IMd-Ib-Pw2" kind="push" identifier="DeveloperSegue" id="rOx-TP-ueJ"/>
+                        <segue destination="IMd-Ib-Pw2" kind="show" identifier="DeveloperSegue" id="rOx-TP-ueJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nG8-ad-rXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1349" y="-593"/>
+            <point key="canvasLocation" x="2529.375" y="-626.40845070422529"/>
         </scene>
-        <!--Developer Table View Controller - Developer-->
+        <!--Developer-->
         <scene sceneID="oIP-Rt-8n1">
             <objects>
                 <tableViewController id="IMd-Ib-Pw2" customClass="BABDeveloperTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="QMH-Kf-JNK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -468,9 +464,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWJ-y6-7IU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1860" y="-593"/>
+            <point key="canvasLocation" x="3487.5" y="-626.40845070422529"/>
         </scene>
-        <!--Auth View Controller - GitHub-->
+        <!--GitHub-->
         <scene sceneID="COj-zU-9sN">
             <objects>
                 <viewController id="ylY-i0-YNr" customClass="BABOAuthViewController" sceneMemberID="viewController">
@@ -479,12 +475,11 @@
                         <viewControllerLayoutGuide type="bottom" id="zqR-fm-oqV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j3P-0o-PaA">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hS5-M1-W9R">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="ylY-i0-YNr" id="Xb2-An-CoI"/>
@@ -506,7 +501,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ttw-Wi-Cen" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1356" y="132"/>
+            <point key="canvasLocation" x="2542.5" y="139.43661971830986"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oAH-1Q-7df">
@@ -524,7 +519,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aQO-7o-iv5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="265" y="132"/>
+            <point key="canvasLocation" x="496.875" y="139.43661971830986"/>
         </scene>
     </scenes>
     <resources>
@@ -532,9 +527,4 @@
         <image name="Logo" width="320" height="320"/>
     </resources>
     <color key="tintColor" red="0.043137254899999998" green="0.82745098039999998" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
