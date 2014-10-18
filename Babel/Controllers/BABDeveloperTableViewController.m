@@ -122,26 +122,36 @@ static NSString * const BABURLGitHubProfileDeveloper = @"https://github.com/ruen
         case 0: {
             tableViewCell.textLabel.text = NSLocalizedString(@"developer-view-controller.name.table-view-cell.text-label.text", nil);
             tableViewCell.detailTextLabel.text = BABNameDeveloperTableViewCellDetails;
+            tableViewCell.detailTextLabel.textColor = [UIColor darkGrayColor];
+            tableViewCell.userInteractionEnabled = NO;
             break;
         }
         case 1: {
             tableViewCell.textLabel.text = BABTwitterSevice;
             tableViewCell.detailTextLabel.text = BABTwitterAccountDeveloperTableViewCellDetails;
+            tableViewCell.detailTextLabel.textColor = [UIColor blackColor];
+            tableViewCell.userInteractionEnabled = YES;
             break;
         }
         case 2: {
             tableViewCell.textLabel.text = BABGitHubSevice;
             tableViewCell.detailTextLabel.text = BABGitHubAccountDeveloperTableViewCellDetails;
+            tableViewCell.detailTextLabel.textColor = [UIColor blackColor];
+            tableViewCell.userInteractionEnabled = YES;
             break;
         }
         case 3: {
             tableViewCell.textLabel.text = BABBlogDeveloperTableViewCellTitle;
             tableViewCell.detailTextLabel.text = BABBlogDeveloperTableViewCellDetails;
+            tableViewCell.detailTextLabel.textColor = [UIColor blackColor];
+            tableViewCell.userInteractionEnabled = YES;
             break;
         }
         case 4: {
             tableViewCell.textLabel.text = NSLocalizedString(@"developer-view-controller.contact.table-view-cell.text-label.text", nil);
             tableViewCell.detailTextLabel.text = BABEmailDeveloper;
+            tableViewCell.detailTextLabel.textColor = [UIColor blackColor];
+            tableViewCell.userInteractionEnabled = YES;
             break;
         }
     }

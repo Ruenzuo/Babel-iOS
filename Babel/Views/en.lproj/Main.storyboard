@@ -20,11 +20,7 @@
                                 <rect key="frame" x="140" y="140" width="320" height="320"/>
                             </imageView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8z0-92-Dcm">
-                                <rect key="frame" x="241" y="539" width="119" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="119" id="ASe-GK-eEs"/>
-                                    <constraint firstAttribute="height" constant="41" id="zt0-xn-q7I"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="539" width="568" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Tap to start">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,9 +33,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="bP2-Of-KcO" secondAttribute="centerY" id="069-lY-h8O"/>
+                            <constraint firstItem="8z0-92-Dcm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="Qv5-l0-haM"/>
                             <constraint firstAttribute="centerX" secondItem="8z0-92-Dcm" secondAttribute="centerX" id="ZUt-j3-gFk"/>
                             <constraint firstAttribute="centerX" secondItem="bP2-Of-KcO" secondAttribute="centerX" id="p8A-XG-fkc"/>
                             <constraint firstAttribute="bottom" secondItem="8z0-92-Dcm" secondAttribute="bottom" constant="20" id="wOE-Pz-uDM"/>
+                            <constraint firstAttribute="trailing" secondItem="8z0-92-Dcm" secondAttribute="trailing" constant="16" id="zL2-Ve-s6j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Babel" id="eNg-k2-aaw">
@@ -60,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1526.25" y="139.43661971830986"/>
+            <point key="canvasLocation" x="1526" y="139"/>
         </scene>
         <!--Babel View Controller-->
         <scene sceneID="dZV-Vy-SR6">
