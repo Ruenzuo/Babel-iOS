@@ -22,8 +22,9 @@ extern NSString * const BABGameCenterManagerDidFinishAuthenticationSuccessfullyN
 @property (nonatomic, assign, getter = isGameCenterEnabled) BOOL gameCenterEnabled;
 
 - (void)authenticateLocalPlayer;
-- (void)reportPoints:(NSUInteger)points
-   forDifficultyMode:(BABDifficultyMode)difficultyMode;
+- (void)reportScore:(NSUInteger)score
+  forDifficultyMode:(BABDifficultyMode)difficultyMode;
 - (NSString *)identifierForDifficultyMode:(BABDifficultyMode)difficultyMode;
+- (BOOL)score:(NSUInteger)score isHighScoreForDifficulty:(BABDifficultyMode)difficultyMode;
 
 @end

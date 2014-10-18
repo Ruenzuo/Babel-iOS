@@ -29,6 +29,7 @@
     #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
     #import <GoogleAnalytics-iOS-SDK/GAI.h>
     #import <CocoaLumberjack/CocoaLumberjack.h>
+    #import <HexColors/HexColor.h>
     #import "iLink.h"
     #include "Definitions.h"
 #endif

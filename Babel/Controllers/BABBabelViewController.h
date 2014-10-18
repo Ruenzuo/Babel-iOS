@@ -10,10 +10,21 @@
 
 @class BABBabelManager;
 @class BABGameCenterManager;
+@class BABNotificationManager;
+
+@protocol BABBabelViewControllerDelegate <NSObject>
+
+- (void)controllerDidFinishWithScore:(NSUInteger)score
+                   forDifficultyMode:(BABDifficultyMode)difficultyMode
+                            withInfo:(NSString *)info;
+
+@end
 
 @interface BABBabelViewController : GAITrackedViewController
 
 @property (nonatomic, strong) BABBabelManager *babelManager;
 @property (nonatomic, strong) BABGameCenterManager *gameCenterManager;
+@property (nonatomic, strong) BABNotificationManager *notificationManager;
+@property (nonatomic, weak) id<BABBabelViewControllerDelegate> delegate;
 
 @end

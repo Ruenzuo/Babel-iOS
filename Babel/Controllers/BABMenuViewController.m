@@ -16,7 +16,7 @@
 #import "BABInfoTableViewController.h"
 #import "BABDifficultyAlertControllerHelper.h"
 
-@interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate, BABGameCenterManagerDelegate, BABDifficultyAlertControllerHelperDelegate>
+@interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate, BABGameCenterManagerDelegate, BABDifficultyAlertControllerHelperDelegate, BABBabelViewControllerDelegate>
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, weak) IBOutlet UIButton *btnStart;
@@ -25,6 +25,7 @@
 @property (nonatomic, assign) BABDifficultyMode selectedDifficultyMode;
 @property (nonatomic, strong) BABGameCenterManager *gameCenterManager;
 @property (nonatomic, strong) BABDifficultyAlertControllerHelper *difficultyAlertControllerHelper;
+@property (nonatomic, strong) BABNotificationManager *notificationManager;
 
 - (void)checkTokenValidity;
 - (IBAction)logIn:(id)sender;
@@ -107,6 +108,8 @@
         [babelManager setupQueue];
         babelViewController.babelManager = babelManager;
         babelViewController.gameCenterManager = self.gameCenterManager;
+        babelViewController.notificationManager = self.notificationManager;
+        babelViewController.delegate = self;
     } else if ([[segue identifier] isEqualToString:@"InfoSegue"]) {
         BABInfoTableViewController *infoViewController = (BABInfoTableViewController *) [segue destinationViewController];
         infoViewController.gameCenterManager = self.gameCenterManager;
@@ -295,6 +298,35 @@
     if (self.selectedDifficultyMode != BABDifficultyModeNone) {
         [self performSegueWithIdentifier:@"BabelSegue"
                                   sender:self];
+    }
+}
+
+#pragma mark - BABBabelViewControllerDelegate
+
+- (void)controllerDidFinishWithScore:(NSUInteger)score
+                   forDifficultyMode:(BABDifficultyMode)difficultyMode
+                            withInfo:(NSString *)info
+{
+    
+    [self.gameCenterManager reportScore:score
+                      forDifficultyMode:difficultyMode];
+    if ([self.gameCenterManager score:score
+             isHighScoreForDifficulty:difficultyMode]) {
+        [TSMessage
+         showNotificationInViewController:self
+         title:[NSString stringWithFormat:@"New High Score! Score: %lu", (unsigned long)score]
+         subtitle:info
+         type:TSMessageNotificationTypeSuccess
+         duration:3.0f
+         canBeDismissedByUser:YES];
+    } else {
+        [TSMessage
+         showNotificationInViewController:self
+         title:[NSString stringWithFormat:@"Wrong! Score: %lu", (unsigned long)score]
+         subtitle:info
+         type:TSMessageNotificationTypeError
+         duration:3.0f
+         canBeDismissedByUser:YES];
     }
 }
 
