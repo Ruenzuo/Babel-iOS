@@ -8,12 +8,13 @@
 
 #import "BABInfoTableViewController.h"
 #import "BABGameCenterManager.h"
-#import "BABDifficultiesActionSheet.h"
+#import "BABDifficultyAlertControllerHelper.h"
 
-@interface BABInfoTableViewController () <GKGameCenterControllerDelegate, UIActionSheetDelegate>
+@interface BABInfoTableViewController () <GKGameCenterControllerDelegate, UIActionSheetDelegate, BABDifficultyAlertControllerHelperDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblVersion;
 @property (nonatomic, weak) IBOutlet UILabel *lblGameCenter;
+@property (nonatomic, strong) BABDifficultyAlertControllerHelper *difficultyAlertControllerHelper;
 
 - (void)setupVersionLabel;
 - (void)setupGameCenterLabel;
@@ -28,6 +29,17 @@
 @end
 
 @implementation BABInfoTableViewController
+
+#pragma mark - Properties
+
+- (BABDifficultyAlertControllerHelper *)difficultyAlertControllerHelper
+{
+    if (_difficultyAlertControllerHelper == nil) {
+        _difficultyAlertControllerHelper = [[BABDifficultyAlertControllerHelper alloc] init];
+        _difficultyAlertControllerHelper.delegate = self;
+    }
+    return _difficultyAlertControllerHelper;
+}
 
 #pragma mark - View controller life cycle
 
@@ -74,7 +86,7 @@
 - (void)leaderboards
 {
     if (self.gameCenterManager.isGameCenterEnabled) {
-        [BABDifficultiesActionSheet showDifficultiesActionSheetInViewController:self];
+        [self.difficultyAlertControllerHelper presentAlertController];
     } else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"gamecenter:"]];
     }
@@ -224,16 +236,15 @@
     [self setupGameCenterLabel];
 }
 
-#pragma mark - UIActionSheetDelegate
+#pragma mark - BABDifficultyAlertControllerHelperDelegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)helperDidFinishSelectionWithDifficulty:(BABDifficultyMode)difficulty
 {
-    if (buttonIndex != actionSheet.cancelButtonIndex) {
-        BABDifficultyMode difficultyMode = buttonIndex;
+    if (difficulty != BABDifficultyModeNone) {
         GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
         gameCenterController.gameCenterDelegate = self;
         gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
-        gameCenterController.leaderboardIdentifier = [self.gameCenterManager identifierForDifficultyMode:difficultyMode];
+        gameCenterController.leaderboardIdentifier = [self.gameCenterManager identifierForDifficultyMode:difficulty];
         [self presentViewController:gameCenterController
                            animated:YES
                          completion:nil];
