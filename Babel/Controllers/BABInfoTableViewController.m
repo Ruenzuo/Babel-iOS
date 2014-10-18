@@ -88,11 +88,11 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
         case 1: {
             switch (indexPath.row) {
                 case 0: {
-                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.share-facebook.table-view-cell.text-lable.text", nil);
+                    tableViewCell.textLabel.text = [NSString localizedStringWithFormat:NSLocalizedString(@"info-view-controller.share-service.table-view-cell.text-lable.text", nil), BABFacebookSevice];
                     break;
                 }
                 case 1: {
-                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.share-twitter.table-view-cell.text-lable.text", nil);
+                    tableViewCell.textLabel.text = [NSString localizedStringWithFormat:NSLocalizedString(@"info-view-controller.share-service.table-view-cell.text-lable.text", nil), BABTwitterSevice];
                     break;
                 }
                 case 2: {
@@ -154,7 +154,7 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
         [TSMessage
          showNotificationInViewController:self
          title:NSLocalizedString(@"everywhere.error.title", nil)
-         subtitle:NSLocalizedString(@"info-view-controller.error.message.subtitle.when-facebook-share-fails", nil)
+         subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"everywhere.error.message.subtitle.when-service-share-fails", nil), BABFacebookSevice]
          type:TSMessageNotificationTypeError
          duration:3.0f
          canBeDismissedByUser:YES];
@@ -185,7 +185,7 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
                      [TSMessage
                       showNotificationInViewController:self
                       title:NSLocalizedString(@"everywhere.error.title", nil)
-                      subtitle:NSLocalizedString(@"info-view-controller.error.message.subtitle.when-twitter-share-fails", nil)
+                      subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"everywhere.error.message.subtitle.when-service-share-fails", nil), BABTwitterSevice]
                       type:TSMessageNotificationTypeError
                       duration:3.0f
                       canBeDismissedByUser:YES];

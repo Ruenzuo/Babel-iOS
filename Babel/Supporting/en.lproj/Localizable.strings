@@ -42,11 +42,8 @@
 /* Enable Game Center UITableViewCell textLabel text on info screen */
 "info-view-controller.enable-game-center.table-view-cell.text-lable.text" = "Enable Game Center";
 
-/* Share this app on Facebook UITableViewCell textLabel text on info screen */
-"info-view-controller.share-facebook.table-view-cell.text-lable.text" = "Share this app on Facebook";
-
-/* Share this app on Twitter UITableViewCell textLabel text on info screen */
-"info-view-controller.share-twitter.table-view-cell.text-lable.text" = "Share this app on Twitter";
+/* Share this app on *Sercice* UITableViewCell textLabel text on info screen */
+"info-view-controller.share-service.table-view-cell.text-lable.text" = "Share this app on %@";
 
 /* Rate this app on App Store UITableViewCell textLabel text on info screen */
 "info-view-controller.rate-app-store.table-view-cell.text-lable.text" = "Rate this app on App Store";
@@ -69,11 +66,8 @@
 /* Error title everywhere */
 "everywhere.error.title" = "Error";
 
-/* Error TSMessage subtitle on info screen when Twitter share fails on info screen */
-"info-view-controller.error.message.subtitle.when-twitter-share-fails" = "It seems that you don't have a Twitter account configured.";
-
-/* Error TSMessage subtitle on info screen when Facebok share fails on info screen */
-"info-view-controller.error.message.subtitle.when-facebook-share-fails" = "It seems that you don't have a Facebook account configured.";
+/* Error TSMessage subtitle on info screen when *Service* is not available everywhere */
+"everywhere.error.message.subtitle.when-service-share-fails" = "It seems that you don't have a %@ account configured on this device.";
 
 /* Share text SLComposeViewController initial text on info screen */
 "info-view-controller.share-text.compose-view-controller.initial-text" = "Check Babel on the AppStore!";
