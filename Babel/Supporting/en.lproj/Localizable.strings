@@ -33,41 +33,62 @@
 /* Log out UIBarButtonItem title on menu screen */
 "menu-view-controller.log-in.bar-button-item.title" = "Log out";
 
-/* Back UIBarButtonItem title everywhere */
-"everywhere.back.bar-button-item.title" = "Back";
-
 /* Leaderboards UITableViewCell textLabel text on info screen */
-"info-view-controller.leaderboards.table-view-cell.text-lable.text" = "Leaderboards";
+"info-view-controller.leaderboards.table-view-cell.text-label.text" = "Leaderboards";
 
 /* Enable Game Center UITableViewCell textLabel text on info screen */
-"info-view-controller.enable-game-center.table-view-cell.text-lable.text" = "Enable Game Center";
+"info-view-controller.enable-game-center.table-view-cell.text-label.text" = "Enable Game Center";
 
 /* Share this app on *Sercice* UITableViewCell textLabel text on info screen */
-"info-view-controller.share-service.table-view-cell.text-lable.text" = "Share this app on %@";
+"info-view-controller.share-service.table-view-cell.text-label.text" = "Share this app on %@";
 
 /* Rate this app on App Store UITableViewCell textLabel text on info screen */
-"info-view-controller.rate-app-store.table-view-cell.text-lable.text" = "Rate this app on App Store";
-
-/* Developer UITableViewCell textLabel text on info screen */
-"info-view-controller.developer.table-view-cell.text-lable.text" = "Developer";
+"info-view-controller.rate-app-store.table-view-cell.text-label.text" = "Rate this app on App Store";
 
 /* Acknowledgments UITableViewCell textLabel text on info screen */
-"info-view-controller.acknowledgments.table-view-cell.text-lable.text" = "Acknowledgments";
+"info-view-controller.acknowledgments.table-view-cell.text-label.text" = "Acknowledgments";
 
 /* Version UITableViewCell textLabel text on info screen */
-"info-view-controller.version.table-view-cell.text-lable.text" = "Version";
+"info-view-controller.version.table-view-cell.text-label.text" = "Version";
 
 /* Social UITableViewHeaderFooterView textLabel text on info screen */
-"info-view-controller.social.table-view-header-footer-view.text-lable.text" = "Social";
+"info-view-controller.social.table-view-header-footer-view.text-label.text" = "Social";
 
 /* About UITableViewHeaderFooterView textLabel text on info screen */
-"info-view-controller.about.table-view-header-footer-view.text-lable.text" = "About";
-
-/* Error title everywhere */
-"everywhere.error.title" = "Error";
-
-/* Error TSMessage subtitle on info screen when *Service* is not available everywhere */
-"everywhere.error.message.subtitle.when-service-share-fails" = "It seems that you don't have a %@ account configured on this device.";
+"info-view-controller.about.table-view-header-footer-view.text-label.text" = "About";
 
 /* Share text SLComposeViewController initial text on info screen */
 "info-view-controller.share-text.compose-view-controller.initial-text" = "Check Babel on the AppStore!";
+
+/* Name UITableViewCell textLabel text on developer screen */
+"developer-view-controller.name.table-view-cell.text-label.text" = "Name";
+
+/* Contact UITableViewCell textLabel text on developer screen */
+"developer-view-controller.contact.table-view-cell.text-label.text" = "Contact";
+
+/* Thanks TSMessage subtitle on developer screen when follow succeed */
+"developer-view-controller.thanks.message.subtitle.when-follow-succeed" = "Thanks for following me!";
+
+/* Thanks TSMessage subtitle on developer screen when email succeed */
+"developer-view-controller.thanks.message.subtitle.when-email-succeed" = "Thanks for the email, I'll reply soon!";
+
+/* Email service localized string everywhere */
+"everywhere.email-service.string" = "email";
+
+/* Developer localized string everywhere */
+"everywhere.developer.string" = "Developer";
+
+/* Back UIBarButtonItem title everywhere */
+"everywhere.back.bar-button-item.title" = "Back";
+
+/* Error localized string everywhere */
+"everywhere.error.string" = "Error";
+
+/* Retry message localized string everywhere */
+"everywhere.retry-message.string" = "Something wrong happened. Try this later.";
+
+/* Success localized string everywhere */
+"everywhere.success.string" = "Success";
+
+/* Error TSMessage subtitle on info screen when *Service* is not available everywhere */
+"everywhere.error.message.subtitle.when-service-share-fails" = "It seems that you don't have a %@ account configured on this device.";
