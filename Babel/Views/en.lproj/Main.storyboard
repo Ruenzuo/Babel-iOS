@@ -111,14 +111,7 @@
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DQo-og-44b">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="pjq-0Q-0Xt"/>
-                                    <barButtonItem title="Skip" id="Wjh-Y5-lZe">
-                                        <connections>
-                                            <action selector="skip:" destination="JaQ-ia-nax" id="fOM-iA-Bgb"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
+                                <items/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -136,13 +129,7 @@
                             <constraint firstItem="dTy-ni-C69" firstAttribute="top" secondItem="TSW-zv-djA" secondAttribute="top" id="wWG-vc-ZJq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="H4K-iv-5xY">
-                        <barButtonItem key="rightBarButtonItem" title="Guess" id="LZZ-MC-cqo">
-                            <connections>
-                                <action selector="guess:" destination="JaQ-ia-nax" id="0c6-7H-ipG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="H4K-iv-5xY"/>
                     <connections>
                         <outlet property="tableView" destination="54C-p9-uZ7" id="yMv-hT-Bfe"/>
                         <outlet property="toolBar" destination="DQo-og-44b" id="B09-oF-cFg"/>

@@ -32,12 +32,11 @@
 @property (nonatomic, strong) BABFile *currentFile;
 
 - (void)nextFile;
-- (IBAction)skip:(id)sender;
-- (IBAction)guess:(id)sender;
+- (void)skip:(id)sender;
+- (void)guess:(id)sender;
 - (void)code:(id)sender;
 - (void)hint:(id)sender;
-- (void)setupTitle;
-- (void)setupInsets;
+- (void)setupView;
 - (void)setupLoadingIndicator;
 - (void)setupGuess;
 - (void)poolRate;
@@ -67,8 +66,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupTitle];
-    [self setupInsets];
+    [self setupView];
     [self setupLoadingIndicator];
     [self nextFile];
 }
@@ -160,7 +158,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (IBAction)guess:(id)sender
 {
-    UIBarButtonItem *code = [[UIBarButtonItem alloc] initWithTitle:@"Code"
+    UIBarButtonItem *code = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"babel-view-controller.code.bar-button-item.title", nil)
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(code:)];
@@ -170,7 +168,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
         UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-        UIBarButtonItem *hint = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Hint (%lu)", (unsigned long)self.remainingHints]
+        UIBarButtonItem *hint = [[UIBarButtonItem alloc] initWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.hint.bar-button-item.title", nil), (unsigned long)self.remainingHints]
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(hint:)];
@@ -186,7 +184,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (void)code:(id)sender
 {
-    UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:@"Guess"
+    UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"babel-view-controller.guess.bar-button-item.title", nil)
                                                               style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(guess:)];
@@ -196,7 +194,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
         UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Skip (%lu)", (unsigned long)self.remainingSkips]
+        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.skip.bar-button-item.title", nil), (unsigned long)self.remainingSkips]
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(skip:)];
@@ -221,7 +219,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                   withRowAnimation:UITableViewRowAnimationFade];
 }
 
-- (void)setupTitle
+- (void)setupView
 {
     FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
     [self.navigationItem setTitleView:shimmeringView];
@@ -231,10 +229,6 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     loadingLabel.textAlignment = NSTextAlignmentCenter;
     loadingLabel.text = @"Babel";
     shimmeringView.contentView = loadingLabel;
-}
-
-- (void)setupInsets
-{
     UIEdgeInsets edgeInsets = UIEdgeInsetsMake([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height, 0, self.toolBar.frame.size.height, 0);
     self.webView.scrollView.contentInset = edgeInsets;
     self.webView.scrollView.scrollIndicatorInsets = edgeInsets;
@@ -256,7 +250,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (void)setupGuess
 {
-    UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:@"Guess"
+    UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"babel-view-controller.guess.bar-button-item.title", nil)
                                                               style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(guess:)];
@@ -266,7 +260,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
         UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Skip (%lu)", (unsigned long)self.remainingSkips]
+        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.skip.bar-button-item.title", nil), (unsigned long)self.remainingSkips]
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(skip:)];
@@ -278,7 +272,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (void)poolRate
 {
-    [SVProgressHUD showWithStatus:@"Pooling rate"
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"babel-view-controller.pooling.progress-hud.status", nil)
                          maskType:SVProgressHUDMaskTypeBlack];
     self.pooling = YES;
     self.timer = [MSWeakTimer scheduledTimerWithTimeInterval:5
