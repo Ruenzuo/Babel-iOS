@@ -16,7 +16,7 @@
 
 - (void)setupInfoTableViewCell:(UITableViewCell *)tableViewCell
                   forIndexPath:(NSIndexPath *)indexPath;
-- (void)leaderboards;
+- (void)leaderboards:(id)sender;
 - (void)developer;
 - (void)acknowledgements;
 - (void)shareOnFacebook;
@@ -117,10 +117,10 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
     }
 }
 
-- (void)leaderboards
+- (void)leaderboards:(id)sender
 {
     if (self.gameCenterManager.isGameCenterEnabled) {
-        [self.difficultyAlertControllerHelper presentAlertController];
+        [self.difficultyAlertControllerHelper presentAlertController:sender];
     } else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"gamecenter:"]];
     }
@@ -270,7 +270,7 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
                 case 0: {
                     [tableView deselectRowAtIndexPath:indexPath
                                              animated:YES];
-                    [self leaderboards];
+                    [self leaderboards:[tableView cellForRowAtIndexPath:indexPath]];
                     break;
                 }
             }

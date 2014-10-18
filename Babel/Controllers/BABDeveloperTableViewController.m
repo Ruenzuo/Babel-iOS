@@ -82,7 +82,7 @@ static NSString * const BABURLGitHubProfileDeveloper = @"https://github.com/ruen
              else {
                  dispatch_async(dispatch_get_main_queue(), ^{
                      [TSMessage
-                      showNotificationInViewController:self
+                      showNotificationInViewController:self.navigationController
                       title:NSLocalizedString(@"everywhere.error.string", nil)
                       subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"everywhere.error.message.subtitle.when-service-share-fails", nil), BABTwitterSevice]
                       type:TSMessageNotificationTypeError

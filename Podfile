@@ -12,7 +12,7 @@ target "Babel" do
   pod 'Shimmer', '~> 1.0.1'
   pod 'libextobjc', '~> 0.4.0'
   pod 'CocoaLumberjack', '~> 2.0.0-beta2'
-  pod 'TSMessages', '~> 0.9.10'
+  pod 'TSMessages', :git => 'git@github.com:toursprung/TSMessages.git', :commit => 'aec1871ca43062a21c58b74902e4351c68b5b39a'
   pod 'VTAcknowledgementsViewController', '~> 0.12.0'
   pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.9'
   pod 'Reveal-iOS-SDK', '~> 1.0.6', :configurations => ['Debug']

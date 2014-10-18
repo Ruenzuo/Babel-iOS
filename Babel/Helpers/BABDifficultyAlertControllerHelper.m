@@ -10,7 +10,7 @@
 
 @implementation BABDifficultyAlertControllerHelper
 
-- (void)presentAlertController
+- (void)presentAlertController:(id)sender
 {
     UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:NSLocalizedString(@"difficulty-alert-controller.title", nil)
@@ -40,6 +40,12 @@
                                 handler:^(UIAlertAction *action) {
                                     [self.delegate helperDidFinishSelectionWithDifficulty:BABDifficultyModeNone];
                                 }]];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIPopoverPresentationController *popPresenter = [alertController popoverPresentationController];
+        UIView *view = (UIView *)sender;
+        popPresenter.sourceView = view;
+        popPresenter.sourceRect = view.bounds;
+    }
     [self.delegate presentViewController:alertController
                                 animated:YES
                               completion:nil];

@@ -25,7 +25,6 @@
 @property (nonatomic, assign) BABDifficultyMode selectedDifficultyMode;
 @property (nonatomic, strong) BABGameCenterManager *gameCenterManager;
 @property (nonatomic, strong) BABDifficultyAlertControllerHelper *difficultyAlertControllerHelper;
-@property (nonatomic, strong) BABNotificationManager *notificationManager;
 
 - (void)checkTokenValidity;
 - (IBAction)logIn:(id)sender;
@@ -108,7 +107,6 @@
         [babelManager setupQueue];
         babelViewController.babelManager = babelManager;
         babelViewController.gameCenterManager = self.gameCenterManager;
-        babelViewController.notificationManager = self.notificationManager;
         babelViewController.delegate = self;
     } else if ([[segue identifier] isEqualToString:@"InfoSegue"]) {
         BABInfoTableViewController *infoViewController = (BABInfoTableViewController *) [segue destinationViewController];
@@ -183,7 +181,7 @@
 
 - (IBAction)start:(id)sender
 {
-    [self.difficultyAlertControllerHelper presentAlertController];
+    [self.difficultyAlertControllerHelper presentAlertController:sender];
 }
 
 - (IBAction)info:(id)sender

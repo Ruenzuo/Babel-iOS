@@ -10,7 +10,6 @@
 
 @class BABBabelManager;
 @class BABGameCenterManager;
-@class BABNotificationManager;
 
 @protocol BABBabelViewControllerDelegate <NSObject>
 
@@ -24,7 +23,6 @@
 
 @property (nonatomic, strong) BABBabelManager *babelManager;
 @property (nonatomic, strong) BABGameCenterManager *gameCenterManager;
-@property (nonatomic, strong) BABNotificationManager *notificationManager;
 @property (nonatomic, weak) id<BABBabelViewControllerDelegate> delegate;
 
 @end
