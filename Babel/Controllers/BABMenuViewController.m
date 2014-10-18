@@ -159,6 +159,7 @@
                      [SVProgressHUD showErrorWithStatus:@"Session expired."];
                      NSError *error = nil;
                      [BABKeychainHelper deleteStoredTokenWithError:&error];
+                     [self showLogInView];
                  }
              } else {
                  [SVProgressHUD dismiss];
@@ -166,6 +167,8 @@
              }
              return nil;
          }];
+    } else {
+        [self showLogInView];
     }
 }
 
@@ -212,7 +215,7 @@
          @strongify(self);
          
          if (task.error) {
-             [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"everywhere.retry-message.string", nil)];
          } else {
              [SVProgressHUD dismiss];
              NSError *error = nil;
@@ -278,7 +281,7 @@
         self.token = token;
         [self showLogOutView];
     } else {
-        [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"everywhere.retry-message.string", nil)];
     }
 }
 

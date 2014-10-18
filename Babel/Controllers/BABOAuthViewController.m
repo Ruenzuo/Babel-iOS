@@ -69,7 +69,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (error != nil) {
-            [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"everywhere.retry-message.string", nil)];
         }
     }];
     [[NSOperationQueue mainQueue] addOperation:requestOperation];
@@ -84,11 +84,11 @@
         NSDictionary *dictionary = [BABTranslatorHelper translateDictionaryWithQuery:query];
         NSString *code = dictionary[@"code"];
         if (code != nil) {
-            [SVProgressHUD showWithStatus:@"Retrieving access token"
+            [SVProgressHUD showWithStatus:NSLocalizedString(@"oauth-view-controller.retrieving.progress-hud.status", nil)
                                  maskType:SVProgressHUDMaskTypeBlack];
             [self getAccessTokenWithCode:code];
         } else {
-            [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"everywhere.retry-message.string", nil)];
         }
         return NO;
     }

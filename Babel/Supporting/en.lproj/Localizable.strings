@@ -72,6 +72,9 @@
 /* Thanks TSMessage subtitle on developer screen when email succeed */
 "developer-view-controller.thanks.message.subtitle.when-email-succeed" = "Thanks for the email, I'll reply soon!";
 
+/* Retrieving SVProgressHUD status on oauth screen */
+"oauth-view-controller.retrieving.progress-hud.status" = "Retrieving access token"
+
 /* Email service localized string everywhere */
 "everywhere.email-service.string" = "email";
 
