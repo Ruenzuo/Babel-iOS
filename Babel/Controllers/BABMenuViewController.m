@@ -14,9 +14,9 @@
 #import "BABBabelManager.h"
 #import "BABGameCenterManager.h"
 #import "BABInfoTableViewController.h"
-#import "BABDifficultiesActionSheet.h"
+#import "BABDifficultyAlertControllerHelper.h"
 
-@interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate, BABGameCenterManagerDelegate>
+@interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate, BABGameCenterManagerDelegate, BABDifficultyAlertControllerHelperDelegate>
 
 @property (nonatomic, strong) NSString *token;
 @property (nonatomic, weak) IBOutlet UIButton *btnStart;
@@ -24,6 +24,7 @@
 @property (nonatomic, strong) BABAuthorizationSessionHelper *authorizationSessionHelper;
 @property (nonatomic, assign) BABDifficultyMode selectedDifficultyMode;
 @property (nonatomic, strong) BABGameCenterManager *gameCenterManager;
+@property (nonatomic, strong) BABDifficultyAlertControllerHelper *difficultyAlertControllerHelper;
 
 - (void)checkTokenValidity;
 - (IBAction)logIn:(id)sender;
@@ -54,6 +55,15 @@
         _gameCenterManager.delegate = self;
     }
     return _gameCenterManager;
+}
+
+- (BABDifficultyAlertControllerHelper *)difficultyAlertControllerHelper
+{
+    if (_difficultyAlertControllerHelper == nil) {
+        _difficultyAlertControllerHelper = [[BABDifficultyAlertControllerHelper alloc] init];
+        _difficultyAlertControllerHelper.delegate = self;
+    }
+    return _difficultyAlertControllerHelper;
 }
 
 #pragma mark - View controller life cycle
@@ -167,7 +177,7 @@
 
 - (IBAction)start:(id)sender
 {
-    [BABDifficultiesActionSheet showDifficultiesActionSheetInViewController:self];
+    [self.difficultyAlertControllerHelper presentAlertController];
 }
 
 - (IBAction)info:(id)sender
@@ -272,14 +282,12 @@
     }
 }
 
-#pragma mark - UIActionSheetDelegate
+#pragma mark - BABDifficultyAlertControllerHelperDelegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)helperDidFinishSelectionWithDifficulty:(BABDifficultyMode)difficulty
 {
-    if (buttonIndex == actionSheet.cancelButtonIndex) {
-        self.selectedDifficultyMode = BABDifficultyModeNone;
-    } else {
-        self.selectedDifficultyMode = buttonIndex;
+    self.selectedDifficultyMode = difficulty;
+    if (self.selectedDifficultyMode != BABDifficultyModeNone) {
         [self performSegueWithIdentifier:@"BabelSegue"
                                   sender:self];
     }

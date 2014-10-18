@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Babel
+
+  Created by Renzo Crisóstomo on 18/10/14.
+  Copyright (c) 2014 Renzo Crisóstomo. All rights reserved.
+*/
+
+/* Difficulty UIAlertController title */
+"difficulty-alert-controller.title" = "Difficulty";
+
+/* Easy action UIAlertController title */
+"difficulty-alert-controller.actions.easy-action.title" = "Easy";
+
+/* Normal action UIAlertController title */
+"difficulty-alert-controller.actions.normal-action.title" = "Normal";
+
+/* Hard action UIAlertController title */
+"difficulty-alert-controller.actions.hard-action.title" = "Hard";
+
+/* Cancel action UIAlertController title */
+"difficulty-alert-controller.actions.cancel-action.title" = "Cancel";
