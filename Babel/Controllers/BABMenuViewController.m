@@ -174,7 +174,7 @@
 - (void)showLogInView
 {
     UIBarButtonItem *logIn = [[UIBarButtonItem alloc] initWithTitle:@"Log In"
-                                                              style:UIBarButtonItemStyleBordered
+                                                              style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(logIn:)];
     [self.navigationItem setRightBarButtonItem:logIn
@@ -188,7 +188,7 @@
 - (void)showLogOutView
 {
     UIBarButtonItem *logOut = [[UIBarButtonItem alloc] initWithTitle:@"Log Out"
-                                                               style:UIBarButtonItemStyleBordered
+                                                               style:UIBarButtonItemStylePlain
                                                               target:self
                                                               action:@selector(logOut:)];
     [self.navigationItem setRightBarButtonItem:logOut

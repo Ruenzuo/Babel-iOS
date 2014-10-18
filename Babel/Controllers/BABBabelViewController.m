@@ -161,7 +161,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 - (IBAction)guess:(id)sender
 {
     UIBarButtonItem *code = [[UIBarButtonItem alloc] initWithTitle:@"Code"
-                                                             style:UIBarButtonItemStyleBordered
+                                                             style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(code:)];
     [self.navigationItem setRightBarButtonItem:code
@@ -171,7 +171,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                                                                                    target:nil
                                                                                    action:nil];
         UIBarButtonItem *hint = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Hint (%lu)", (unsigned long)self.remainingHints]
-                                                                 style:UIBarButtonItemStyleBordered
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(hint:)];
         [self.toolBar setItems:@[separator, hint]
@@ -187,7 +187,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 - (void)code:(id)sender
 {
     UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:@"Guess"
-                                                              style:UIBarButtonItemStyleBordered
+                                                              style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(guess:)];
     [self.navigationItem setRightBarButtonItem:guess
@@ -197,7 +197,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                                                                                    target:nil
                                                                                    action:nil];
         UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Skip (%lu)", (unsigned long)self.remainingSkips]
-                                                                 style:UIBarButtonItemStyleBordered
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(skip:)];
         [self.toolBar setItems:@[separator, skip]
@@ -257,7 +257,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 - (void)setupGuess
 {
     UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:@"Guess"
-                                                              style:UIBarButtonItemStyleBordered
+                                                              style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(guess:)];
     [self.navigationItem setRightBarButtonItem:guess
@@ -267,7 +267,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                                                                                    target:nil
                                                                                    action:nil];
         UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Skip (%lu)", (unsigned long)self.remainingSkips]
-                                                                 style:UIBarButtonItemStyleBordered
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(skip:)];
         [self.toolBar setItems:@[separator, skip]
