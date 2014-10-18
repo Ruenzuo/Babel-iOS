@@ -19,7 +19,8 @@
 @interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate, BABGameCenterManagerDelegate>
 
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) IBOutlet UIButton *btnStart;
+@property (nonatomic, weak) IBOutlet UIButton *btnStart;
+@property (nonatomic, weak) IBOutlet UIImageView *imageViewIcon;
 @property (nonatomic, strong) BABAuthorizationSessionHelper *authorizationSessionHelper;
 @property (nonatomic, assign) BABDifficultyMode selectedDifficultyMode;
 @property (nonatomic, strong) BABGameCenterManager *gameCenterManager;
@@ -27,6 +28,7 @@
 - (void)checkTokenValidity;
 - (IBAction)logIn:(id)sender;
 - (IBAction)start:(id)sender;
+- (IBAction)info:(id)sender;
 - (void)logOut:(id)sender;
 - (void)showLogInView;
 - (void)showLogOutView;
@@ -101,6 +103,28 @@
     }
 }
 
+- (void)viewDidLayoutSubviews
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+        if (UIDeviceOrientationIsLandscape(orientation)) {
+            if (self.imageViewIcon.alpha != 0.0f) {
+                [UIView animateWithDuration:0.4
+                                 animations:^{
+                                     self.imageViewIcon.alpha = 0.0f;
+                                 }];
+            }
+        } else {
+            if (self.imageViewIcon.alpha == 0.0f) {
+                [UIView animateWithDuration:0.4
+                                 animations:^{
+                                     self.imageViewIcon.alpha = 1.0f;
+                                 }];
+            }
+        }
+    }
+}
+
 #pragma mark - Private Methods
 
 - (void)checkTokenValidity
@@ -144,6 +168,25 @@
 - (IBAction)start:(id)sender
 {
     [BABDifficultiesActionSheet showDifficultiesActionSheetInViewController:self];
+}
+
+- (IBAction)info:(id)sender
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
+        BABInfoTableViewController *infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"InfoViewController"];
+        infoViewController.gameCenterManager = self.gameCenterManager;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
+        [navigationController.navigationBar setTintColor:self.navigationController.navigationBar.tintColor];
+        navigationController.preferredContentSize = CGSizeMake(320, 500);
+        UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:navigationController];
+        [popoverController presentPopoverFromBarButtonItem:barButtonItem
+                                  permittedArrowDirections:UIPopoverArrowDirectionUp
+                                                  animated:YES];
+    } else {
+        [self performSegueWithIdentifier:@"InfoSegue"
+                                  sender:self];
+    }
 }
 
 - (void)logOut:(id)sender
