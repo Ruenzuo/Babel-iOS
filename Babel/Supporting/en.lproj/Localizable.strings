@@ -42,6 +42,12 @@
 /* Session expired SVProgressHUD status on menu screen */
 "menu-view-controller.sesion-expired.progress-hud.status" = "Session expired.";
 
+/* High score TSMessage title on menu screen */
+"menu-view-controller.high-score.message.title" = "New High Score! Score: %lu";
+
+/* Wrong TSMessage title on menu screen */
+"menu-view-controller.wrong.message.title" = "Wrong! Score: %lu";
+
 /* Leaderboards UITableViewCell textLabel text on info screen */
 "info-view-controller.leaderboards.table-view-cell.text-label.text" = "Leaderboards";
 
@@ -98,6 +104,21 @@
 
 /* Code UIBarButtonItem title on babel screen */
 "babel-view-controller.code.bar-button-item.title" = "Code";
+
+/* Skipped TSMessage title on babel screen */
+"babel-view-controller.skipped.message.title" = "Skipped!";
+
+/* Skipped TSMessage subtitle on babel screen */
+"babel-view-controller.skipped.message.subtitle" = "Language: %@, file: %@, repository: %@";
+
+/* Right TSMessage title on babel screen */
+"babel-view-controller.right.message.title" = "Right!";
+
+/* Right TSMessage subtitle on babel screen */
+"babel-view-controller.right.message.subtitle" = "File: %@, repository: %@";
+
+/* Wrong TSMessage subtitle on babel screen */
+"babel-view-controller.wrong.message.subtitle" = "Language: %@, file: %@, repository: %@";
 
 /* Email service localized string everywhere */
 "everywhere.email-service.string" = "email";

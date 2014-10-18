@@ -312,7 +312,7 @@
              isHighScoreForDifficulty:difficultyMode]) {
         [TSMessage
          showNotificationInViewController:self
-         title:[NSString stringWithFormat:@"New High Score! Score: %lu", (unsigned long)score]
+         title:[NSString localizedStringWithFormat:NSLocalizedString(@"menu-view-controller.high-score.message.title", nil), (unsigned long)score]
          subtitle:info
          type:TSMessageNotificationTypeSuccess
          duration:3.0f
@@ -320,7 +320,7 @@
     } else {
         [TSMessage
          showNotificationInViewController:self
-         title:[NSString stringWithFormat:@"Wrong! Score: %lu", (unsigned long)score]
+         title:[NSString localizedStringWithFormat:NSLocalizedString(@"menu-view-controller.wrong.message.title", nil), (unsigned long)score]
          subtitle:info
          type:TSMessageNotificationTypeError
          duration:3.0f
