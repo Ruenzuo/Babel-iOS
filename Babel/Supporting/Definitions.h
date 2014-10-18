@@ -24,6 +24,6 @@ typedef NS_ENUM(NSInteger, BABDifficultyMode) {
     BABDifficultyModeNone
 };
 
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static int const ddLogLevel = LOG_LEVEL_VERBOSE;
 
 #endif

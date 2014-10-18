@@ -48,7 +48,7 @@
 
 @implementation BABBabelViewController
 
-NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
+static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 #pragma mark - View controller life cycle
 
