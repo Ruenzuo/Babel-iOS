@@ -16,4 +16,5 @@ target "Babel" do
   pod 'VTAcknowledgementsViewController', '~> 0.12.0'
   pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.9'
   pod 'Reveal-iOS-SDK', '~> 1.0.6', :configurations => ['Debug']
+  pod 'CRToast', '~> 0.0.7'
 end
