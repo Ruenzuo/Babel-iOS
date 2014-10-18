@@ -581,6 +581,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "064f91aa-eab4-4edd-8bae-a0566b11d20c";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -598,6 +599,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "064f91aa-eab4-4edd-8bae-a0566b11d20c";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

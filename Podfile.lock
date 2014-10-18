@@ -1,30 +1,34 @@
 PODS:
-  - AFNetworking (2.3.1):
+  - AFNetworking (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.3.1):
+  - AFNetworking/NSURLConnection (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.3.1):
+  - AFNetworking/NSURLSession (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.3.1)
-  - AFNetworking/Security (2.3.1)
-  - AFNetworking/Serialization (2.3.1)
-  - AFNetworking/UIKit (2.3.1):
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Bolts (1.1.1)
-  - CocoaLumberjack (1.9.1):
+  - Bolts (1.1.3)
+  - CocoaLumberjack (2.0.0-beta2):
+    - CocoaLumberjack/CLI
+    - CocoaLumberjack/Core
     - CocoaLumberjack/Extensions
-  - CocoaLumberjack/Core (1.9.1)
-  - CocoaLumberjack/Extensions (1.9.1):
+  - CocoaLumberjack/CLI (2.0.0-beta2):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Core (2.0.0-beta2)
+  - CocoaLumberjack/Extensions (2.0.0-beta2):
     - CocoaLumberjack/Core
   - GoogleAnalytics-iOS-SDK (3.0.9)
   - HexColors (2.2.1)
@@ -63,44 +67,44 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4)
   - libextobjc/UmbrellaHeader (0.4)
-  - Mantle (1.5):
+  - Mantle (1.5.1):
     - Mantle/extobjc
-  - Mantle/extobjc (1.5)
+  - Mantle/extobjc (1.5.1)
   - MSWeakTimer (1.1.0)
   - Shimmer (1.0.1)
   - SSKeychain (1.2.2)
   - SVProgressHUD (1.0)
-  - TSMessages (0.9.9):
+  - TSMessages (0.9.10):
     - HexColors
-  - VTAcknowledgementsViewController (0.11)
+  - VTAcknowledgementsViewController (0.12)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.3.1)
-  - Bolts (~> 1.1.1)
-  - CocoaLumberjack (~> 1.9.1)
+  - AFNetworking (~> 2.4.1)
+  - Bolts (~> 1.1.3)
+  - CocoaLumberjack (~> 2.0.0-beta2)
   - GoogleAnalytics-iOS-SDK (~> 3.0.9)
   - libextobjc (~> 0.4.0)
-  - Mantle (~> 1.5.0)
+  - Mantle (~> 1.5.1)
   - MSWeakTimer (~> 1.1.0)
   - Shimmer (~> 1.0.1)
   - SSKeychain (~> 1.2.2)
   - SVProgressHUD (~> 1.0.0)
-  - TSMessages (~> 0.9.9)
-  - VTAcknowledgementsViewController (~> 0.11.0)
+  - TSMessages (~> 0.9.10)
+  - VTAcknowledgementsViewController (~> 0.12.0)
 
 SPEC CHECKSUMS:
-  AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  Bolts: 0ca796081c3e7c139bd86d6903c27f1b83036a5d
-  CocoaLumberjack: 94accd5749f5c5d15134c8d50f34a973aed8ef69
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
+  CocoaLumberjack: 956d3fb98fed498a13d56499f262c975ef431c98
   GoogleAnalytics-iOS-SDK: d9e198b1f955259a72886769be7377cdfcdb2250
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   libextobjc: ba42e4111f433273a886cd54f0ddaddb7f62f82f
-  Mantle: c67a7e45e14196ed42b2a7cbb98ff6a9920e6b92
+  Mantle: d7c5ac734579ec751c58fecbf56189853056c58c
   MSWeakTimer: 6bd071c058fd49daa62013e4ae70caf61d0f2dc2
   Shimmer: 35aa2a57b8fbc17f9e16706021665966fd93dbd1
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
-  TSMessages: 2999ef55e532378692e9d14d32da2bb60e285129
-  VTAcknowledgementsViewController: 6e71652adbe73c68f0a278a73ac9ca1e1fc00b90
+  TSMessages: 8598a0645e9d54847f6e5f3b070bef39c493bbf8
+  VTAcknowledgementsViewController: 5cdab8f3d003680b8fbdfcce90fcab92cee962a6
 
 COCOAPODS: 0.34.2

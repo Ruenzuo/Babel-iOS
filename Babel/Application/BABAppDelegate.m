@@ -7,8 +7,6 @@
 //
 
 #import "BABAppDelegate.h"
-#import <CocoaLumberjack/DDASLLogger.h>
-#import <CocoaLumberjack/DDTTYLogger.h>
 
 @interface BABAppDelegate ()
 
