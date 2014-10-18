@@ -130,6 +130,9 @@ static NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOAR
 
 - (BOOL)score:(NSUInteger)score isHighScoreForDifficulty:(BABDifficultyMode)difficultyMode
 {
+    if (!self.isGameCenterEnabled) {
+        return NO;
+    }
     switch (difficultyMode) {
         case BABDifficultyModeEasy:
             return score > self.easyHighScore;
