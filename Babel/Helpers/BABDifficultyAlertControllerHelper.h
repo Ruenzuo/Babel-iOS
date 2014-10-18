@@ -18,6 +18,6 @@
 
 @property (nonatomic, weak) UIViewController<BABDifficultyAlertControllerHelperDelegate> *delegate;
 
-- (void)presentAlertController;
+- (void)presentAlertController:(id)sender;
 
 @end
