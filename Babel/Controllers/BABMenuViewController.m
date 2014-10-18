@@ -144,7 +144,7 @@
     NSError *error = nil;
     self.token = [BABKeychainHelper retrieveTokenWithError:&error];
     if (!error) {
-        [SVProgressHUD showWithStatus:@"Checking session validity."
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"menu-view-controller.checking-session.progress-hud.status", nil)
                              maskType:SVProgressHUDMaskTypeBlack];
         [[self.authorizationSessionHelper checkTokenValidityWithToken:self.token]
          continueWithExecutor:[BFExecutor mainThreadExecutor]
@@ -154,9 +154,9 @@
              
              if (task.error) {
                  if ([task.error.domain isEqualToString:NSURLErrorDomain] && task.error.code == NSURLErrorNotConnectedToInternet) {
-                     [SVProgressHUD showErrorWithStatus:@"The Internet connection appears to be offline."];
+                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"menu-view-controller.internet-error.progress-hud.status", nil)];
                  } else {
-                     [SVProgressHUD showErrorWithStatus:@"Session expired."];
+                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"menu-view-controller.sesion-expired.progress-hud.status", nil)];
                      NSError *error = nil;
                      [BABKeychainHelper deleteStoredTokenWithError:&error];
                      [self showLogInView];
@@ -206,7 +206,7 @@
 {
     @weakify(self);
     
-    [SVProgressHUD showWithStatus:@"Logging out."
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"menu-view-controller.logging-out.progress-hud.status", nil)
                          maskType:SVProgressHUDMaskTypeBlack];
     [[self.authorizationSessionHelper revokeTokenWithToken:self.token]
      continueWithExecutor:[BFExecutor mainThreadExecutor]
@@ -229,10 +229,11 @@
 
 - (void)showLogInView
 {
-    UIBarButtonItem *logIn = [[UIBarButtonItem alloc] initWithTitle:@"Log In"
-                                                              style:UIBarButtonItemStylePlain
-                                                             target:self
-                                                             action:@selector(logIn:)];
+    UIBarButtonItem *logIn = [[UIBarButtonItem alloc]
+                              initWithTitle:NSLocalizedString(@"menu-view-controller.log-in.bar-button-item.title", nil)
+                              style:UIBarButtonItemStylePlain
+                              target:self
+                              action:@selector(logIn:)];
     [self.navigationItem setRightBarButtonItem:logIn
                                       animated:YES];
     [UIView animateWithDuration:0.5f
@@ -243,10 +244,11 @@
 
 - (void)showLogOutView
 {
-    UIBarButtonItem *logOut = [[UIBarButtonItem alloc] initWithTitle:@"Log Out"
-                                                               style:UIBarButtonItemStylePlain
-                                                              target:self
-                                                              action:@selector(logOut:)];
+    UIBarButtonItem *logOut = [[UIBarButtonItem alloc]
+                               initWithTitle:NSLocalizedString(@"menu-view-controller.log-in.bar-button-item.title", nil)
+                               style:UIBarButtonItemStylePlain
+                               target:self
+                               action:@selector(logOut:)];
     [self.navigationItem setRightBarButtonItem:logOut
                                       animated:YES];
     [UIView animateWithDuration:0.5f
