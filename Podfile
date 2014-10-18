@@ -4,7 +4,7 @@ platform :ios, "7.0"
 
 target "Babel" do
   pod 'AFNetworking', '~> 2.4.1'
-  pod 'SVProgressHUD', '~> 1.0.0'
+  pod 'SVProgressHUD', :git => 'git@github.com:TransitApp/SVProgressHUD.git', :commit => '9e2a22dee810d7da2b93e795b2d92b1e08a41ea1'
   pod 'Bolts', '~> 1.1.3'
   pod 'SSKeychain', '~> 1.2.2'
   pod 'Mantle', '~> 1.5.1'
