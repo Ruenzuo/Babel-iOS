@@ -91,7 +91,7 @@
 "oauth-view-controller.retrieving.progress-hud.status" = "Retrieving access token.";
 
 /* Pooling SVProgressHUD status on babel screen */
-"babel-view-controller.pooling.progress-hud.status" = "Pooling rate";
+"babel-view-controller.pooling.progress-hud.status" = "Loading";
 
 /* Guess UIBarButtonItem title on babel screen */
 "babel-view-controller.guess.bar-button-item.title" = "Guess";
@@ -108,17 +108,14 @@
 /* Skipped TSMessage title on babel screen */
 "babel-view-controller.skipped.message.title" = "Skipped!";
 
-/* Skipped TSMessage subtitle on babel screen */
-"babel-view-controller.skipped.message.subtitle" = "Language: %@, file: %@, repository: %@";
+/* Info TSMessage subtitle on babel screen */
+"babel-view-controller.info.message.subtitle" = "Language: %@\nFile: %@\nRepository: %@";
 
 /* Right TSMessage title on babel screen */
 "babel-view-controller.right.message.title" = "Right!";
 
 /* Right TSMessage subtitle on babel screen */
-"babel-view-controller.right.message.subtitle" = "File: %@, repository: %@";
-
-/* Wrong TSMessage subtitle on babel screen */
-"babel-view-controller.wrong.message.subtitle" = "Language: %@, file: %@, repository: %@";
+"babel-view-controller.right.message.subtitle" = "File: %@\nRepository: %@";
 
 /* Email service localized string everywhere */
 "everywhere.email-service.string" = "email";

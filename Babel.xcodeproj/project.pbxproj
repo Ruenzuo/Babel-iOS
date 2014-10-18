@@ -54,6 +54,7 @@
 		31F354D0933A7BF82364D843 /* Pods-Babel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Babel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Babel/Pods-Babel.release.xcconfig"; sourceTree = "<group>"; };
 		3F055F0019EC42DC00B6283D /* Pods-Babel-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-Babel-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-Babel/Pods-Babel-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		3F0F704919EC44BA006FD5ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Views/en.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		3F38760E19F2E16700177375 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3F53F71319F27C7D007B7A43 /* BABDifficultyAlertControllerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABDifficultyAlertControllerHelper.h; path = Helpers/BABDifficultyAlertControllerHelper.h; sourceTree = "<group>"; };
 		3F53F71419F27C7D007B7A43 /* BABDifficultyAlertControllerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABDifficultyAlertControllerHelper.m; path = Helpers/BABDifficultyAlertControllerHelper.m; sourceTree = "<group>"; };
 		3F53F71A19F283DD007B7A43 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -374,6 +375,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = A0D9B13D197C4B7A00AD7990;
 			productRefGroup = A0D9B147197C4B7A00AD7990 /* Products */;
@@ -483,6 +485,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3F53F71A19F283DD007B7A43 /* en */,
+				3F38760E19F2E16700177375 /* es */,
 			);
 			name = Localizable.strings;
 			path = Supporting;

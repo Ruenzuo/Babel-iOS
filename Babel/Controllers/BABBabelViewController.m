@@ -143,7 +143,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     [TSMessage
      showNotificationInViewController:self
      title:NSLocalizedString(@"babel-view-controller.skipped.message.title", nil)
-     subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.skipped.message.subtitle", nil),
+     subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.info.message.subtitle", nil),
                self.currentLanguage.name,
                self.currentFile.name,
                self.currentRepository.name]
@@ -234,6 +234,10 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     loadingLabel.textAlignment = NSTextAlignmentCenter;
     loadingLabel.text = @"Babel";
     shimmeringView.contentView = loadingLabel;
+}
+
+- (void)viewWillLayoutSubviews
+{
     UIEdgeInsets edgeInsets = UIEdgeInsetsMake([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height, 0, self.toolBar.frame.size.height, 0);
     self.webView.scrollView.contentInset = edgeInsets;
     self.webView.scrollView.scrollIndicatorInsets = edgeInsets;
@@ -406,7 +410,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     } else {
         [self.delegate controllerDidFinishWithScore:self.score
                                   forDifficultyMode:self.babelManager.difficultyMode
-                                           withInfo:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.wrong.message.subtitle", nil),
+                                           withInfo:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.info.message.subtitle", nil),
                                                      self.currentLanguage.name,
                                                      self.currentFile.name,
                                                      self.currentRepository.name]];

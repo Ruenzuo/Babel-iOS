@@ -80,6 +80,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupView];
     [self checkTokenValidity];
 }
 
@@ -137,6 +138,13 @@
 }
 
 #pragma mark - Private Methods
+
+- (void)setupView
+{
+    [self.btnStart setTitle:NSLocalizedString(@"menu-view-controller.start.button.title", nil)
+                   forState:UIControlStateNormal];
+    self.navigationItem.backBarButtonItem.title = NSLocalizedString(@"everywhere.back.bar-button-item.title", nil);
+}
 
 - (void)checkTokenValidity
 {
