@@ -245,7 +245,7 @@
 - (void)showLogOutView
 {
     UIBarButtonItem *logOut = [[UIBarButtonItem alloc]
-                               initWithTitle:NSLocalizedString(@"menu-view-controller.log-in.bar-button-item.title", nil)
+                               initWithTitle:NSLocalizedString(@"menu-view-controller.log-out.bar-button-item.title", nil)
                                style:UIBarButtonItemStylePlain
                                target:self
                                action:@selector(logOut:)];
