@@ -77,9 +77,9 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
             switch (indexPath.row) {
                 case 0:
                     if (self.gameCenterManager.isGameCenterEnabled) {
-                        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.leaderboards.table-view-cell.text-lable.text", nil);
+                        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.leaderboards.table-view-cell.text-labe;.text", nil);
                     } else {
-                        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.enable-game-center.table-view-cell.text-lable.text", nil);
+                        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.enable-game-center.table-view-cell.text-label.text", nil);
                     }
                     break;
             }
@@ -88,15 +88,15 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
         case 1: {
             switch (indexPath.row) {
                 case 0: {
-                    tableViewCell.textLabel.text = [NSString localizedStringWithFormat:NSLocalizedString(@"info-view-controller.share-service.table-view-cell.text-lable.text", nil), BABFacebookSevice];
+                    tableViewCell.textLabel.text = [NSString localizedStringWithFormat:NSLocalizedString(@"info-view-controller.share-service.table-view-cell.text-label.text", nil), BABFacebookSevice];
                     break;
                 }
                 case 1: {
-                    tableViewCell.textLabel.text = [NSString localizedStringWithFormat:NSLocalizedString(@"info-view-controller.share-service.table-view-cell.text-lable.text", nil), BABTwitterSevice];
+                    tableViewCell.textLabel.text = [NSString localizedStringWithFormat:NSLocalizedString(@"info-view-controller.share-service.table-view-cell.text-label.text", nil), BABTwitterSevice];
                     break;
                 }
                 case 2: {
-                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.rate-app-store.table-view-cell.text-lable.text", nil);
+                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.rate-app-store.table-view-cell.text-label.text", nil);
                     break;
                 }
             }
@@ -105,11 +105,11 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
         case 2: {
             switch (indexPath.row) {
                 case 0: {
-                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.developer.table-view-cell.text-lable.text", nil);
+                    tableViewCell.textLabel.text = NSLocalizedString(@"everywhere.developer.string", nil);
                     break;
                 }
                 case 1: {
-                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.acknowledgments.table-view-cell.text-lable.text", nil);
+                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.acknowledgments.table-view-cell.text-label.text", nil);
                     break;
                 }
             }
@@ -153,7 +153,7 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
     } else {
         [TSMessage
          showNotificationInViewController:self
-         title:NSLocalizedString(@"everywhere.error.title", nil)
+         title:NSLocalizedString(@"everywhere.error.string", nil)
          subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"everywhere.error.message.subtitle.when-service-share-fails", nil), BABFacebookSevice]
          type:TSMessageNotificationTypeError
          duration:3.0f
@@ -184,7 +184,7 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
                  dispatch_async(dispatch_get_main_queue(), ^{
                      [TSMessage
                       showNotificationInViewController:self
-                      title:NSLocalizedString(@"everywhere.error.title", nil)
+                      title:NSLocalizedString(@"everywhere.error.string", nil)
                       subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"everywhere.error.message.subtitle.when-service-share-fails", nil), BABTwitterSevice]
                       type:TSMessageNotificationTypeError
                       duration:3.0f
@@ -221,9 +221,9 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
         case 0:
             return BABGameCenterTableViewHeaderFooterViewText;
         case 1:
-            return NSLocalizedString(@"info-view-controller.social.table-view-header-footer-view.text-lable.text", nil);
+            return NSLocalizedString(@"info-view-controller.social.table-view-header-footer-view.text-label.text", nil);
         case 2:
-            return NSLocalizedString(@"info-view-controller.about.table-view-header-footer-view.text-lable.text", nil);
+            return NSLocalizedString(@"info-view-controller.about.table-view-header-footer-view.text-label.text", nil);
         default:
             return @"";
     }
@@ -249,7 +249,7 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
     if (indexPath.section == 2 && indexPath.row == 2) {
         tableViewCell = [tableView dequeueReusableCellWithIdentifier:BABVersionTableViewCell
                                                         forIndexPath:indexPath];
-        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.version.table-view-cell.text-lable.text", nil);
+        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.version.table-view-cell.text-label.text", nil);
         tableViewCell.detailTextLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     } else {
         tableViewCell = [tableView dequeueReusableCellWithIdentifier:BABInfoTableViewCell
