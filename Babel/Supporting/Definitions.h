@@ -25,5 +25,7 @@ typedef NS_ENUM(NSInteger, BABDifficultyMode) {
 };
 
 static int const ddLogLevel = LOG_LEVEL_VERBOSE;
+static NSString * const BABTwitterSevice = @"Twitter";
+static NSString * const BABFacebookSevice = @"Facebook";
 
 #endif
