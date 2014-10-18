@@ -84,6 +84,21 @@
 /* Retrieving SVProgressHUD status on oauth screen */
 "oauth-view-controller.retrieving.progress-hud.status" = "Retrieving access token.";
 
+/* Pooling SVProgressHUD status on babel screen */
+"babel-view-controller.pooling.progress-hud.status" = "Pooling rate";
+
+/* Guess UIBarButtonItem title on babel screen */
+"babel-view-controller.guess.bar-button-item.title" = "Guess";
+
+/* Skip UIBarButtonItem title on babel screen */
+"babel-view-controller.skip.bar-button-item.title" = "Skip (%lu)";
+
+/* Hint UIBarButtonItem title on babel screen */
+"babel-view-controller.hint.bar-button-item.title" = "Hint (%lu)";
+
+/* Code UIBarButtonItem title on babel screen */
+"babel-view-controller.code.bar-button-item.title" = "Code";
+
 /* Email service localized string everywhere */
 "everywhere.email-service.string" = "email";
 
