@@ -3,16 +3,17 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, "7.0"
 
 target "Babel" do
-  pod 'AFNetworking', '~> 2.3.1'
-  pod 'SVProgressHUD', '~> 1.0.0'
-  pod 'Bolts', '~> 1.1.1'
+  pod 'AFNetworking', '~> 2.4.1'
+  pod 'SVProgressHUD', :git => 'git@github.com:TransitApp/SVProgressHUD.git', :commit => '9e2a22dee810d7da2b93e795b2d92b1e08a41ea1'
+  pod 'Bolts', '~> 1.1.3'
   pod 'SSKeychain', '~> 1.2.2'
-  pod 'Mantle', '~> 1.5.0'
+  pod 'Mantle', '~> 1.5.1'
   pod 'MSWeakTimer', '~> 1.1.0'
   pod 'Shimmer', '~> 1.0.1'
   pod 'libextobjc', '~> 0.4.0'
-  pod 'CocoaLumberjack', '~> 1.9.1'
-  pod 'TSMessages', '~> 0.9.9'
-  pod 'VTAcknowledgementsViewController', '~> 0.11.0'
+  pod 'CocoaLumberjack', '~> 2.0.0-beta2'
+  pod 'TSMessages', :git => 'git@github.com:toursprung/TSMessages.git', :commit => 'aec1871ca43062a21c58b74902e4351c68b5b39a'
+  pod 'VTAcknowledgementsViewController', '~> 0.12.0'
   pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.9'
+  pod 'Reveal-iOS-SDK', '~> 1.0.6', :configurations => ['Debug']
 end

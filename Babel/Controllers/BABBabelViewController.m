@@ -24,7 +24,7 @@
 @property (nonatomic, weak) IBOutlet UIToolbar *toolBar;
 @property (nonatomic, weak) FBShimmeringView *titleShimmeringView;
 @property (nonatomic, assign, getter = isHintEnabled) BOOL hintEnabled;
-@property (nonatomic, assign) NSUInteger points;
+@property (nonatomic, assign) NSUInteger score;
 @property (nonatomic, assign) NSUInteger remainingHints;
 @property (nonatomic, assign) NSUInteger remainingSkips;
 @property (nonatomic, strong) BABLanguage *currentLanguage;
@@ -32,12 +32,11 @@
 @property (nonatomic, strong) BABFile *currentFile;
 
 - (void)nextFile;
-- (IBAction)skip:(id)sender;
-- (IBAction)guess:(id)sender;
+- (void)skip:(id)sender;
+- (void)guess:(id)sender;
 - (void)code:(id)sender;
 - (void)hint:(id)sender;
-- (void)setupTitle;
-- (void)setupInsets;
+- (void)setupView;
 - (void)setupLoadingIndicator;
 - (void)setupGuess;
 - (void)poolRate;
@@ -48,7 +47,7 @@
 
 @implementation BABBabelViewController
 
-NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
+static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 #pragma mark - View controller life cycle
 
@@ -57,7 +56,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.pooling = false;
-        self.points = 0;
+        self.score = 0;
         self.remainingHints = 5;
         self.remainingSkips = 5;
     }
@@ -67,8 +66,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupTitle];
-    [self setupInsets];
+    [self setupView];
     [self setupLoadingIndicator];
     [self nextFile];
 }
@@ -142,11 +140,16 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 {
     --self.remainingSkips;
     [self setupLoadingIndicator];
-    [SVProgressHUD showImage:[UIImage imageNamed:@"Info"]
-                      status:[NSString stringWithFormat:@"Skipped:\nLanguage:%@\nFile: %@\nRepository:%@",
-                                        self.currentLanguage.name,
-                                        self.currentFile.name,
-                                        self.currentRepository.name]];
+    [TSMessage
+     showNotificationInViewController:self
+     title:NSLocalizedString(@"babel-view-controller.skipped.message.title", nil)
+     subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.info.message.subtitle", nil),
+               self.currentLanguage.name,
+               self.currentFile.name,
+               self.currentRepository.name]
+     type:TSMessageNotificationTypeMessage
+     duration:3.0f
+     canBeDismissedByUser:YES];
     [UIView animateWithDuration:0.5f
                      animations:^{
                          self.webView.alpha = 0.0f;
@@ -160,8 +163,8 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (IBAction)guess:(id)sender
 {
-    UIBarButtonItem *code = [[UIBarButtonItem alloc] initWithTitle:@"Code"
-                                                             style:UIBarButtonItemStyleBordered
+    UIBarButtonItem *code = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"babel-view-controller.code.bar-button-item.title", nil)
+                                                             style:UIBarButtonItemStylePlain
                                                             target:self
                                                             action:@selector(code:)];
     [self.navigationItem setRightBarButtonItem:code
@@ -170,8 +173,8 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
         UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-        UIBarButtonItem *hint = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Hint (%lu)", (unsigned long)self.remainingHints]
-                                                                 style:UIBarButtonItemStyleBordered
+        UIBarButtonItem *hint = [[UIBarButtonItem alloc] initWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.hint.bar-button-item.title", nil), (unsigned long)self.remainingHints]
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(hint:)];
         [self.toolBar setItems:@[separator, hint]
@@ -186,8 +189,8 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (void)code:(id)sender
 {
-    UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:@"Guess"
-                                                              style:UIBarButtonItemStyleBordered
+    UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"babel-view-controller.guess.bar-button-item.title", nil)
+                                                              style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(guess:)];
     [self.navigationItem setRightBarButtonItem:guess
@@ -196,8 +199,8 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
         UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Skip (%lu)", (unsigned long)self.remainingSkips]
-                                                                 style:UIBarButtonItemStyleBordered
+        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.skip.bar-button-item.title", nil), (unsigned long)self.remainingSkips]
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(skip:)];
         [self.toolBar setItems:@[separator, skip]
@@ -221,7 +224,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                   withRowAnimation:UITableViewRowAnimationFade];
 }
 
-- (void)setupTitle
+- (void)setupView
 {
     FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
     [self.navigationItem setTitleView:shimmeringView];
@@ -233,7 +236,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     shimmeringView.contentView = loadingLabel;
 }
 
-- (void)setupInsets
+- (void)viewWillLayoutSubviews
 {
     UIEdgeInsets edgeInsets = UIEdgeInsetsMake([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height, 0, self.toolBar.frame.size.height, 0);
     self.webView.scrollView.contentInset = edgeInsets;
@@ -256,8 +259,8 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (void)setupGuess
 {
-    UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:@"Guess"
-                                                              style:UIBarButtonItemStyleBordered
+    UIBarButtonItem *guess = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"babel-view-controller.guess.bar-button-item.title", nil)
+                                                              style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(guess:)];
     [self.navigationItem setRightBarButtonItem:guess
@@ -266,8 +269,8 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
         UIBarButtonItem *separator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                    target:nil
                                                                                    action:nil];
-        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Skip (%lu)", (unsigned long)self.remainingSkips]
-                                                                 style:UIBarButtonItemStyleBordered
+        UIBarButtonItem *skip = [[UIBarButtonItem alloc] initWithTitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.skip.bar-button-item.title", nil), (unsigned long)self.remainingSkips]
+                                                                 style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(skip:)];
         [self.toolBar setItems:@[separator, skip]
@@ -278,7 +281,7 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
 
 - (void)poolRate
 {
-    [SVProgressHUD showWithStatus:@"Pooling rate"
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"babel-view-controller.pooling.progress-hud.status", nil)
                          maskType:SVProgressHUDMaskTypeBlack];
     self.pooling = YES;
     self.timer = [MSWeakTimer scheduledTimerWithTimeInterval:5
@@ -380,10 +383,16 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
         language = self.babelManager.languages[indexPath.row];
     }
     if ([language.index unsignedIntegerValue] == [self.currentLanguage.index unsignedIntegerValue]) {
-        self.points++;
-        [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"Correct!\nFile: %@\nRepository:%@",
-                                              self.currentFile.name,
-                                              self.currentRepository.name]];
+        self.score++;
+        [TSMessage
+         showNotificationInViewController:self
+         title:NSLocalizedString(@"babel-view-controller.right.message.title", nil)
+         subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.right.message.subtitle", nil),
+                   self.currentFile.name,
+                   self.currentRepository.name]
+         type:TSMessageNotificationTypeSuccess
+         duration:3.0f
+         canBeDismissedByUser:YES];
         self.hintEnabled = NO;
         [self setupLoadingIndicator];
         [UIView animateWithDuration:0.5f
@@ -399,13 +408,12 @@ NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
                              }
                          }];
     } else {
-        [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"Incorrect!\nLanguage:%@\nFile: %@\nRepository:%@\nTotal points: %lu",
-                                            self.currentLanguage.name,
-                                            self.currentFile.name,
-                                            self.currentRepository.name,
-                                            (unsigned long)self.points]];
-        [self.gameCenterManager reportPoints:self.points
-                           forDifficultyMode:self.babelManager.difficultyMode];
+        [self.delegate controllerDidFinishWithScore:self.score
+                                  forDifficultyMode:self.babelManager.difficultyMode
+                                           withInfo:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.info.message.subtitle", nil),
+                                                     self.currentLanguage.name,
+                                                     self.currentFile.name,
+                                                     self.currentRepository.name]];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

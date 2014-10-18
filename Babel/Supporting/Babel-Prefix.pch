@@ -21,7 +21,6 @@
     #import <MSWeakTimer/MSWeakTimer.h>
     #import <Shimmer/FBShimmeringView.h>
     #import <libextobjc/EXTScope.h>
-    #import <CocoaLumberjack/DDLog.h>
     #import <GameKit/GameKit.h>
     #import <MessageUI/MessageUI.h>
     #import <Accounts/Accounts.h>
@@ -29,6 +28,8 @@
     #import <TSMessages/TSMessage.h>
     #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
     #import <GoogleAnalytics-iOS-SDK/GAI.h>
+    #import <CocoaLumberjack/CocoaLumberjack.h>
+    #import <HexColors/HexColor.h>
     #import "iLink.h"
     #include "Definitions.h"
 #endif

@@ -28,8 +28,8 @@
 
 @implementation BABGitHubAPISessionHelper
 
-int const BABMaxBytesFileSize = 1 * 1024 * 1024;
-int const BABMinBytesFileSize = 10 * 1024;
+static int const BABMaxBytesFileSize = 1 * 1024 * 1024;
+static int const BABMinBytesFileSize = 10 * 1024;
 
 - (id)init
 {
