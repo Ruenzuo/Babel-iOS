@@ -49,11 +49,6 @@
                                 <action selector="info:" destination="vXZ-lx-hvc" id="sGw-e9-ja2"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Log in" id="29j-1T-U14">
-                            <connections>
-                                <action selector="logIn:" destination="vXZ-lx-hvc" id="AWU-5g-0E6"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btnStart" destination="8z0-92-Dcm" id="9Mb-X0-ynd"/>
