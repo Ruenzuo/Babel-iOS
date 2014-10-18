@@ -77,7 +77,7 @@ static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
             switch (indexPath.row) {
                 case 0:
                     if (self.gameCenterManager.isGameCenterEnabled) {
-                        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.leaderboards.table-view-cell.text-labe;.text", nil);
+                        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.leaderboards.table-view-cell.text-label.text", nil);
                     } else {
                         tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.enable-game-center.table-view-cell.text-label.text", nil);
                     }

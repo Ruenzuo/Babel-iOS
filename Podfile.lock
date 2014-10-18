@@ -30,6 +30,7 @@ PODS:
   - CocoaLumberjack/Core (2.0.0-beta2)
   - CocoaLumberjack/Extensions (2.0.0-beta2):
     - CocoaLumberjack/Core
+  - CRToast (0.0.7)
   - GoogleAnalytics-iOS-SDK (3.0.9)
   - HexColors (2.2.1)
   - libextobjc (0.4):
@@ -83,6 +84,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.4.1)
   - Bolts (~> 1.1.3)
   - CocoaLumberjack (~> 2.0.0-beta2)
+  - CRToast (~> 0.0.7)
   - GoogleAnalytics-iOS-SDK (~> 3.0.9)
   - libextobjc (~> 0.4.0)
   - Mantle (~> 1.5.1)
@@ -98,6 +100,7 @@ SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   CocoaLumberjack: 956d3fb98fed498a13d56499f262c975ef431c98
+  CRToast: f9f2c4b29776d68ba24c4d621cba59a83fea921b
   GoogleAnalytics-iOS-SDK: d9e198b1f955259a72886769be7377cdfcdb2250
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   libextobjc: ba42e4111f433273a886cd54f0ddaddb7f62f82f
