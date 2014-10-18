@@ -7,8 +7,6 @@
 //
 
 #import "BABAppDelegate.h"
-#import <CocoaLumberjack/DDASLLogger.h>
-#import <CocoaLumberjack/DDTTYLogger.h>
 
 @interface BABAppDelegate ()
 
@@ -19,8 +17,7 @@
 
 @implementation BABAppDelegate
 
-NSString * const BABHockeyAppIdentifier = @"6fd9e830e7744e983eb60925d91d3d93";
-NSString * const BABGoogleAnalyticsTrackingId = @"UA-53969387-1";
+static NSString * const BABGoogleAnalyticsTrackingId = @"UA-53969387-1";
 
 #pragma mark - Application Life cycle
 

@@ -14,8 +14,8 @@
 
 @implementation BABKeychainHelper
 
-NSString * const BABBabelService = @"BABBabelService";
-NSString * const BABBabelAccount = @"BABBabelAccount";
+static NSString * const BABBabelService = @"BABBabelService";
+static NSString * const BABBabelAccount = @"BABBabelAccount";
 
 #pragma mark - Public Methods
 

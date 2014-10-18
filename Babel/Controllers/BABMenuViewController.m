@@ -14,19 +14,22 @@
 #import "BABBabelManager.h"
 #import "BABGameCenterManager.h"
 #import "BABInfoTableViewController.h"
-#import "BABDifficultiesActionSheet.h"
+#import "BABDifficultyAlertControllerHelper.h"
 
-@interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate, BABGameCenterManagerDelegate>
+@interface BABMenuViewController () <BABOAuthViewControllerDelegate, UIActionSheetDelegate, BABGameCenterManagerDelegate, BABDifficultyAlertControllerHelperDelegate, BABBabelViewControllerDelegate>
 
 @property (nonatomic, strong) NSString *token;
-@property (nonatomic, strong) IBOutlet UIButton *btnStart;
+@property (nonatomic, weak) IBOutlet UIButton *btnStart;
+@property (nonatomic, weak) IBOutlet UIImageView *imageViewIcon;
 @property (nonatomic, strong) BABAuthorizationSessionHelper *authorizationSessionHelper;
 @property (nonatomic, assign) BABDifficultyMode selectedDifficultyMode;
 @property (nonatomic, strong) BABGameCenterManager *gameCenterManager;
+@property (nonatomic, strong) BABDifficultyAlertControllerHelper *difficultyAlertControllerHelper;
 
 - (void)checkTokenValidity;
 - (IBAction)logIn:(id)sender;
 - (IBAction)start:(id)sender;
+- (IBAction)info:(id)sender;
 - (void)logOut:(id)sender;
 - (void)showLogInView;
 - (void)showLogOutView;
@@ -54,6 +57,15 @@
     return _gameCenterManager;
 }
 
+- (BABDifficultyAlertControllerHelper *)difficultyAlertControllerHelper
+{
+    if (_difficultyAlertControllerHelper == nil) {
+        _difficultyAlertControllerHelper = [[BABDifficultyAlertControllerHelper alloc] init];
+        _difficultyAlertControllerHelper.delegate = self;
+    }
+    return _difficultyAlertControllerHelper;
+}
+
 #pragma mark - View controller life cycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -68,6 +80,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupView];
     [self checkTokenValidity];
 }
 
@@ -95,13 +108,43 @@
         [babelManager setupQueue];
         babelViewController.babelManager = babelManager;
         babelViewController.gameCenterManager = self.gameCenterManager;
+        babelViewController.delegate = self;
     } else if ([[segue identifier] isEqualToString:@"InfoSegue"]) {
         BABInfoTableViewController *infoViewController = (BABInfoTableViewController *) [segue destinationViewController];
         infoViewController.gameCenterManager = self.gameCenterManager;
     }
 }
 
+- (void)viewDidLayoutSubviews
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+        if (UIDeviceOrientationIsLandscape(orientation)) {
+            if (self.imageViewIcon.alpha != 0.0f) {
+                [UIView animateWithDuration:0.4
+                                 animations:^{
+                                     self.imageViewIcon.alpha = 0.0f;
+                                 }];
+            }
+        } else {
+            if (self.imageViewIcon.alpha == 0.0f) {
+                [UIView animateWithDuration:0.4
+                                 animations:^{
+                                     self.imageViewIcon.alpha = 1.0f;
+                                 }];
+            }
+        }
+    }
+}
+
 #pragma mark - Private Methods
+
+- (void)setupView
+{
+    [self.btnStart setTitle:NSLocalizedString(@"menu-view-controller.start.button.title", nil)
+                   forState:UIControlStateNormal];
+    self.navigationItem.backBarButtonItem.title = NSLocalizedString(@"everywhere.back.bar-button-item.title", nil);
+}
 
 - (void)checkTokenValidity
 {
@@ -110,7 +153,7 @@
     NSError *error = nil;
     self.token = [BABKeychainHelper retrieveTokenWithError:&error];
     if (!error) {
-        [SVProgressHUD showWithStatus:@"Checking session validity."
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"menu-view-controller.checking-session.progress-hud.status", nil)
                              maskType:SVProgressHUDMaskTypeBlack];
         [[self.authorizationSessionHelper checkTokenValidityWithToken:self.token]
          continueWithExecutor:[BFExecutor mainThreadExecutor]
@@ -120,11 +163,12 @@
              
              if (task.error) {
                  if ([task.error.domain isEqualToString:NSURLErrorDomain] && task.error.code == NSURLErrorNotConnectedToInternet) {
-                     [SVProgressHUD showErrorWithStatus:@"The Internet connection appears to be offline."];
+                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"menu-view-controller.internet-error.progress-hud.status", nil)];
                  } else {
-                     [SVProgressHUD showErrorWithStatus:@"Session expired."];
+                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"menu-view-controller.sesion-expired.progress-hud.status", nil)];
                      NSError *error = nil;
                      [BABKeychainHelper deleteStoredTokenWithError:&error];
+                     [self showLogInView];
                  }
              } else {
                  [SVProgressHUD dismiss];
@@ -132,6 +176,8 @@
              }
              return nil;
          }];
+    } else {
+        [self showLogInView];
     }
 }
 
@@ -143,14 +189,33 @@
 
 - (IBAction)start:(id)sender
 {
-    [BABDifficultiesActionSheet showDifficultiesActionSheetInViewController:self];
+    [self.difficultyAlertControllerHelper presentAlertController:sender];
+}
+
+- (IBAction)info:(id)sender
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
+        BABInfoTableViewController *infoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"InfoViewController"];
+        infoViewController.gameCenterManager = self.gameCenterManager;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
+        [navigationController.navigationBar setTintColor:self.navigationController.navigationBar.tintColor];
+        navigationController.preferredContentSize = CGSizeMake(320, 500);
+        UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:navigationController];
+        [popoverController presentPopoverFromBarButtonItem:barButtonItem
+                                  permittedArrowDirections:UIPopoverArrowDirectionUp
+                                                  animated:YES];
+    } else {
+        [self performSegueWithIdentifier:@"InfoSegue"
+                                  sender:self];
+    }
 }
 
 - (void)logOut:(id)sender
 {
     @weakify(self);
     
-    [SVProgressHUD showWithStatus:@"Logging out."
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"menu-view-controller.logging-out.progress-hud.status", nil)
                          maskType:SVProgressHUDMaskTypeBlack];
     [[self.authorizationSessionHelper revokeTokenWithToken:self.token]
      continueWithExecutor:[BFExecutor mainThreadExecutor]
@@ -159,7 +224,7 @@
          @strongify(self);
          
          if (task.error) {
-             [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"everywhere.retry-message.string", nil)];
          } else {
              [SVProgressHUD dismiss];
              NSError *error = nil;
@@ -173,10 +238,11 @@
 
 - (void)showLogInView
 {
-    UIBarButtonItem *logIn = [[UIBarButtonItem alloc] initWithTitle:@"Log In"
-                                                              style:UIBarButtonItemStyleBordered
-                                                             target:self
-                                                             action:@selector(logIn:)];
+    UIBarButtonItem *logIn = [[UIBarButtonItem alloc]
+                              initWithTitle:NSLocalizedString(@"menu-view-controller.log-in.bar-button-item.title", nil)
+                              style:UIBarButtonItemStylePlain
+                              target:self
+                              action:@selector(logIn:)];
     [self.navigationItem setRightBarButtonItem:logIn
                                       animated:YES];
     [UIView animateWithDuration:0.5f
@@ -187,10 +253,11 @@
 
 - (void)showLogOutView
 {
-    UIBarButtonItem *logOut = [[UIBarButtonItem alloc] initWithTitle:@"Log Out"
-                                                               style:UIBarButtonItemStyleBordered
-                                                              target:self
-                                                              action:@selector(logOut:)];
+    UIBarButtonItem *logOut = [[UIBarButtonItem alloc]
+                               initWithTitle:NSLocalizedString(@"menu-view-controller.log-out.bar-button-item.title", nil)
+                               style:UIBarButtonItemStylePlain
+                               target:self
+                               action:@selector(logOut:)];
     [self.navigationItem setRightBarButtonItem:logOut
                                       animated:YES];
     [UIView animateWithDuration:0.5f
@@ -225,20 +292,47 @@
         self.token = token;
         [self showLogOutView];
     } else {
-        [SVProgressHUD showErrorWithStatus:@"An error has occurred. Please try this again later."];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"everywhere.retry-message.string", nil)];
     }
 }
 
-#pragma mark - UIActionSheetDelegate
+#pragma mark - BABDifficultyAlertControllerHelperDelegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)helperDidFinishSelectionWithDifficulty:(BABDifficultyMode)difficulty
 {
-    if (buttonIndex == actionSheet.cancelButtonIndex) {
-        self.selectedDifficultyMode = BABDifficultyModeNone;
-    } else {
-        self.selectedDifficultyMode = buttonIndex;
+    self.selectedDifficultyMode = difficulty;
+    if (self.selectedDifficultyMode != BABDifficultyModeNone) {
         [self performSegueWithIdentifier:@"BabelSegue"
                                   sender:self];
+    }
+}
+
+#pragma mark - BABBabelViewControllerDelegate
+
+- (void)controllerDidFinishWithScore:(NSUInteger)score
+                   forDifficultyMode:(BABDifficultyMode)difficultyMode
+                            withInfo:(NSString *)info
+{
+    
+    [self.gameCenterManager reportScore:score
+                      forDifficultyMode:difficultyMode];
+    if ([self.gameCenterManager score:score
+             isHighScoreForDifficulty:difficultyMode]) {
+        [TSMessage
+         showNotificationInViewController:self
+         title:[NSString localizedStringWithFormat:NSLocalizedString(@"menu-view-controller.high-score.message.title", nil), (unsigned long)score]
+         subtitle:info
+         type:TSMessageNotificationTypeSuccess
+         duration:3.0f
+         canBeDismissedByUser:YES];
+    } else {
+        [TSMessage
+         showNotificationInViewController:self
+         title:[NSString localizedStringWithFormat:NSLocalizedString(@"menu-view-controller.wrong.message.title", nil), (unsigned long)score]
+         subtitle:info
+         type:TSMessageNotificationTypeError
+         duration:3.0f
+         canBeDismissedByUser:YES];
     }
 }
 

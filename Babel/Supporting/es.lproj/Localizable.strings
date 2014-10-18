@@ -1,0 +1,139 @@
+/* 
+  Localizable.strings
+  Babel
+
+  Created by Renzo Crisóstomo on 18/10/14.
+  Copyright (c) 2014 Renzo Crisóstomo. All rights reserved.
+*/
+
+/* Difficulty UIAlertController title */
+"difficulty-alert-controller.title" = "Dificultad";
+
+/* Easy action UIAlertController title */
+"difficulty-alert-controller.actions.easy-action.title" = "Fácil";
+
+/* Normal action UIAlertController title */
+"difficulty-alert-controller.actions.normal-action.title" = "Normal";
+
+/* Hard action UIAlertController title */
+"difficulty-alert-controller.actions.hard-action.title" = "Difícil";
+
+/* Cancel action UIAlertController title */
+"difficulty-alert-controller.actions.cancel-action.title" = "Cancelar";
+
+/* Start UIButton title on menu screen */
+"menu-view-controller.start.button.title" = "Toque para iniciar";
+
+/* Log in UIBarButtonItem title on menu screen */
+"menu-view-controller.log-in.bar-button-item.title" = "Acceder";
+
+/* Log out UIBarButtonItem title on menu screen */
+"menu-view-controller.log-out.bar-button-item.title" = "Salir";
+
+/* Logging out SVProgressHUD status on menu screen */
+"menu-view-controller.logging-out.progress-hud.status" = "Cerrando sesión.";
+
+/* Checking SVProgressHUD status on menu screen */
+"menu-view-controller.checking-session.progress-hud.status" = "Comprobando la validez de la sesión.";
+
+/* Internet error SVProgressHUD status on menu screen */
+"menu-view-controller.internet-error.progress-hud.status" = "La conexión a Internet parece estar desconectada.";
+
+/* Session expired SVProgressHUD status on menu screen */
+"menu-view-controller.sesion-expired.progress-hud.status" = "La sesión ha expirado.";
+
+/* High score TSMessage title on menu screen */
+"menu-view-controller.high-score.message.title" = "Nuevo récord! Puntaje: %lu";
+
+/* Wrong TSMessage title on menu screen */
+"menu-view-controller.wrong.message.title" = "Incorrecto! Puntaje: %lu";
+
+/* Leaderboards UITableViewCell textLabel text on info screen */
+"info-view-controller.leaderboards.table-view-cell.text-label.text" = "Clasificaciones";
+
+/* Enable Game Center UITableViewCell textLabel text on info screen */
+"info-view-controller.enable-game-center.table-view-cell.text-label.text" = "Habilitar Game Center";
+
+/* Share this app on *Sercice* UITableViewCell textLabel text on info screen */
+"info-view-controller.share-service.table-view-cell.text-label.text" = "Compartir esta aplicación en %@";
+
+/* Rate this app on App Store UITableViewCell textLabel text on info screen */
+"info-view-controller.rate-app-store.table-view-cell.text-label.text" = "Calificar esta aplicación en la App Store";
+
+/* Acknowledgments UITableViewCell textLabel text on info screen */
+"info-view-controller.acknowledgments.table-view-cell.text-label.text" = "Agradecimientos";
+
+/* Version UITableViewCell textLabel text on info screen */
+"info-view-controller.version.table-view-cell.text-label.text" = "Versión";
+
+/* Social UITableViewHeaderFooterView textLabel text on info screen */
+"info-view-controller.social.table-view-header-footer-view.text-label.text" = "Social";
+
+/* About UITableViewHeaderFooterView textLabel text on info screen */
+"info-view-controller.about.table-view-header-footer-view.text-label.text" = "Acerca de";
+
+/* Share text SLComposeViewController initial text on info screen */
+"info-view-controller.share-text.compose-view-controller.initial-text" = "Vean Babel en la AppStore!";
+
+/* Name UITableViewCell textLabel text on developer screen */
+"developer-view-controller.name.table-view-cell.text-label.text" = "Nombre";
+
+/* Contact UITableViewCell textLabel text on developer screen */
+"developer-view-controller.contact.table-view-cell.text-label.text" = "Contacto";
+
+/* Thanks TSMessage subtitle on developer screen when follow succeed */
+"developer-view-controller.thanks.message.subtitle.when-follow-succeed" = "Graciar por seguirme!";
+
+/* Thanks TSMessage subtitle on developer screen when email succeed */
+"developer-view-controller.thanks.message.subtitle.when-email-succeed" = "Graciar por tu correo, responderé pronto!";
+
+/* Retrieving SVProgressHUD status on oauth screen */
+"oauth-view-controller.retrieving.progress-hud.status" = "Recuperando el token de acceso.";
+
+/* Pooling SVProgressHUD status on babel screen */
+"babel-view-controller.pooling.progress-hud.status" = "Cargando";
+
+/* Guess UIBarButtonItem title on babel screen */
+"babel-view-controller.guess.bar-button-item.title" = "Elegir";
+
+/* Skip UIBarButtonItem title on babel screen */
+"babel-view-controller.skip.bar-button-item.title" = "Saltar (%lu)";
+
+/* Hint UIBarButtonItem title on babel screen */
+"babel-view-controller.hint.bar-button-item.title" = "Ayuda (%lu)";
+
+/* Code UIBarButtonItem title on babel screen */
+"babel-view-controller.code.bar-button-item.title" = "Código";
+
+/* Skipped TSMessage title on babel screen */
+"babel-view-controller.skipped.message.title" = "Saltado!";
+
+/* Info TSMessage subtitle on babel screen */
+"babel-view-controller.info.message.subtitle" = "Lenguaje: %@\nArchivo: %@\nRepositorio: %@";
+
+/* Right TSMessage title on babel screen */
+"babel-view-controller.right.message.title" = "Correcto!";
+
+/* Right TSMessage subtitle on babel screen */
+"babel-view-controller.right.message.subtitle" = "Lenguaje: %@\nRepositorio: %@";
+
+/* Email service localized string everywhere */
+"everywhere.email-service.string" = "correo electrónico";
+
+/* Developer localized string everywhere */
+"everywhere.developer.string" = "Desarrollador";
+
+/* Back UIBarButtonItem title everywhere */
+"everywhere.back.bar-button-item.title" = "Atrás";
+
+/* Error localized string everywhere */
+"everywhere.error.string" = "Error";
+
+/* Retry message localized string everywhere */
+"everywhere.retry-message.string" = "Ha sucedido un error. Intente esto luego.";
+
+/* Success localized string everywhere */
+"everywhere.success.string" = "Éxito";
+
+/* Error TSMessage subtitle on info screen when *Service* is not available everywhere */
+"everywhere.error.message.subtitle.when-service-share-fails" = "Parece que no tienes configurada una cuenta de %@ en este dispositivo.";

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3F055F0119EC42DC00B6283D /* Pods-Babel-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F055F0019EC42DC00B6283D /* Pods-Babel-acknowledgements.plist */; };
 		3F0F704A19EC44BA006FD5ED /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0F704819EC44BA006FD5ED /* LaunchScreen.xib */; };
+		3F53F71519F27C7D007B7A43 /* BABDifficultyAlertControllerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F53F71419F27C7D007B7A43 /* BABDifficultyAlertControllerHelper.m */; };
+		3F53F71919F283DD007B7A43 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3F53F71B19F283DD007B7A43 /* Localizable.strings */; };
 		A08E88F11982CF3F00EA3758 /* info-hard.json in Resources */ = {isa = PBXBuildFile; fileRef = A08E88F01982CF3F00EA3758 /* info-hard.json */; };
 		A08E88F41982D4D400EA3758 /* NSMutableArray+BABShuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */; };
 		A093AA17197D6C5100F21675 /* BABOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A093AA16197D6C5100F21675 /* BABOAuthViewController.m */; };
@@ -28,7 +30,6 @@
 		A0BA0148198E82D7005BE680 /* info-normal.json in Resources */ = {isa = PBXBuildFile; fileRef = A0BA0147198E82D7005BE680 /* info-normal.json */; };
 		A0BA014B198E83C8005BE680 /* BABConfigurationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BA014A198E83C8005BE680 /* BABConfigurationHelper.m */; };
 		A0BEA9E219A0A74800704B2F /* BABInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEA9E119A0A74800704B2F /* BABInfoTableViewController.m */; };
-		A0BEA9E519A0B5E300704B2F /* BABDifficultiesActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEA9E419A0B5E300704B2F /* BABDifficultiesActionSheet.m */; };
 		A0BEA9E819A0BA2A00704B2F /* BABDeveloperTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0BEA9E719A0BA2A00704B2F /* BABDeveloperTableViewController.m */; };
 		A0BEA9EA19A0BB2100704B2F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9E919A0BB2100704B2F /* MessageUI.framework */; };
 		A0BEA9EC19A0BB3900704B2F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0BEA9EB19A0BB3900704B2F /* Accounts.framework */; };
@@ -53,6 +54,10 @@
 		31F354D0933A7BF82364D843 /* Pods-Babel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Babel.release.xcconfig"; path = "Pods/Target Support Files/Pods-Babel/Pods-Babel.release.xcconfig"; sourceTree = "<group>"; };
 		3F055F0019EC42DC00B6283D /* Pods-Babel-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-Babel-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-Babel/Pods-Babel-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		3F0F704919EC44BA006FD5ED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Views/en.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		3F38760E19F2E16700177375 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3F53F71319F27C7D007B7A43 /* BABDifficultyAlertControllerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABDifficultyAlertControllerHelper.h; path = Helpers/BABDifficultyAlertControllerHelper.h; sourceTree = "<group>"; };
+		3F53F71419F27C7D007B7A43 /* BABDifficultyAlertControllerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABDifficultyAlertControllerHelper.m; path = Helpers/BABDifficultyAlertControllerHelper.m; sourceTree = "<group>"; };
+		3F53F71A19F283DD007B7A43 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A08E88F01982CF3F00EA3758 /* info-hard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "info-hard.json"; path = "Supporting/info-hard.json"; sourceTree = "<group>"; };
 		A08E88F21982D4D400EA3758 /* NSMutableArray+BABShuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+BABShuffle.h"; path = "Extensions/NSMutableArray+BABShuffle.h"; sourceTree = "<group>"; };
 		A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+BABShuffle.m"; path = "Extensions/NSMutableArray+BABShuffle.m"; sourceTree = "<group>"; };
@@ -88,8 +93,6 @@
 		A0BA014A198E83C8005BE680 /* BABConfigurationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABConfigurationHelper.m; path = Helpers/BABConfigurationHelper.m; sourceTree = "<group>"; };
 		A0BEA9E019A0A74800704B2F /* BABInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABInfoTableViewController.h; path = Controllers/BABInfoTableViewController.h; sourceTree = "<group>"; };
 		A0BEA9E119A0A74800704B2F /* BABInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABInfoTableViewController.m; path = Controllers/BABInfoTableViewController.m; sourceTree = "<group>"; };
-		A0BEA9E319A0B5E300704B2F /* BABDifficultiesActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABDifficultiesActionSheet.h; path = Extensions/BABDifficultiesActionSheet.h; sourceTree = "<group>"; };
-		A0BEA9E419A0B5E300704B2F /* BABDifficultiesActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABDifficultiesActionSheet.m; path = Extensions/BABDifficultiesActionSheet.m; sourceTree = "<group>"; };
 		A0BEA9E619A0BA2A00704B2F /* BABDeveloperTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BABDeveloperTableViewController.h; path = Controllers/BABDeveloperTableViewController.h; sourceTree = "<group>"; };
 		A0BEA9E719A0BA2A00704B2F /* BABDeveloperTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BABDeveloperTableViewController.m; path = Controllers/BABDeveloperTableViewController.m; sourceTree = "<group>"; };
 		A0BEA9E919A0BB2100704B2F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -153,8 +156,6 @@
 				A093AA1D197D7FFF00F21675 /* NSError+BABError.m */,
 				A08E88F21982D4D400EA3758 /* NSMutableArray+BABShuffle.h */,
 				A08E88F31982D4D400EA3758 /* NSMutableArray+BABShuffle.m */,
-				A0BEA9E319A0B5E300704B2F /* BABDifficultiesActionSheet.h */,
-				A0BEA9E419A0B5E300704B2F /* BABDifficultiesActionSheet.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -187,6 +188,8 @@
 				A0AC26F91989579A0009A871 /* BABGitHubAPISessionHelper.m */,
 				A0BA0149198E83C8005BE680 /* BABConfigurationHelper.h */,
 				A0BA014A198E83C8005BE680 /* BABConfigurationHelper.m */,
+				3F53F71319F27C7D007B7A43 /* BABDifficultyAlertControllerHelper.h */,
+				3F53F71419F27C7D007B7A43 /* BABDifficultyAlertControllerHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				A0D9B189197C4BEC00AD7990 /* InfoPlist.strings */,
 				A0D9B183197C4BE300AD7990 /* main.m */,
 				A0A9CC981980315300333518 /* Definitions.h */,
+				3F53F71B19F283DD007B7A43 /* Localizable.strings */,
 			);
 			name = Supporting;
 			sourceTree = "<group>";
@@ -371,6 +375,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = A0D9B13D197C4B7A00AD7990;
 			productRefGroup = A0D9B147197C4B7A00AD7990 /* Products */;
@@ -392,6 +397,7 @@
 				A08E88F11982CF3F00EA3758 /* info-hard.json in Resources */,
 				A0BA0146198E824E005BE680 /* info-easy.json in Resources */,
 				3F055F0119EC42DC00B6283D /* Pods-Babel-acknowledgements.plist in Resources */,
+				3F53F71919F283DD007B7A43 /* Localizable.strings in Resources */,
 				A0BA0148198E82D7005BE680 /* info-normal.json in Resources */,
 				A0D9B18C197C4C0E00AD7990 /* Main.storyboard in Resources */,
 				3F0F704A19EC44BA006FD5ED /* LaunchScreen.xib in Resources */,
@@ -442,6 +448,7 @@
 				A0AC26FB1989579A0009A871 /* BABGitHubAPISessionHelper.m in Sources */,
 				A0BEA9E219A0A74800704B2F /* BABInfoTableViewController.m in Sources */,
 				A093AA17197D6C5100F21675 /* BABOAuthViewController.m in Sources */,
+				3F53F71519F27C7D007B7A43 /* BABDifficultyAlertControllerHelper.m in Sources */,
 				A0EDABEC199A6D9700E06BDE /* BABGameCenterManager.m in Sources */,
 				A0AC26FE198957AB0009A871 /* BABBabelManager.m in Sources */,
 				A0D9B195197C4DA900AD7990 /* BABMenuViewController.m in Sources */,
@@ -449,7 +456,6 @@
 				A0A9CC9119801E7E00333518 /* BABLanguage.m in Sources */,
 				A0AC26FA1989579A0009A871 /* BABAuthorizationSessionHelper.m in Sources */,
 				A08E88F41982D4D400EA3758 /* NSMutableArray+BABShuffle.m in Sources */,
-				A0BEA9E519A0B5E300704B2F /* BABDifficultiesActionSheet.m in Sources */,
 				A0BA014B198E83C8005BE680 /* BABConfigurationHelper.m in Sources */,
 				A0D9B191197C4C1600AD7990 /* BABAppDelegate.m in Sources */,
 				A0BEA9F819A0C4E100704B2F /* iLink.m in Sources */,
@@ -473,6 +479,16 @@
 				3F0F704919EC44BA006FD5ED /* en */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		3F53F71B19F283DD007B7A43 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F53F71A19F283DD007B7A43 /* en */,
+				3F38760E19F2E16700177375 /* es */,
+			);
+			name = Localizable.strings;
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		A0D9B189197C4BEC00AD7990 /* InfoPlist.strings */ = {
@@ -528,7 +544,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -561,7 +577,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -590,7 +606,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2f9eb8b9-fd90-45a2-8c7b-28358f669429";
+				PROVISIONING_PROFILE = "064f91aa-eab4-4edd-8bae-a0566b11d20c";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -617,7 +634,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Babel/Supporting/Babel-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b9b03671-a5ad-4687-bfc3-d857bbe5c206";
+				PROVISIONING_PROFILE = "064f91aa-eab4-4edd-8bae-a0566b11d20c";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
