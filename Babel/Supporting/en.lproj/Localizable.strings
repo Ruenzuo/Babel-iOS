@@ -20,3 +20,60 @@
 
 /* Cancel action UIAlertController title */
 "difficulty-alert-controller.actions.cancel-action.title" = "Cancel";
+
+/* Start UIButton title on menu screen */
+"menu-view-controller.start.button.title" = "Tap to start";
+
+/* Start UIButton title on menu screen */
+"menu-view-controller.start.button.title" = "Tap to start";
+
+/* Log in UIBarButtonItem title on menu screen */
+"menu-view-controller.log-in.bar-button-item.title" = "Log in";
+
+/* Log out UIBarButtonItem title on menu screen */
+"menu-view-controller.log-in.bar-button-item.title" = "Log out";
+
+/* Back UIBarButtonItem title everywhere */
+"everywhere.back.bar-button-item.title" = "Back";
+
+/* Leaderboards UITableViewCell textLabel text on info screen */
+"info-view-controller.leaderboards.table-view-cell.text-lable.text" = "Leaderboards";
+
+/* Enable Game Center UITableViewCell textLabel text on info screen */
+"info-view-controller.enable-game-center.table-view-cell.text-lable.text" = "Enable Game Center";
+
+/* Share this app on Facebook UITableViewCell textLabel text on info screen */
+"info-view-controller.share-facebook.table-view-cell.text-lable.text" = "Share this app on Facebook";
+
+/* Share this app on Twitter UITableViewCell textLabel text on info screen */
+"info-view-controller.share-twitter.table-view-cell.text-lable.text" = "Share this app on Twitter";
+
+/* Rate this app on App Store UITableViewCell textLabel text on info screen */
+"info-view-controller.rate-app-store.table-view-cell.text-lable.text" = "Rate this app on App Store";
+
+/* Developer UITableViewCell textLabel text on info screen */
+"info-view-controller.developer.table-view-cell.text-lable.text" = "Developer";
+
+/* Acknowledgments UITableViewCell textLabel text on info screen */
+"info-view-controller.acknowledgments.table-view-cell.text-lable.text" = "Acknowledgments";
+
+/* Version UITableViewCell textLabel text on info screen */
+"info-view-controller.version.table-view-cell.text-lable.text" = "Version";
+
+/* Social UITableViewHeaderFooterView textLabel text on info screen */
+"info-view-controller.social.table-view-header-footer-view.text-lable.text" = "Social";
+
+/* About UITableViewHeaderFooterView textLabel text on info screen */
+"info-view-controller.about.table-view-header-footer-view.text-lable.text" = "About";
+
+/* Error title everywhere */
+"everywhere.error.title" = "Error";
+
+/* Error TSMessage subtitle on info screen when Twitter share fails on info screen */
+"info-view-controller.error.message.subtitle.when-twitter-share-fails" = "It seems that you don't have a Twitter account configured.";
+
+/* Error TSMessage subtitle on info screen when Facebok share fails on info screen */
+"info-view-controller.error.message.subtitle.when-facebook-share-fails" = "It seems that you don't have a Facebook account configured.";
+
+/* Share text SLComposeViewController initial text on info screen */
+"info-view-controller.share-text.compose-view-controller.initial-text" = "Check Babel on the AppStore!";
