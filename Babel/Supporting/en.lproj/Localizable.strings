@@ -28,19 +28,19 @@
 "menu-view-controller.log-in.bar-button-item.title" = "Log in";
 
 /* Log out UIBarButtonItem title on menu screen */
-"menu-view-controller.log-in.bar-button-item.title" = "Log out";
+"menu-view-controller.log-out.bar-button-item.title" = "Log out";
 
 /* Logging out SVProgressHUD status on menu screen */
-"menu-view-controller.logging-out.progress-hud.status" = "Logging out."
+"menu-view-controller.logging-out.progress-hud.status" = "Logging out.";
 
 /* Checking SVProgressHUD status on menu screen */
-"menu-view-controller.checking-session.progress-hud.status" = "Checking session validity."
+"menu-view-controller.checking-session.progress-hud.status" = "Checking session validity.";
 
 /* Internet error SVProgressHUD status on menu screen */
-"menu-view-controller.internet-error.progress-hud.status" = "The Internet connection appears to be offline."
+"menu-view-controller.internet-error.progress-hud.status" = "The Internet connection appears to be offline.";
 
 /* Session expired SVProgressHUD status on menu screen */
-"menu-view-controller.sesion-expired.progress-hud.status" = "Session expired."
+"menu-view-controller.sesion-expired.progress-hud.status" = "Session expired.";
 
 /* Leaderboards UITableViewCell textLabel text on info screen */
 "info-view-controller.leaderboards.table-view-cell.text-label.text" = "Leaderboards";
@@ -82,7 +82,7 @@
 "developer-view-controller.thanks.message.subtitle.when-email-succeed" = "Thanks for the email, I'll reply soon!";
 
 /* Retrieving SVProgressHUD status on oauth screen */
-"oauth-view-controller.retrieving.progress-hud.status" = "Retrieving access token."
+"oauth-view-controller.retrieving.progress-hud.status" = "Retrieving access token.";
 
 /* Email service localized string everywhere */
 "everywhere.email-service.string" = "email";
