@@ -11,10 +11,10 @@
 
 @implementation BABConfigurationHelper
 
-NSUInteger const BABFixedRandomLanguage = -1;
-NSUInteger const BABMaxHintsEasy = 3;
-NSUInteger const BABMaxHintsNormal = 5;
-NSUInteger const BABMaxHintsHard = 7;
+static NSUInteger const BABFixedRandomLanguage = -1;
+static NSUInteger const BABMaxHintsEasy = 3;
+static NSUInteger const BABMaxHintsNormal = 5;
+static NSUInteger const BABMaxHintsHard = 7;
 
 #pragma marl - Public Methods
 

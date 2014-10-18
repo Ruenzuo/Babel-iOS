@@ -16,9 +16,9 @@ NSString * const BABGameCenterManagerDidFinishAuthenticationSuccessfullyNotifica
 
 @implementation BABGameCenterManager
 
-NSString * const BABEasyLeaderboardIdentifier = @"BAB_001_EASY_LEADERBOARD";
-NSString * const BABNormalLeaderboardIdentifier = @"BAB_001_NORMAL_LEADERBOARD";
-NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOARD";
+static NSString * const BABEasyLeaderboardIdentifier = @"BAB_001_EASY_LEADERBOARD";
+static NSString * const BABNormalLeaderboardIdentifier = @"BAB_001_NORMAL_LEADERBOARD";
+static NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOARD";
 
 #pragma mark - Public Methods
 

@@ -10,7 +10,7 @@
 
 @implementation NSError (BABError)
 
-NSString * const BABErrorDomain = @"BABErrorDomain";
+static NSString * const BABErrorDomain = @"BABErrorDomain";
 
 + (NSError *)bab_authorizationError
 {
