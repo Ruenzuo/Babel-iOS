@@ -142,8 +142,8 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     [self setupLoadingIndicator];
     [TSMessage
      showNotificationInViewController:self
-     title:@"Skipped!"
-     subtitle:[NSString stringWithFormat:@"Language:%@, File: %@, Repository:%@",
+     title:NSLocalizedString(@"babel-view-controller.skipped.message.title", nil)
+     subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.skipped.message.subtitle", nil),
                self.currentLanguage.name,
                self.currentFile.name,
                self.currentRepository.name]
@@ -382,8 +382,8 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
         self.score++;
         [TSMessage
          showNotificationInViewController:self
-         title:@"Right!"
-         subtitle:[NSString stringWithFormat:@"File: %@, Repository:%@",
+         title:NSLocalizedString(@"babel-view-controller.right.message.title", nil)
+         subtitle:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.right.message.subtitle", nil),
                    self.currentFile.name,
                    self.currentRepository.name]
          type:TSMessageNotificationTypeSuccess
@@ -406,7 +406,7 @@ static NSString * const BABLanguageTableViewCell = @"BABLanguageTableViewCell";
     } else {
         [self.delegate controllerDidFinishWithScore:self.score
                                   forDifficultyMode:self.babelManager.difficultyMode
-                                           withInfo:[NSString stringWithFormat:@"Language: %@, File: %@, Repository:%@",
+                                           withInfo:[NSString localizedStringWithFormat:NSLocalizedString(@"babel-view-controller.wrong.message.subtitle", nil),
                                                      self.currentLanguage.name,
                                                      self.currentFile.name,
                                                      self.currentRepository.name]];
