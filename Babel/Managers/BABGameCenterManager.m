@@ -98,15 +98,15 @@ static NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOAR
     }];
 }
 
-- (void)reportPoints:(NSUInteger)points
-   forDifficultyMode:(BABDifficultyMode)difficultyMode
+- (void)reportScore:(NSUInteger)score
+  forDifficultyMode:(BABDifficultyMode)difficultyMode
 {
     if (!self.gameCenterEnabled) {
         return;
     }
-    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:[self identifierForDifficultyMode:difficultyMode]];
-    score.value = points;
-    [GKScore reportScores:@[score]
+    GKScore *gameScore = [[GKScore alloc] initWithLeaderboardIdentifier:[self identifierForDifficultyMode:difficultyMode]];
+    gameScore.value = score;
+    [GKScore reportScores:@[gameScore]
     withCompletionHandler:^(NSError *error) {
         if (error) {
             DDLogError(@"%@", [error localizedDescription]);
@@ -125,6 +125,20 @@ static NSString * const BABHardLeaderboardIdentifier = @"BAB_001_HARD_LEADERBOAR
             return BABHardLeaderboardIdentifier;
         case BABDifficultyModeNone:
             return @"";
+    }
+}
+
+- (BOOL)score:(NSUInteger)score isHighScoreForDifficulty:(BABDifficultyMode)difficultyMode
+{
+    switch (difficultyMode) {
+        case BABDifficultyModeEasy:
+            return score > self.easyHighScore;
+        case BABDifficultyModeNormal:
+            return score > self.normalHighScore;
+        case BABDifficultyModeHard:
+            return score > self.hardHighScore;
+        case BABDifficultyModeNone:
+            return NO;
     }
 }
 
