@@ -12,12 +12,10 @@
 
 @interface BABInfoTableViewController () <GKGameCenterControllerDelegate, UIActionSheetDelegate, BABDifficultyAlertControllerHelperDelegate>
 
-@property (nonatomic, weak) IBOutlet UILabel *lblVersion;
-@property (nonatomic, weak) IBOutlet UILabel *lblGameCenter;
 @property (nonatomic, strong) BABDifficultyAlertControllerHelper *difficultyAlertControllerHelper;
 
-- (void)setupVersionLabel;
-- (void)setupGameCenterLabel;
+- (void)setupInfoTableViewCell:(UITableViewCell *)tableViewCell
+                  forIndexPath:(NSIndexPath *)indexPath;
 - (void)leaderboards;
 - (void)developer;
 - (void)acknowledgements;
@@ -29,6 +27,10 @@
 @end
 
 @implementation BABInfoTableViewController
+
+static NSString * const BABGameCenterTableViewHeaderFooterViewText = @"Game Center";
+static NSString * const BABInfoTableViewCell = @"BABInfoTableViewCell";
+static NSString * const BABVersionTableViewCell = @"BABVersionTableViewCell";
 
 #pragma mark - Properties
 
@@ -58,8 +60,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupVersionLabel];
-    [self setupGameCenterLabel];
 }
 
 - (void)dealloc
@@ -69,17 +69,51 @@
 
 #pragma mark - Private Methods
 
-- (void)setupVersionLabel
+- (void)setupInfoTableViewCell:(UITableViewCell *)tableViewCell
+                  forIndexPath:(NSIndexPath *)indexPath
 {
-    self.lblVersion.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-}
-
-- (void)setupGameCenterLabel
-{
-    if (self.gameCenterManager.isGameCenterEnabled) {
-        self.lblGameCenter.text = @"Leaderboards";
-    } else {
-        self.lblGameCenter.text = @"Enable Game Center";
+    switch (indexPath.section) {
+        case 0: {
+            switch (indexPath.row) {
+                case 0:
+                    if (self.gameCenterManager.isGameCenterEnabled) {
+                        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.leaderboards.table-view-cell.text-lable.text", nil);
+                    } else {
+                        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.enable-game-center.table-view-cell.text-lable.text", nil);
+                    }
+                    break;
+            }
+            break;
+        }
+        case 1: {
+            switch (indexPath.row) {
+                case 0: {
+                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.share-facebook.table-view-cell.text-lable.text", nil);
+                    break;
+                }
+                case 1: {
+                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.share-twitter.table-view-cell.text-lable.text", nil);
+                    break;
+                }
+                case 2: {
+                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.rate-app-store.table-view-cell.text-lable.text", nil);
+                    break;
+                }
+            }
+            break;
+        }
+        case 2: {
+            switch (indexPath.row) {
+                case 0: {
+                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.developer.table-view-cell.text-lable.text", nil);
+                    break;
+                }
+                case 1: {
+                    tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.acknowledgments.table-view-cell.text-lable.text", nil);
+                    break;
+                }
+            }
+        }
     }
 }
 
@@ -111,7 +145,7 @@
 {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *facebookStatus = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        [facebookStatus setInitialText:@"Check Babel on the AppStore!"];
+        [facebookStatus setInitialText:NSLocalizedString(@"info-view-controller.share-text.compose-view-controller.initial-text", nil)];
         [facebookStatus addURL:[[iLink sharedInstance] iLinkGetAppURLforSharing]];
         [self presentViewController:facebookStatus
                            animated:YES
@@ -119,8 +153,8 @@
     } else {
         [TSMessage
          showNotificationInViewController:self
-         title:@"Error"
-         subtitle:@"It seems that you don't have a Facebook account configured."
+         title:NSLocalizedString(@"everywhere.error.title", nil)
+         subtitle:NSLocalizedString(@"info-view-controller.error.message.subtitle.when-facebook-share-fails", nil)
          type:TSMessageNotificationTypeError
          duration:3.0f
          canBeDismissedByUser:YES];
@@ -140,7 +174,7 @@
              if ([accounts count] > 0) {
                  SLComposeViewController *tweetSheet = [SLComposeViewController
                                                         composeViewControllerForServiceType:SLServiceTypeTwitter];
-                 [tweetSheet setInitialText:@"Check Babel on the AppStore!"];
+                 [tweetSheet setInitialText:NSLocalizedString(@"info-view-controller.share-text.compose-view-controller.initial-text", nil)];
                  [tweetSheet addURL:[[iLink sharedInstance] iLinkGetAppURLforSharing]];
                  [self presentViewController:tweetSheet
                                     animated:YES
@@ -150,8 +184,8 @@
                  dispatch_async(dispatch_get_main_queue(), ^{
                      [TSMessage
                       showNotificationInViewController:self
-                      title:@"Error"
-                      subtitle:@"It seems that you don't have a Twitter account configured."
+                      title:NSLocalizedString(@"everywhere.error.title", nil)
+                      subtitle:NSLocalizedString(@"info-view-controller.error.message.subtitle.when-twitter-share-fails", nil)
                       type:TSMessageNotificationTypeError
                       duration:3.0f
                       canBeDismissedByUser:YES];
@@ -172,6 +206,58 @@
 {
     [self dismissViewControllerAnimated:YES
                              completion:nil];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 3;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return BABGameCenterTableViewHeaderFooterViewText;
+        case 1:
+            return NSLocalizedString(@"info-view-controller.social.table-view-header-footer-view.text-lable.text", nil);
+        case 2:
+            return NSLocalizedString(@"info-view-controller.about.table-view-header-footer-view.text-lable.text", nil);
+        default:
+            return @"";
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return 1;
+        case 1:
+            return 3;
+        case 2:
+            return 3;
+        default:
+            return 0;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *tableViewCell;
+    if (indexPath.section == 2 && indexPath.row == 2) {
+        tableViewCell = [tableView dequeueReusableCellWithIdentifier:BABVersionTableViewCell
+                                                        forIndexPath:indexPath];
+        tableViewCell.textLabel.text = NSLocalizedString(@"info-view-controller.version.table-view-cell.text-lable.text", nil);
+        tableViewCell.detailTextLabel.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    } else {
+        tableViewCell = [tableView dequeueReusableCellWithIdentifier:BABInfoTableViewCell
+                                                        forIndexPath:indexPath];
+        [self setupInfoTableViewCell:tableViewCell
+                        forIndexPath:indexPath];
+    }
+    return tableViewCell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -233,7 +319,9 @@
 
 - (void)onGameCenterDidFinishAutenticationSuccessfully:(NSNotification *)notification
 {
-    [self setupGameCenterLabel];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0
+                                                                inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - BABDifficultyAlertControllerHelperDelegate
